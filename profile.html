@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Profile</title>
+  <link rel="stylesheet" href="profile_style.css">
+</head>
+<body>
+  <h1>Edit Profile</h1>
+  <form action="update_profile.php" method="post"> <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" required>
+    </div>
+    <div class="form-group">
+      <label for="age">Age:</label>
+      <input type="number" name="age" id="age" min="13"> </div>
+    <div class="form-group">
+      <label for="current_password">Current Password:</label>
+      <input type="password" name="current_password" id="current_password" required>
+      <small>Required to update profile information.</small>
+    </div>
+    <div class="form-group">
+      <label for="new_password">New Password (Optional):</label>
+      <input type="password" name="new_password" id="new_password">
+      <small>Leave blank if you don't want to change your password.</small>
+    </div>
+    <div class="form-group">
+      <button type="submit">Update Profile</button>
+    </div>
+  </form>
+</body>
+</html>

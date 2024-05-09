@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retro Rewind</title>
+  <style>
+    body {
+      font-family: 'Press Start 2P', sans-serif;
+      background-color: #000;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      overflow-x: scroll; /* Enable horizontal scrolling */
+      scroll-snap-type: x mandatory; /* Enable snapping to game divs */
+      white-space: nowrap; /* Prevent content from wrapping */
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 0;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-top: 0;
+    }
+
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .game-container {
+      display: flex;
+      width: fit-content; /* Let container grow with game divs */
+    }
+
+    .game {
+      margin: 10px;
+      padding: 10px;
+      border: 2px solid #fff;
+      border-radius: 5px;
+      text-align: center;
+      scroll-snap-align: start; /* Snap to left edge of game div */
+      cursor: pointer; /* Change cursor to pointer on hover */
+    }
+
+    .game h2 {
+      font-size: 1.5em;
+      margin-bottom: 5px;
+    }
+
+    .game img {
+      width: 200px;
+      height: auto;
+      transition: transform 0.2s ease-in-out; /* Add smooth zoom effect */
+    }
+
+    .game:hover img {
+      transform: scale(1.1); /* Zoom image on hover */
+    }
+
+    /* Hide scrollbar for a cleaner look (optional) */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Retro Rewind</h1>
+    <p>Power Up Your Nostalgia!</p>
+  </header>
+  <main>
+    <div class="game-container">
+      <div class="game">
+        <h2>Pac-Man</h2>
+        <img src="images/pac-man.png" alt="Pac-Man game image" data-sound="sounds/pac-man.mp3">
+      </div>
+      <div class="game">
+        <h2>Super Mario Bros.</h2>
+        <img src="images/super-mario-bros.png" alt="Super Mario Bros. game image" data-sound="sounds/super-mario-bros.mp3">
+      </div>
+      <div class="game">
+        <h2>Tetris</h2>
+        <img src="images/tetris.png" alt="Tetris game image" data-sound="sound/tetris.mp3">
+      </div>
+    </div>
+  </main>
+  <script>
+    const gameList = document.querySelector('.game-container');
+    const sounds = {};
+
+    // Preload game sounds
+    const soundElements = document.querySelectorAll('.game[data-sound]');
+    soundElements.forEach(game => {
+      const soundPath = game.dataset.sound;
+      const audio = new Audio(soundPath);
+      sounds[soundPath] = audio;
+    });
+
+    gameList.addEventListener('scroll', () => {
+      // Disable scroll snapping at the end of the list
+      if (gameList.scrollWidth <= gameList.scrollLeft + gameList.clientWidth) {
+        gameList.style.scrollSnapType = 'none';
+      } else {
+        gameList.style.scrollSnapType = 'x mandatory';
+      }
+    });
+
+    gameList.addEventListener('mouseover', function(event) {
+      if (event.target.classList.contains('game')) {
+        const soundPath = event.target.dataset.sound;
+        
+      }
+    });
