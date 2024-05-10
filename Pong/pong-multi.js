@@ -109,22 +109,32 @@ window.onload = function () {
       ball.y > player1.y &&
       ball.y < player1.y + player1.height
     ) {
-      ball.dx *= -1.05; // Increase speed and change direction
+      ball.dx *= -1.02; // Slightly increase speed and change direction
     } else if (
       ball.x + ball.radius > player2.x &&
       ball.y > player2.y &&
       ball.y < player2.y + player2.height
     ) {
-      ball.dx *= -1.05; // Increase speed and change direction
+      ball.dx *= -1.02; // Slightly increase speed and change direction
     }
 
     // Check if the ball goes past the left or right edge
     if (ball.x < 0) {
       player2.score++; // Increment player 2's score
       resetBall(); // Reset the ball
+      if (player2.score >= 20) {
+        // Winning score is 20
+        alert("Game Over! Player 2 wins!");
+        document.location.reload();
+      }
     } else if (ball.x > WIDTH) {
       player1.score++; // Increment player 1's score
       resetBall(); // Reset the ball
+      if (player1.score >= 20) {
+        // Winning score is 20
+        alert("Game Over! Player 1 wins!");
+        document.location.reload();
+      }
     }
 
     // Draw players
