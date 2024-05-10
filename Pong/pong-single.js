@@ -97,7 +97,7 @@ window.onload = function () {
       computer.dy = 0;
     }
     // Add some randomness to the AI
-    if (Math.random() < 0.5) {
+    if (Math.random() < 0.1) {
       computer.dy = -computer.dy;
     }
     computer.y += computer.dy;
@@ -138,16 +138,22 @@ window.onload = function () {
     if (ball.x < 0) {
       computer.score++; // Increment computer's score
       resetBall(); // Reset the ball
-      if (computer.score >= 20) {
-        alert("Game Over! Computer wins!");
-        document.location.reload();
+      if (computer.score >= 10) {
+        if (confirm("Game Over! Computer wins! Do you want to play again?")) {
+          document.location.reload();
+        } else {
+          window.location.href = "../index.html";
+        }
       }
     } else if (ball.x > WIDTH) {
       player1.score++; // Increment player 1's score
       resetBall(); // Reset the ball
-      if (player1.score >= 20) {
-        alert("Game Over! Player 1 wins!");
-        document.location.reload();
+      if (player1.score >= 10) {
+        if (confirm("Game Over! Player 1 wins! Do you want to play again?")) {
+          document.location.reload();
+        } else {
+          window.location.href = "../index.html";
+        }
       }
     }
 

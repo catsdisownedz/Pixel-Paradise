@@ -1,54 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="amazingstyle.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jacquarda+Bastarda+9&family=Micro+5&family=Ojuju:wght@200..800&family=Satisfy&family=Whisper&display=swap"
-      rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
-    <link rel="stylesheet" href="https://fonts.google.com/specimen/Dancing+Script">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="amazingstyle.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jacquarda+Bastarda+9&family=Micro+5&family=Ojuju:wght@200..800&family=Satisfy&family=Whisper&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Sofia"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.google.com/specimen/Dancing+Script"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple"
+    />
 
-    <title> Retro Gaming Arcade </title>
+    <title>Retro Gaming Arcade</title>
   </head>
   <body>
-      <header>
-        <div class="profile-section">
-          <a href="profile.html"> <img src="images/profile-pic.png" alt="Player profile pic"> </a>
-          <span class="level">Lv. 1 Beginner</span>
+    <header>
+      <div class="profile-section">
+        <a href="profile.html">
+          <img src="images/profile-pic.png" alt="Player profile pic" />
+        </a>
+        <span class="level">Lv. 1 Beginner</span>
+      </div>
+      <h1>Pixel Paradise</h1>
+      <p>Power up your nostalgia</p>
+    </header>
+    <main>
+      <div class="game-container">
+        <div class="game">
+          <h2>Pac-Man</h2>
+          <img
+            src="images/pac-man.png"
+            alt="Pac-Man game"
+            data-sound="sounds/pac-man.mp3"
+          />
         </div>
-        <h1>Pixel Paradise</h1>
-        <p>Power up your nostalgia</p>
-      </header>
-      <main>
-        <div class = "game-container">
-          <div class="game">
-            <h2>Pac-Man</h2>
-            <img src = "images/pac-man.png" alt="Pac-Man game" data-sound="sounds/pac-man.mp3">
+        <div class="game">
+          <h2>Tetris</h2>
+          <img
+            src="images/tetris.png"
+            alt="Tetris game"
+            data-sound="sound/tetris.mp3"
+          />
+        </div>
+        <div class="game">
+          <h2>Pong</h2>
+          <img
+            src="images/ping-pong.png"
+            alt="Pong game"
+            data-sound="sound/ping-pong.mp3"
+          />
+          <div class="options">
+            <a href="Pong/pong-single.html" id="singlePlayer">Single Player</a>
+            <a href="Pong/pong-multi.html" id="multiPlayer">Multiplayer</a>
           </div>
-          <div class="game">
-            <h2>Tetris</h2>
-            <img src="images/tetris.png" alt="Tetris game" data-sound="sound/tetris.mp3">
-          </div>
-          <div class="game">
-            <h2>Pong</h2>
-            <img src="images/ping-pong.png" alt="Pong game" data-sound="sound/ping-pong.mp3">
-          </div>
-          <div class="game">
-            <h2>Minesweeper</h2>
-            <img src="images/mine-sweeper.png" alt="Minesweeper game" data-sound="sound/mine-sweeper.mp3">
-          </div>
-          <div class="game">
-            <h2>Flappy Bird</h2>
-            <img src="images/flappy-bird.png" alt="Flappy Bird game" data-sound="sound/table-tennis.mp3">
-          </div>
-        </div>   
-      </main>
-    <script src = "behind_the_scenes.js"></script>
+        </div>
+        <div class="game">
+          <h2>Minesweeper</h2>
+          <img
+            src="images/mine-sweeper.png"
+            alt="Minesweeper game"
+            data-sound="sound/mine-sweeper.mp3"
+          />
+        </div>
+        <div class="game">
+          <h2>Flappy Bird</h2>
+          <img
+            src="images/flappy-bird.png"
+            alt="Flappy Bird game"
+            data-sound="sound/table-tennis.mp3"
+          />
+        </div>
+      </div>
+    </main>
+    <script src="behind_the_scenes.js"></script>
   </body>
-
 </html>

@@ -120,20 +120,24 @@ window.onload = function () {
 
     // Check if the ball goes past the left or right edge
     if (ball.x < 0) {
-      player2.score++; // Increment player 2's score
+      player2.score++; // Increment player2's score
       resetBall(); // Reset the ball
-      if (player2.score >= 20) {
-        // Winning score is 20
-        alert("Game Over! Player 2 wins!");
-        document.location.reload();
+      if (player2.score >= 10) {
+        if (confirm("Game Over! player2 wins! Do you want to play again?")) {
+          document.location.reload();
+        } else {
+          window.location.href = "..index.html";
+        }
       }
     } else if (ball.x > WIDTH) {
       player1.score++; // Increment player 1's score
       resetBall(); // Reset the ball
-      if (player1.score >= 20) {
-        // Winning score is 20
-        alert("Game Over! Player 1 wins!");
-        document.location.reload();
+      if (player1.score >= 10) {
+        if (confirm("Game Over! Player 1 wins! Do you want to play again?")) {
+          document.location.reload();
+        } else {
+          window.location.href = "../index.html";
+        }
       }
     }
 

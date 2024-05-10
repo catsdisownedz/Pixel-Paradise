@@ -43,4 +43,29 @@ document.addEventListener("DOMContentLoaded", function () {
       sounds[soundPath].play();
     }
   });
+
+  function loadScript(src, callback) {
+    var script = document.createElement("script");
+    script.src = src;
+    script.onload = function () {
+      callback();
+    };
+    document.head.appendChild(script);
+  }
+
+  document
+    .getElementById("singleplayer")
+    .addEventListener("click", function () {
+      loadScript("Pong/pong.js", function () {
+        // Call a function defined in pong.js here
+        startSinglePlayerGame();
+      });
+    });
+
+  document.getElementById("multiplayer").addEventListener("click", function () {
+    loadScript("Pong/pong-multi.js", function () {
+      // Call a function defined in pong-multi.js here
+      startMultiPlayerGame();
+    });
+  });
 });
