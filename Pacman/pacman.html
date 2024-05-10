@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pacman</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: rgb(8, 0, 18);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh; /* Ensures viewport height */
+    }
+
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas" width="500" height="500"></canvas>
+  <canvas id="gameOverCanvas" style="display: none;"></canvas>
+
+  <div style="display:none;">
+    <img id="animation" src="animations.gif" width="140" height="20">
+    <img id="ghosts" src="ghost.png" width="140" height="20">
+  </div>
+  <script src="ghost.js"></script>
+  <script src="pacman.js"></script>
+  <script src="game.js"></script>
+</body>
+
+</html>
