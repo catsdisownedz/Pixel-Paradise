@@ -106,7 +106,7 @@ p {
   border: 0.001em solid #fff;
   border-radius: 0.5vw;
   text-align: center;
-  scroll-snap-align: start; /* Snap to left edge of game div */
+  scroll-snap-align: center; /* Snap to left edge of game div */
   cursor: pointer; /* Change cursor to pointer on hover */
   /* padding-bottom:1vw; */
 }

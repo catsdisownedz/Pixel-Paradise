@@ -1,35 +1,46 @@
-/* <script src="/path/to/flickity.pkgd.min.js"></script> */
+document.addEventListener("DOMContentLoaded", function () {
+  const gameContainer = document.querySelector(".game-container");
+  const sounds = {};
 
-const gameList = document.querySelector(".game-container");
-const sounds = {};
+  // Preload game sounds
+  const soundElements = document.querySelectorAll(".game[data-sound]");
+  soundElements.forEach((game) => {
+    const soundPath = game.dataset.sound;
+    const audio = new Audio(soundPath);
+    sounds[soundPath] = audio;
+  });
 
-// Preload game sounds
-const soundElements = document.querySelectorAll(".game[data-sound]");
-soundElements.forEach((game) => {
-  const soundPath = game.dataset.sound;
-  const audio = new Audio(soundPath);
-  sounds[soundPath] = audio;
-});
+  // Duplicate the games for a looping effect
+  gameContainer.innerHTML += gameContainer.innerHTML;
 
-gameList.addEventListener("scroll", () => {
-  // Disable scroll snapping at the end of the list
-  if (gameList.scrollWidth <= gameList.scrollLeft + gameList.clientWidth) {
-    gameList.style.scrollSnapType = "none";
-  } else {
-    gameList.style.scrollSnapType = "x mandatory";
+  let ticking = false;
+
+  function resetScroll() {
+    const contentWidth = gameContainer.scrollWidth / 2;
+    // If the user has scrolled through 75% of the games, duplicate them
+    if (gameContainer.scrollLeft >= contentWidth * 0.75) {
+      gameContainer.innerHTML += gameContainer.innerHTML;
+    }
+    // If the user has scrolled past the end of the original games, reset the scroll position
+    if (gameContainer.scrollLeft >= contentWidth) {
+      gameContainer.scrollLeft = 0;
+    }
+    ticking = false;
   }
-});
 
-// gameList.addEventListener('mouseover', function(event) {
-//   if (event.target.classList.contains('game')) {
-//     const soundPath = event.target.dataset.sound;
+  // Add scroll event listener to call resetScroll
+  gameContainer.addEventListener("scroll", function () {
+    if (!ticking) {
+      window.requestAnimationFrame(resetScroll);
+      ticking = true;
+    }
+  });
 
-//   }
-// });
-
-gameList.addEventListener("mouseover", function (event) {
-  if (event.target.classList.contains("game")) {
-    const soundPath = event.target.dataset.sound;
-    sounds[soundPath].play();
-  }
+  // Add mouseover event listener to play sounds
+  gameContainer.addEventListener("mouseover", function (event) {
+    if (event.target.classList.contains("game")) {
+      const soundPath = event.target.dataset.sound;
+      sounds[soundPath].play();
+    }
+  });
 });
