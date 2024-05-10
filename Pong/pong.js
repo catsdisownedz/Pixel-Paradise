@@ -97,7 +97,7 @@ window.onload = function () {
       computer.dy = 0;
     }
     // Add some randomness to the AI
-    if (Math.random() < 0.01) {
+    if (Math.random() < 0.1) {
       computer.dy = -computer.dy;
     }
     computer.y += computer.dy;
