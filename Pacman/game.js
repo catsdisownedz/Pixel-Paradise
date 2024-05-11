@@ -2,6 +2,7 @@ const canvas = document.getElementById("canvas");
 const canvasContext = canvas.getContext("2d");
 const pacmanFrames = document.getElementById("animation");
 const ghostFrames = document.getElementById("ghosts");
+const wakaSound = document.getElementById("waka")
 
 let createRect = (x, y, width, height, color) => {
     canvasContext.fillStyle = color;
@@ -30,6 +31,7 @@ let ghosts = [];
 let wallSpaceWidth = oneBlockSize / 1.6;
 let wallOffset = (oneBlockSize - wallSpaceWidth) / 2;
 let wallInnerColor = "black";
+let gameOver = false;
 
 // we now create the map of the walls,
 // if 1 wall, if 0 not wall
@@ -45,7 +47,7 @@ let map = [
     [1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1],
     [0, 0, 0, 0, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 0, 0, 0, 0],
     [1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1],
-    [2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2],
+    [1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1],
     [1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1],
     [0, 0, 0, 0, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 0, 0, 0, 0],
     [0, 0, 0, 0, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 0, 0, 0, 0],
@@ -102,9 +104,43 @@ let onGhostCollision = () => {
     lives--;
     restartPacmanAndGhosts();
     if (lives == 0) {
+        gameOver = true;
+        if (gameOver) {
+            document.getElementById('overlay1').style.display = 'flex';
+            document.getElementById('replay-button').addEventListener('click', replayGame);
+            document.getElementById('exit-button').addEventListener('click', exitGame);
+        }
+
     }
 };
 
+let wonGame = () => {
+    if (pacman.scoreReached) {
+        // replayButton.removeEventListener('click', replayGame);
+        // exitButton.removeEventListener('click', exitGame);
+        document.getElementById('overlay2').style.display = 'flex';
+        document.getElementById('replay-button2').addEventListener('click', replayGame);
+        document.getElementById('exit-button2').addEventListener('click', exitGame);
+    }
+}
+function replayGame() {
+    gameOver = true;
+    window.location.reload();
+}
+
+// export function replayGame(){
+//     gameOver = true;
+//     window.location.reload();
+// }
+
+function exitGame() {
+    window.location.href = document.querySelector('#redirect').href;
+}
+
+
+// export function exitGame(){
+//     window.location.href = document.querySelector('#redirect').href;
+// }
 let update = () => {
     pacman.moveProcess();
     pacman.eat();
@@ -131,7 +167,7 @@ let drawFoods = () => {
 };
 
 let drawRemainingLives = () => {
-    canvasContext.font = "20px Emulogic";
+    canvasContext.font = "20px 'Micro 5', sans-serif";
     canvasContext.fillStyle = "white";
     canvasContext.fillText("Lives: ", 220, oneBlockSize * (map.length + 1));
 
@@ -162,7 +198,7 @@ let drawScore = () => {
 
 let draw = () => {
     canvasContext.clearRect(0, 0, canvas.width, canvas.height);
-    createRect(0, 0, canvas.width, canvas.height, "black");
+    createRect(0, 0, canvas.width, canvas.height, "rgb(8, 0, 18)");
     drawWalls();
     drawFoods();
     drawGhosts();
@@ -245,6 +281,7 @@ let createGhosts = () => {
     }
 };
 
+
 createNewPacman();
 createGhosts();
 gameLoop();
@@ -267,77 +304,3 @@ window.addEventListener("keydown", (event) => {
         }
     }, 1);
 });
-
-
-// let showGameOverScreen = () => {
-//     // Clear the game loop interval
-//     clearInterval(gameInterval);
-  
-//     // Get the game over canvas element
-//     const gameOverCanvas = document.getElementById("gameOverCanvas");
-//     const gameOverContext = gameOverCanvas.getContext("2d");
-  
-//     gameOverCanvas.style.display = "block"; // Show the game over canvas
-  
-//     gameOverContext.clearRect(0, 0, gameOverCanvas.width, gameOverCanvas.height);
-//     gameOverContext.fillStyle = "black";
-//     gameOverContext.fillRect(0, 0, gameOverCanvas.width, gameOverCanvas.height);
-//     gameOverContext.font = "40px Emulogic";
-//     gameOverContext.fillStyle = "white";
-//     gameOverContext.textAlign = "center";
-//     gameOverContext.fillText("You Lose!", gameOverCanvas.width / 2, gameOverCanvas.height / 2);
-  
-//     // Add retry and exit buttons using the gameOverCanvas
-//     createRetryButton(gameOverCanvas, gameOverContext);
-//     createExitButton(gameOverCanvas, gameOverContext);
-//   };
-  
-//   let createRetryButton = (canvas, context) => {
-//     // Define button properties (position, size, text)
-//     let retryButtonX = canvas.width / 4;
-//     let retryButtonY = canvas.height / 2 + 50;
-//     let retryButtonWidth = canvas.width / 2;
-//     let retryButtonHeight = 40;
-//     let retryButtonText = "Retry";
-  
-//     // Draw the button rectangle
-//     context.fillStyle = "white";
-//     context.fillRect(retryButtonX, retryButtonY, retryButtonWidth, retryButtonHeight);
-//     context.fillStyle = "black";
-//     context.font = "20px Emulogic";
-//     context.fillText(retryButtonText, retryButtonX + retryButtonWidth / 2, retryButtonY + retryButtonHeight / 2 + 5);
-  
-//     // Add event listener for button click
-//     canvas.addEventListener("click", (event) => {
-//       let clickX = event.clientX;
-//       let clickY = event.clientY;
-//       let canvasRect = canvas.getBoundingClientRect(); // Get canvas position
-//       if (clickX >= retryButtonX + canvasRect.left && clickX <= retryButtonX + retryButtonWidth + canvasRect.left &&
-//           clickY >= retryButtonY + canvasRect.top && clickY <= retryButtonY + retryButtonHeight + canvasRect.top) {
-//         restartGame(); // Call function to restart the game
-//       }
-//     });
-//   };
-  
-//   let createExitButton = (canvas, context) => {
-//     // Define button properties similar to retry button
-//     let exitButtonX = canvas.width * 3 / 4;
-//     let exitButtonY = canvas.height / 2 + 50;
-//     let exitButtonWidth = canvas.width / 2;
-//     let exitButtonHeight = 40;
-//     let exitButtonText = "Exit";
-  
-//     // Draw the button using the same approach as retry button
-  
-//     // Add event listener for button click
-//     canvas.addEventListener("click", (event) => {
-//       let clickX = event.clientX;
-//       let clickY = event.clientY;
-//       let canvasRect = canvas.getBoundingClientRect();
-//       if (clickX >= exitButtonX + canvasRect.left && clickX <= exitButtonX + exitButtonWidth + canvasRect.left &&
-//           clickY >= exitButtonY + canvasRect.top && clickY <= retryButtonY + retryButtonHeight + canvas.top) {
-//         window.close(); // Close the browser window to exit the game
-//       }
-//     });
-//   };
-  
