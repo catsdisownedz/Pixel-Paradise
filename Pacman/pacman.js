@@ -1,4 +1,4 @@
-
+var scoreReached=false;
 class Pacman {
     constructor(x, y, width, height, speed) {
         this.x = x;
@@ -10,8 +10,8 @@ class Pacman {
         this.nextDirection = 4;
         this.frameCount = 7;
         this.currentFrame = 1;
-        this.wakaSound = new Audio("../../sounds/waka.mp3")
-        this.scoreReached = false;
+        scoreReached = false;
+        this.wakaSound = document.getElementById("waka");   
         setInterval(() => {
             this.changeAnimation();
         }, 100);
@@ -46,19 +46,9 @@ class Pacman {
 
     check(){
         if(score == 10){
-            this.scoreReached = true;
+            scoreReached= true;
         }
     }
-
-    // exitGame(){
-    //     window.location.href = document.querySelector('#redirect').href;
-    // }
-    
-    // replayGame(){
-    //     gameOver = true;
-    //     window.location.reload();
-    // }
-    
 
     moveBackwards() {
         switch (this.direction) {

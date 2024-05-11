@@ -2,7 +2,11 @@ const canvas = document.getElementById("canvas");
 const canvasContext = canvas.getContext("2d");
 const pacmanFrames = document.getElementById("animation");
 const ghostFrames = document.getElementById("ghosts");
-const wakaSound = document.getElementById("waka")
+const wakaSound = document.getElementById("waka");
+const over = document.getElementById("gameOver");
+const winn = document.getElementById("gameWin");
+const eatGhost = document.getElementById("eatGhost");
+const powerDot = document.getElementById("powerDot");
 
 let createRect = (x, y, width, height, color) => {
     canvasContext.fillStyle = color;
@@ -102,45 +106,38 @@ let restartPacmanAndGhosts = () => {
 
 let onGhostCollision = () => {
     lives--;
+    eatGhost.play();
     restartPacmanAndGhosts();
     if (lives == 0) {
         gameOver = true;
         if (gameOver) {
+            over.play();
             document.getElementById('overlay1').style.display = 'flex';
             document.getElementById('replay-button').addEventListener('click', replayGame);
             document.getElementById('exit-button').addEventListener('click', exitGame);
         }
-
     }
 };
 
 let wonGame = () => {
-    if (pacman.scoreReached) {
-        // replayButton.removeEventListener('click', replayGame);
-        // exitButton.removeEventListener('click', exitGame);
+    if (scoreReached) {
+        winn.play();
         document.getElementById('overlay2').style.display = 'flex';
         document.getElementById('replay-button2').addEventListener('click', replayGame);
         document.getElementById('exit-button2').addEventListener('click', exitGame);
     }
-}
+};
+
 function replayGame() {
     gameOver = true;
     window.location.reload();
 }
-
-// export function replayGame(){
-//     gameOver = true;
-//     window.location.reload();
-// }
 
 function exitGame() {
     window.location.href = document.querySelector('#redirect').href;
 }
 
 
-// export function exitGame(){
-//     window.location.href = document.querySelector('#redirect').href;
-// }
 let update = () => {
     pacman.moveProcess();
     pacman.eat();
