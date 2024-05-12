@@ -1,14 +1,14 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const gameContainer = document.querySelector(".game-container");
-  const sounds = {};
+// document.addEventListener("DOMContentLoaded", function () {
+//   const gameContainer = document.querySelector(".game-container");
+//   const sounds = {};
 
   // Preload game sounds
-  const soundElements = document.querySelectorAll(".game[data-sound]");
-  soundElements.forEach((game) => {
-    const soundPath = game.dataset.sound;
-    const audio = new Audio(soundPath);
-    sounds[soundPath] = audio;
-  });
+  // const soundElements = document.querySelectorAll(".game[data-sound]");
+  // soundElements.forEach((game) => {
+  //   const soundPath = game.dataset.sound;
+  //   const audio = new Audio(soundPath);
+  //   sounds[soundPath] = audio;
+  // });
 
   // Duplicate the games for a looping effect
   gameContainer.innerHTML += gameContainer.innerHTML;
@@ -36,13 +36,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Add mouseover event listener to play sounds
-  gameContainer.addEventListener("mouseover", function (event) {
-    if (event.target.classList.contains("game")) {
-      const soundPath = event.target.dataset.sound;
-      sounds[soundPath].play();
-    }
-  });
+  // // Add mouseover event listener to play sounds
+  // gameContainer.addEventListener("mouseover", function (event) {
+  //   if (event.target.classList.contains("game")) {
+  //     const soundPath = event.target.dataset.sound;
+  //     sounds[soundPath].play();
+  //   }
+  // });
 
   function loadScript(src, callback) {
     var script = document.createElement("script");
@@ -68,4 +68,20 @@ document.addEventListener("DOMContentLoaded", function () {
       startMultiPlayerGame();
     });
   });
+
+
+document.querySelectorAll('.game').forEach(game => {
+  const img = game.querySelector('img');
+  const video = game.querySelector('video');
+  img.addEventListener('mouseover', () => {
+    
+    video = game.querySelector('video').style.display= 'block';
+    video.play();
+  });
+
+  img.addEventListener('mouseout', () => {
+    video.pause();
+    video.currentTime = 0; // This will rewind the video to the start
+  });
 });
+
