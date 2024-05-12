@@ -54,6 +54,7 @@ class Ghost {
             this.target = randomTargetsForGhosts[this.randomTargetIndex];
         }
         this.changeDirectionIfPossible();
+        
         this.moveForwards();
         if (this.checkCollisions()) {
             this.moveBackwards();
