@@ -110,12 +110,14 @@ window.onload = function () {
       ball.y < player1.y + player1.height
     ) {
       ball.dx *= -1.02; // Slightly increase speed and change direction
+      if (Math.abs(ball.dx) > 5) ball.dx = 5 * Math.sign(ball.dx); // Limit the speed
     } else if (
       ball.x + ball.radius > player2.x &&
       ball.y > player2.y &&
       ball.y < player2.y + player2.height
     ) {
       ball.dx *= -1.02; // Slightly increase speed and change direction
+      if (Math.abs(ball.dx) > 5) ball.dx = 5 * Math.sign(ball.dx); // Limit the speed
     }
 
     // Check if the ball goes past the left or right edge
