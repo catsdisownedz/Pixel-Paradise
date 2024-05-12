@@ -141,11 +141,11 @@ var Game = {
       if (this.ball.moveX === DIRECTION.LEFT) this.ball.x -= this.ball.speed;
       else if (this.ball.moveX === DIRECTION.RIGHT)
         this.ball.x += this.ball.speed;
-
       // Handle paddle (AI) UP and DOWN movement
+      var difficultyFactor = 0.95 - this.round * 0.05; // Decrease the factor by 0.05 each round
       if (
         this.paddle.y > this.ball.y - this.paddle.height / 2 &&
-        Math.random() < 0.95
+        Math.random() < difficultyFactor
       ) {
         if (this.ball.moveX === DIRECTION.RIGHT)
           this.paddle.y -= this.paddle.speed / 1.5;
@@ -153,13 +153,15 @@ var Game = {
       }
       if (
         this.paddle.y < this.ball.y - this.paddle.height / 2 &&
-        Math.random() < 0.95
+        Math.random() < difficultyFactor
       ) {
         if (this.ball.moveX === DIRECTION.RIGHT)
           this.paddle.y += this.paddle.speed / 1.5;
         else this.paddle.y += this.paddle.speed / 4;
       }
 
+      // Increase the paddle's speed with each round
+      this.paddle.speed = initialPaddleSpeed + this.round * speedIncrement;
       // Handle paddle (AI) wall collision
       if (this.paddle.y >= this.canvas.height - this.paddle.height)
         this.paddle.y = this.canvas.height - this.paddle.height;
