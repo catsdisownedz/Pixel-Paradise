@@ -102,40 +102,19 @@ p {
 
 .game {
   flex: 0 0 auto;
-  width: 500px;
+  width: 300px;
+  height: 570px;
   margin: 0.8em;
   padding: 0.5em;
   border: 0.001em solid #fff;
   border-radius: 0.5vw;
   text-align: center;
-  scroll-snap-align: center;
-  /* Snap to left edge of game div */
-  cursor: pointer;
-  /* Change cursor to pointer on hover */
+
+  scroll-snap-align: center; /* Snap to left edge of game div */
   /* padding-bottom:1vw; */
-  transition: transform 0.3s ease;
+  position:relative;
+  
 }
-
-.game :hover {
-  transform: scale(1.2) ease;
-}
-
-.game img {
-  width: 200px;
-  height: auto;
-  transition: transform 0.2s ease-in-out;
-  object-fit: contain;
-  /* Add smooth zoom effect */
-}
-
-
-.video {
-  display: none;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
 
 @keyframes animate {
   0% {
@@ -152,7 +131,41 @@ p {
   margin-bottom: 5px;
 }
 
+.game  img {
+  max-width: 90%;
+  margin: auto;
+  display: block;
+  transition: transform 0.2s ease-in-out; /* Add smooth zoom effect */
+  position:absolute;
+}
+.game  img:hover{
+  opacity:0;
+}
+.game  video:hover{
+  opacity:1;
+}
+.game  video{
+  max-width: 95%;
+  margin: auto;
+  display: block;
+  transition: transform 0.2s ease-in-out; /* Add smooth zoom effect */
+  opacity:0;
+  position: absolute;
+  transition: 0.3s;
+}
 
+.game .options {
+  transition: transform 0.2s ease-in-out; /* Add smooth zoom effect
+}
+
+.game:hover img {
+  transform: scale(1.1); /* Zoom image on hover */
+}
+
+.game:hover .options {
+  transform: scale(1.1);
+  display: block;
+}
 
 /* Hide scrollbar for a cleaner look (optional) */
 ::-webkit-scrollbar {
