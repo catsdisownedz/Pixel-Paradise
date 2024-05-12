@@ -1,4 +1,5 @@
-var scoreReached=false;
+let scoreReached = false;
+let gameWon = false;
 class Pacman {
     constructor(x, y, width, height, speed) {
         this.x = x;
@@ -39,16 +40,12 @@ class Pacman {
                     map[i][j] = 3;
                     score++;
                     this.wakaSound.play();
+                    this.check();
                 }
             }
         }
     }
 
-    check(){
-        if(score == 10){
-            scoreReached= true;
-        }
-    }
 
     moveBackwards() {
         switch (this.direction) {
@@ -103,6 +100,13 @@ class Pacman {
             isCollided = true;
         }
         return isCollided;
+    }
+
+    check() {
+        if (score == 10) {
+            scoreReached = true;
+            wonGame(); // Call the wonGame function when score reaches 10
+        }
     }
 
     checkGhostCollision(ghosts) {
@@ -183,3 +187,13 @@ class Pacman {
     }
 }
 
+let wonGame = () => {
+        if (scoreReached) {
+            clearInterval(gameInterval);
+            winn.play();
+            document.getElementById('overlay2').style.display = 'flex';
+            document.getElementById('replay-button2').addEventListener('click', replayGame);
+            document.getElementById('exit-button2').addEventListener('click', exitGame);
+            gameWon = true;
+        }
+    };
