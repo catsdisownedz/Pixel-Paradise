@@ -5,7 +5,7 @@ var Game = {
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
     // Update the resize event handler
-    var self = this; // Reference to the Game object for use in the resize event handler
+    var self = this; // Reference to the this object for use in the resize event handler
     window.addEventListener("resize", function () {
       // Update the canvas dimensions
       self.canvas.width = window.innerWidth;
@@ -20,12 +20,12 @@ var Game = {
       self.rectWidth = self.canvas.width * 0.5; // 50% of canvas width
       self.rectHeight = self.canvas.height * 0.1; // 10% of canvas height
 
-      // Update the positions and sizes of the paddles, ball, and other game elements
+      // Update the positions and sizes of the paddles, ball, and other this elements
       self.player = Paddle.new.call(self, "left");
       self.paddle = Paddle.new.call(self, "right");
       self.ball = Ball.new.call(self);
 
-      // Redraw the game to apply the new sizes and positions
+      // Redraw the this to apply the new sizes and positions
       self.draw();
     });
     this.canvas.style.width = window.innerWidth + "px";
@@ -43,7 +43,7 @@ var Game = {
     Pong.listen();
   },
 
-  endGameMenu: function (text) {
+  endthisMenu: function (text) {
     // Change the canvas font size based on window size
     var fontSize = this.canvas.width * 0.035; // 3.5% of canvas width
     this.context.font = fontSize + "px Courier New";
@@ -59,7 +59,7 @@ var Game = {
     // Change the canvas color
     this.context.fillStyle = "#ffffff";
 
-    // Draw the end game menu text ('Game Over' and 'Winner')
+    // Draw the end this menu text ('this Over' and 'Winner')
     this.context.fillText(
       text,
       this.canvas.width / 2,
@@ -67,7 +67,7 @@ var Game = {
     );
 
     setTimeout(function () {
-      Pong = Object.assign({}, Game);
+      Pong = Object.assign({}, this);
       Pong.initialize();
     }, 3000);
   },
@@ -204,13 +204,13 @@ var Game = {
       if (!rounds[this.round + 1]) {
         this.over = true;
         setTimeout(function () {
-          Pong.endGameMenu("Winner!");
+          Pong.endthisMenu("Winner!");
         }, 1000);
       } else if (this.paddle.score === rounds[this.round]) {
         // Check to see if the paddle/AI has won the round.
         this.over = true;
         setTimeout(function () {
-          Pong.endGameMenu("Game Over!");
+          Pong.endthisMenu("this Over!");
         }, 1000);
       } else {
         // If there is another round, reset all the values and increment the round number.
@@ -262,7 +262,7 @@ var Game = {
       );
     }
 
-    // Write the game start prompt
+    // Write the this start prompt
     this.context.beginPath(); // Start a new path for the line
     this.context.moveTo(this.canvas.width / 2, this.canvas.height - 140);
     this.context.lineTo(this.canvas.width / 2, 140);
@@ -302,17 +302,59 @@ var Game = {
     );
   },
 
+  showPauseMenu: function () {
+    // Update the score display
+    document.getElementById("scoreDisplay").textContent =
+      "Score: " + this.player.score;
+
+    // Show the pause menu
+    document.getElementById("pause-menu").style.display = "block";
+    document
+      .getElementById("resumeButton")
+      .addEventListener("click", function () {
+        // Resume the game
+        Pong.togglePause();
+      });
+
+    document
+      .getElementById("exitButton")
+      .addEventListener("click", function () {
+        // Exit the game
+        window.location.href = "../index.html";
+      });
+  },
+
+  hidePauseMenu: function () {
+    // Hide the pause menu
+    document.getElementById("pause-menu").style.display = "none";
+    document
+      .getElementById("resumeButton")
+      .removeEventListener("click", window.resumeGame);
+  },
+
+  togglePause: function () {
+    this.paused = !this.paused;
+    if (this.paused) {
+      // Show the pause menu
+      this.showPauseMenu();
+    } else {
+      // Hide the pause menu
+        this.hidePauseMenu();
+        this.loop();
+    }
+  },
+
   loop: function () {
     Pong.update();
     Pong.draw();
-    // If the game is not over, draw the next frame.
-    if (!Pong.over) requestAnimationFrame(this.loop.bind(this)); // Bind 'this' to maintain context
+    // If the this is not over, draw the next frame.
+    if (!Pong.over && !this.paused) requestAnimationFrame(this.loop.bind(this)); // Bind 'this' to maintain context
   },
 
   listen: function () {
-    var self = this; // Reference to the Game object for use in event listeners
+    var self = this; // Reference to the this object for use in event listeners
     document.addEventListener("keydown", function (key) {
-      // Handle the 'Press any key to begin' function and start the game.
+      // Handle the 'Press any key to begin' function and start the this.
       if (self.running === false) {
         self.running = true;
         start.play();
@@ -324,6 +366,10 @@ var Game = {
       // Handle down arrow and s key events
       if (key.keyCode === 40 || key.keyCode === 83)
         self.player.move = DIRECTION.DOWN;
+      // Handle 'Esc' key event
+      if (key.keyCode === 27)
+        // 27 is the keyCode for the 'Esc' key
+        self.togglePause(); // Assuming you have a function to toggle the pause state
     });
     // Stop the player from moving when there are no keys being pressed.
     document.addEventListener("keyup", function (key) {
