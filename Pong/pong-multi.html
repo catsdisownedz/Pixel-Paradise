@@ -8,8 +8,21 @@
   </head>
 
   <body>
-    <canvas id="gameCanvas"></canvas>
+    <canvas></canvas>
+    <!-- <script type="text/javascript src=pong-single.js"></script> -->
+    <script src="directions.js"></script>
+    <script src="settings.js"></script>
+    <script src="ball.js"></script>
+    <script src="paddle.js"></script>
     <script src="pong-multi.js"></script>
+    <script src="main.js"></script>
+
+    <div id="pause-menu">
+      <h1>Game Paused</h1>
+      <p id="scoreDisplay">Score: 0</p>
+      <button id="resumeButton">Resume</button>
+      <button id="exitButton">Leave Game</button>
+    </div>
   </body>
 
   <link rel="stylesheet" href="pong.css" />

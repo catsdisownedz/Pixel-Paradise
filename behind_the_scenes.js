@@ -1,5 +1,5 @@
 // document.addEventListener("DOMContentLoaded", function () {
-//   const gameContainer = document.querySelector(".game-container");
+  const gameContainer = document.querySelector(".game-container");
 //   const sounds = {};
 
   // Preload game sounds

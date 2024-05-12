@@ -91,6 +91,7 @@ p {
 
 .game-container {
   display: flex;
+  flex-wrap: nowrap;
   overflow-x: auto;
   /* allow horizontal scrolling */
   scroll-snap-type: x mandatory;
@@ -109,11 +110,14 @@ p {
   border: 0.001em solid #fff;
   border-radius: 0.5vw;
   text-align: center;
-
   scroll-snap-align: center; /* Snap to left edge of game div */
   /* padding-bottom:1vw; */
   position:relative;
   
+}
+
+.game--first {
+  order: -1;
 }
 
 @keyframes animate {

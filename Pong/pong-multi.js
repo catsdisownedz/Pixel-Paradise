@@ -1,170 +1,379 @@
-window.onload = function () {
-  // Basic parameters of the screen
-  const WIDTH = 900;
-  const HEIGHT = 600;
-  const canvas = document.getElementById("gameCanvas");
-  canvas.width = WIDTH;
-  canvas.height = HEIGHT;
-  const ctx = canvas.getContext("2d");
+var Game = {
+  initialize: function () {
+    this.canvas = document.querySelector("canvas");
+    this.context = this.canvas.getContext("2d");
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
 
-  // Game objects
-  let player1 = { x: 20, y: 0, width: 10, height: 100, dy: 0, score: 0 };
-  let player2 = {
-    x: WIDTH - 30,
-    y: 0,
-    width: 10,
-    height: 100,
-    dy: 0,
-    score: 0,
-  };
-  let ball = { x: WIDTH / 2, y: HEIGHT / 2, radius: 7, dx: 2, dy: 2 };
+    // Update the resize event handler
+    var self = this; // Reference to the this object for use in the resize event handler
+    window.addEventListener("resize", function () {
+      // Update the canvas dimensions
+      self.canvas.width = window.innerWidth;
+      self.canvas.height = window.innerHeight;
 
-  // Set colors and font
-  let player1Color = getComputedStyle(document.documentElement)
-    .getPropertyValue("--player1-color")
-    .trim();
-  let player2Color = getComputedStyle(document.documentElement)
-    .getPropertyValue("--player2-color")
-    .trim();
-  let ballColor = getComputedStyle(document.documentElement)
-    .getPropertyValue("--ball-color")
-    .trim();
-  let textColor = getComputedStyle(document.documentElement)
-    .getPropertyValue("--text-color")
-    .trim();
-  let textFont = getComputedStyle(document.documentElement)
-    .getPropertyValue("--text-font")
-    .trim();
+      // Update the canvas style dimensions
+      self.canvas.style.width = window.innerWidth + "px";
+      self.canvas.style.height = window.innerHeight + "px";
 
-  // Add event listeners for keydown and keyup events
-  window.addEventListener("keydown", keyDownHandler, false);
-  window.addEventListener("keyup", keyUpHandler, false);
+      // Update the font size based on new canvas size
+      self.fontSize = self.canvas.width * 0.035; // 3.5% of canvas width
+      self.rectWidth = self.canvas.width * 0.5; // 50% of canvas width
+      self.rectHeight = self.canvas.height * 0.1; // 10% of canvas height
 
-  // Define the key handler functions
-  function keyDownHandler(event) {
-    switch (event.key) {
-      case "w":
-        player1.dy = -2;
-        break;
-      case "s":
-        player1.dy = 2;
-        break;
-      case "ArrowUp":
-        player2.dy = -2;
-        break;
-      case "ArrowDown":
-        player2.dy = 2;
-        break;
+      // Update the positions and sizes of the paddles, ball, and other this elements
+      self.player1 = Paddle.new.call(this, "left");
+      self.player2 = Paddle.new.call(this, "right");
+      self.ball = Ball.new.call(self);
+
+      // Redraw the this to apply the new sizes and positions
+      self.draw();
+    });
+    this.canvas.style.width = window.innerWidth + "px";
+    this.canvas.style.height = window.innerHeight + "px";
+    this.player1 = Paddle.new.call(this, "left");
+    this.player2 = Paddle.new.call(this, "right");
+    this.ball = Ball.new.call(this);
+    this.running = this.over = false;
+    this.turn = this.paddle;
+    this.timer = this.round = 0;
+    this.color = "#2c0946";
+    speedIncrement = 1;
+    Pong.menu();
+    Pong.listen();
+  },
+
+  endthisMenu: function (text) {
+    // Change the canvas font size based on window size
+    var fontSize = this.canvas.width * 0.035; // 3.5% of canvas width
+    this.context.font = fontSize + "px Courier New";
+    this.context.fillStyle = this.color;
+
+    // Draw the rectangle behind the 'Press any key to begin' text.
+    var rectWidth = this.canvas.width * 0.5; // 50% of canvas width
+    var rectHeight = this.canvas.height * 0.1; // 10% of canvas height
+    var rectX = (this.canvas.width - rectWidth) / 2; // center horizontally
+    var rectY = (this.canvas.height - rectHeight) / 2; // center vertically
+    this.context.fillRect(rectX, rectY, rectWidth, rectHeight);
+
+    // Change the canvas color
+    this.context.fillStyle = "#ffffff";
+
+    // Draw the end this menu text ('this Over' and 'Winner')
+    this.context.fillText(
+      text,
+      this.canvas.width / 2,
+      this.canvas.height / 2 + fontSize / 2
+    );
+
+    // Reset the game after displaying the end game menu
+    setTimeout(function () {
+      Pong = Object.assign({}, PongMulti); // Use PongMulti instead of this
+      Pong.initialize();
+    }, 3000);
+  },
+
+  menu: function () {
+    // Draw all the Pong objects in their current state
+    Pong.draw();
+
+    // Change the canvas font size and color
+    var fontSize = this.canvas.width * 0.035; // 3.5% of canvas width
+    this.context.font = fontSize + "px Courier New";
+    this.context.fillStyle = this.color;
+
+    // Draw the rectangle behind the 'Press any key to begin' text.
+    var rectWidth = this.canvas.width * 0.5; // 50% of canvas width
+    var rectHeight = this.canvas.height * 0.1; // 10% of canvas height
+    var rectX = (this.canvas.width - rectWidth) / 2; // center horizontally
+    var rectY = (this.canvas.height - rectHeight) / 2; // center vertically
+    this.context.fillRect(rectX, rectY, rectWidth, rectHeight);
+
+    // Change the canvas color;
+    this.context.fillStyle = "#ffffff";
+
+    // Draw the 'press any key to begin' text for either player
+    this.context.fillText(
+      "Press any key to begin'",
+      this.canvas.width / 2,
+      this.canvas.height / 2 + fontSize / 2
+    );
+  },
+
+  // Update all objects (move the player, paddle, ball, increment the score, etc.)
+  update: function () {
+    if (!this.over) {
+      // Update dynamic elements like scores based on new canvas size
+      var scoreFontSize = this.canvas.width * 0.07; // 7% of canvas width
+      this.context.font = scoreFontSize + "px Courier New";
+
+      // If the ball collides with the bound limits - correct the x and y coords.
+      if (this.ball.x <= 0)
+        Pong._resetTurn.call(this, this.player1, this.player2);
+      if (this.ball.x >= this.canvas.width - this.ball.width)
+        Pong._resetTurn.call(this, this.player2, this.player1);
+      if (this.ball.y <= 0) this.ball.moveY = DIRECTION.DOWN;
+      if (this.ball.y >= this.canvas.height - this.ball.height)
+        this.ball.moveY = DIRECTION.UP;
+
+      // Move player1 if their move value was updated by a keyboard event
+      if (this.player1.move === DIRECTION.UP)
+        this.player1.y -= this.player1.speed;
+      else if (this.player1.move === DIRECTION.DOWN)
+        this.player1.y += this.player1.speed;
+
+      // Move player2 if their move value was updated by a keyboard event
+      if (this.player2.move === DIRECTION.UP)
+        this.player2.y -= this.player2.speed;
+      else if (this.player2.move === DIRECTION.DOWN)
+        this.player2.y += this.player2.speed;
+      // On new serve (start of each turn) move the ball to the correct side
+      // and randomize the direction to add some challenge.
+      if (Pong._turnDelayIsOver.call(this) && this.turn) {
+        this.ball.moveX =
+          this.turn === this.player ? DIRECTION.LEFT : DIRECTION.RIGHT;
+        this.ball.moveY = [DIRECTION.UP, DIRECTION.DOWN][
+          Math.round(Math.random())
+        ];
+        this.ball.y =
+          Math.floor(Math.random() * this.canvas.height - 200) + 200;
+        this.turn = null;
+      }
+      // If the player1 collides with the bound limits, update the y coords.
+      if (this.player1.y <= 0) this.player1.y = 0;
+      else if (this.player1.y >= this.canvas.height - this.player1.height)
+        this.player1.y = this.canvas.height - this.player1.height;
+
+      // If the player2 collides with the bound limits, update the y coords.
+      if (this.player2.y <= 0) this.player2.y = 0;
+      else if (this.player2.y >= this.canvas.height - this.player2.height)
+        this.player2.y = this.canvas.height - this.player2.height;
+
+      // Handle Player1-Ball collisions
+      if (
+        this.ball.x - this.ball.width <= this.player1.x &&
+        this.ball.x >= this.player1.x - this.player1.width
+      ) {
+        if (
+          this.ball.y <= this.player1.y + this.player1.height &&
+          this.ball.y + this.ball.height >= this.player1.y
+        ) {
+          this.ball.x = this.player1.x - this.ball.width;
+          this.ball.moveX = DIRECTION.LEFT;
+          ballHit.play();
+        }
+      }
+
+      // Handle Player2-Ball collisions
+      if (
+        this.ball.x - this.ball.width <= this.player2.x &&
+        this.ball.x >= this.player2.x - this.player2.width
+      ) {
+        if (
+          this.ball.y <= this.player2.y + this.player2.height &&
+          this.ball.y + this.ball.height >= this.player2.y
+        ) {
+          this.ball.x = this.player2.x - this.ball.width;
+          this.ball.moveX = DIRECTION.LEFT;
+          ballHit.play();
+        }
+      }
     }
-  }
 
-  function keyUpHandler(event) {
-    switch (event.key) {
-      case "w":
-      case "s":
-        player1.dy = 0;
-        break;
-      case "ArrowUp":
-      case "ArrowDown":
-        player2.dy = 0;
-        break;
-    }
-  }
-
-  // Function to reset the ball to the center
-  function resetBall() {
-    ball.x = WIDTH / 2;
-    ball.y = HEIGHT / 2;
-    ball.dx = -ball.dx; // Change ball direction
-    ball.dy = 2; // Reset ball speed
-  }
-
-  // Game loop
-  function gameLoop() {
-    // Clear the canvas
-    ctx.clearRect(0, 0, WIDTH, HEIGHT);
-
-    // Update player positions
-    player1.y += player1.dy;
-    player2.y += player2.dy;
-
-    // Prevent players from going off screen
-    if (player1.y < 0) player1.y = 0;
-    if (player1.y > HEIGHT - player1.height)
-      player1.y = HEIGHT - player1.height;
-    if (player2.y < 0) player2.y = 0;
-    if (player2.y > HEIGHT - player2.height)
-      player2.y = HEIGHT - player2.height;
-
-    // Update ball position
-    ball.x += ball.dx;
-    ball.y += ball.dy;
-
-    // Detect ball collision with top and bottom of screen
-    if (ball.y < 0 || ball.y > HEIGHT) ball.dy *= -1;
-
-    // Detect ball collision with players
+    // Handle the end of round transition for both players
+    // Check to see if the player won the round.
     if (
-      ball.x - ball.radius < player1.x + player1.width &&
-      ball.y > player1.y &&
-      ball.y < player1.y + player1.height
+      this.player1.score === rounds[this.round] ||
+      this.player2.score === rounds[this.round]
     ) {
-      ball.dx *= -1.02; // Slightly increase speed and change direction
-      if (Math.abs(ball.dx) > 5) ball.dx = 5 * Math.sign(ball.dx); // Limit the speed
-    } else if (
-      ball.x + ball.radius > player2.x &&
-      ball.y > player2.y &&
-      ball.y < player2.y + player2.height
-    ) {
-      ball.dx *= -1.02; // Slightly increase speed and change direction
-      if (Math.abs(ball.dx) > 5) ball.dx = 5 * Math.sign(ball.dx); // Limit the speed
+      this.over = true;
+      var winner =
+        this.player1.score === rounds[this.round] ? "Player 1" : "Player 2";
+      setTimeout(function () {
+        Pong.endGameMenu(winner + " Wins!");
+      }, 1000);
+    }
+  },
+
+  draw: function () {
+    // Clear the Canvas
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    // Set the fill style to black (if intended for background)
+    this.context.fillStyle = this.color;
+
+    // Update dynamic elements like scores based on new canvas size
+    var scoreFontSize = this.canvas.width * 0.07; // 7% of canvas width
+    this.context.font = scoreFontSize + "px Courier New";
+
+    // Set the fill style to white (For the paddles and the ball)
+    this.context.fillStyle = "#ffffff";
+    // Draw Player 1
+    this.context.fillRect(
+      this.player1.x,
+      this.player1.y,
+      this.player1.width,
+      this.player1.height
+    );
+    // Draw Player 2
+    this.context.fillRect(
+      this.player2.x,
+      this.player2.y,
+      this.player2.width,
+      this.player2.height
+    );
+    // Draw the Ball
+    if (Pong._turnDelayIsOver.call(this)) {
+      this.context.fillRect(
+        this.ball.x,
+        this.ball.y,
+        this.ball.width,
+        this.ball.height
+      );
     }
 
-    // Check if the ball goes past the left or right edge
-    if (ball.x < 0) {
-      player2.score++; // Increment player2's score
-      resetBall(); // Reset the ball
-      if (player2.score >= 10) {
-        if (confirm("Game Over! player2 wins! Do you want to play again?")) {
-          document.location.reload();
-        } else {
-          window.location.href = "..index.html";
-        }
-      }
-    } else if (ball.x > WIDTH) {
-      player1.score++; // Increment player 1's score
-      resetBall(); // Reset the ball
-      if (player1.score >= 10) {
-        if (confirm("Game Over! Player 1 wins! Do you want to play again?")) {
-          document.location.reload();
-        } else {
-          window.location.href = "../index.html";
-        }
-      }
+    // Set the default canvas font and align it to the center
+    this.context.font = "100px Courier New";
+    this.context.textAlign = "center";
+
+    // Draw Player 1's score (left)
+    this.context.fillText(
+      this.player1.score.toString(),
+      this.canvas.width / 4,
+      200
+    );
+    // Draw Player 2's score (right)
+    this.context.fillText(
+      this.player2.score.toString(),
+      (this.canvas.width * 3) / 4,
+      200
+    );
+
+    // Change the font size for the center score text
+    this.context.font = "30px Courier New";
+    // Draw the winning score (center)
+    this.context.fillText(
+      "Round " + (Pong.round + 1),
+      this.canvas.width / 2,
+      35
+    );
+    // Change the font size for the center score value
+    this.context.font = "40px Courier";
+    // Draw the current round number
+    this.context.fillText(
+      rounds[Pong.round] ? rounds[Pong.round] : rounds[Pong.round - 1],
+      this.canvas.width / 2,
+      100
+    );
+  },
+
+  showPauseMenu: function () {
+    // Update the score display
+    document.getElementById("scoreDisplay").textContent =
+      "Score: " + this.player.score;
+
+    // Show the pause menu
+    document.getElementById("pause-menu").style.display = "block";
+    document
+      .getElementById("resumeButton")
+      .addEventListener("click", function () {
+        // Resume the game
+        Pong.togglePause();
+      });
+
+    document
+      .getElementById("exitButton")
+      .addEventListener("click", function () {
+        // Exit the game
+        window.location.href = "../index.html";
+      });
+  },
+
+  hidePauseMenu: function () {
+    // Hide the pause menu
+    document.getElementById("pause-menu").style.display = "none";
+    document
+      .getElementById("resumeButton")
+      .removeEventListener("click", window.resumeGame);
+  },
+
+  togglePause: function () {
+    this.paused = !this.paused;
+    if (this.paused) {
+      // Show the pause menu
+      this.showPauseMenu();
+    } else {
+      // Hide the pause menu
+      this.hidePauseMenu();
+      this.loop();
     }
+  },
 
-    // Draw players
-    ctx.fillStyle = player1Color;
-    ctx.fillRect(player1.x, player1.y, player1.width, player1.height);
-    ctx.fillStyle = player2Color;
-    ctx.fillRect(player2.x, player2.y, player2.width, player2.height);
+  loop: function () {
+    Pong.update();
+    Pong.draw();
+    // If the this is not over, draw the next frame.
+    if (!Pong.over && !this.paused) requestAnimationFrame(this.loop.bind(this)); // Bind 'this' to maintain context
+  },
 
-    // Draw ball
-    ctx.beginPath();
-    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-    ctx.fillStyle = ballColor;
-    ctx.fill();
+  listen: function () {
+    var self = this; // Reference to the this object for use in event listeners
+    var keys = {};
 
-    // Display scores
-    ctx.fillStyle = textColor;
-    ctx.font = textFont;
-    ctx.fillText("Player 1: " + player1.score, 100, 30);
-    ctx.fillText("Player 2: " + player2.score, WIDTH - 200, 30);
+    document.addEventListener("keydown", function (key) {
+      // Handle the 'Press any key to begin' function and start the game.
+      if (self.running === false) {
+        self.running = true;
+        start.play();
+        window.requestAnimationFrame(self.loop.bind(self));
+      }
 
-    // Continue the game loop
-    requestAnimationFrame(gameLoop);
-  }
+      // Player 1 controls
+      if (key.keyCode === 87) self.player1.move = DIRECTION.UP; // 'w' key
+      if (key.keyCode === 83) self.player1.move = DIRECTION.DOWN; // 's' key
 
-  // Start the game loop
-  gameLoop();
+      // Player 2 controls
+      if (key.keyCode === 38) self.player2.move = DIRECTION.UP; // Up arrow key
+      if (key.keyCode === 40) self.player2.move = DIRECTION.DOWN; // Down arrow key
+
+      // Handle 'Esc' key event
+      if (key.keyCode === 27)
+        // 27 is the keyCode for the 'Esc' key
+        self.togglePause(); // Assuming you have a function to toggle the pause state
+    });
+
+    // Stop the player from moving when there are no keys being pressed.
+    document.addEventListener("keyup", function (key) {
+      if (key.keyCode === 87 || key.keyCode === 83)
+        self.player1.move = DIRECTION.IDLE; // 'w' or 's' key
+      if (key.keyCode === 38 || key.keyCode === 40)
+        self.player2.move = DIRECTION.IDLE; // Up or Down arrow key
+    });
+  },
+
+  // Reset the ball location, the player turns and set a delay before the next round begins.
+  _resetTurn: function (victor, loser) {
+    this.ball = Ball.new.call(this, this.ball.speed);
+    this.turn = loser;
+    this.timer = new Date().getTime();
+    victor.score++;
+
+    // Check if the victor is the player or the computer (paddle)
+    if (victor === this.player1) {
+      victory.play(); // Play the victory sound when the user scores
+    } else if (victor === this.player2) {
+      loss.play(); // Play the loss sound when the computer scores
+    }
+  },
+
+  // Wait for a delay to have passed after each turn.
+  _turnDelayIsOver: function () {
+    return new Date().getTime() - this.timer >= 1000;
+  },
+
+  // Select a random color as the background of each level/round.
+  _generateRoundColor: function () {
+    var newColor = colors[Math.floor(Math.random() * colors.length)];
+    if (newColor === this.color) return Pong._generateRoundColor();
+    return newColor;
+  },
 };
