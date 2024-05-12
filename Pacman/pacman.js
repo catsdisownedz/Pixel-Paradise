@@ -1,3 +1,5 @@
+let scoreReached = false;
+let gameWon = false;
 class Pacman {
     constructor(x, y, width, height, speed) {
         this.x = x;
@@ -9,6 +11,8 @@ class Pacman {
         this.nextDirection = 4;
         this.frameCount = 7;
         this.currentFrame = 1;
+        scoreReached = false;
+        this.wakaSound = document.getElementById("waka");   
         setInterval(() => {
             this.changeAnimation();
         }, 100);
@@ -23,6 +27,7 @@ class Pacman {
         }
     }
 
+   
     eat() {
         for (let i = 0; i < map.length; i++) {
             for (let j = 0; j < map[0].length; j++) {
@@ -30,13 +35,17 @@ class Pacman {
                     map[i][j] == 2 &&
                     this.getMapX() == j &&
                     this.getMapY() == i
+                    
                 ) {
                     map[i][j] = 3;
                     score++;
+                    this.wakaSound.play();
+                    this.check();
                 }
             }
         }
     }
+
 
     moveBackwards() {
         switch (this.direction) {
@@ -91,6 +100,13 @@ class Pacman {
             isCollided = true;
         }
         return isCollided;
+    }
+
+    check() {
+        if (score == 166) {
+            scoreReached = true;
+            wonGame(); // Call the wonGame function when score reaches 10
+        }
     }
 
     checkGhostCollision(ghosts) {
@@ -170,3 +186,14 @@ class Pacman {
         canvasContext.restore();
     }
 }
+
+let wonGame = () => {
+        if (scoreReached) {
+            clearInterval(gameInterval);
+            winn.play();
+            document.getElementById('overlay2').style.display = 'flex';
+            document.getElementById('replay-button2').addEventListener('click', replayGame);
+            document.getElementById('exit-button2').addEventListener('click', exitGame);
+            gameWon = true;
+        }
+    };

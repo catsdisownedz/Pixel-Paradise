@@ -288,3 +288,5 @@ let drawGhosts = () => {
         ghosts[i].draw();
     }
 };
+
+
