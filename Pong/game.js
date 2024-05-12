@@ -33,11 +33,12 @@ var Game = {
     this.player = Paddle.new.call(this, "left");
     this.paddle = Paddle.new.call(this, "right");
     this.ball = Ball.new.call(this);
-    this.paddle.speed = 8;
+    this.paddle.speed = initialPaddleSpeed = 8;
     this.running = this.over = false;
     this.turn = this.paddle;
     this.timer = this.round = 0;
     this.color = "#2c0946";
+    speedIncrement = 1;
     Pong.menu();
     Pong.listen();
   },
@@ -142,7 +143,7 @@ var Game = {
       else if (this.ball.moveX === DIRECTION.RIGHT)
         this.ball.x += this.ball.speed;
       // Handle paddle (AI) UP and DOWN movement
-      var difficultyFactor = 0.95 - this.round * 0.05; // Decrease the factor by 0.05 each round
+      var difficultyFactor = 0.35 + this.round * 0.1; // Increase the factor by 0.05 each round
       if (
         this.paddle.y > this.ball.y - this.paddle.height / 2 &&
         Math.random() < difficultyFactor
@@ -159,7 +160,6 @@ var Game = {
           this.paddle.y += this.paddle.speed / 1.5;
         else this.paddle.y += this.paddle.speed / 4;
       }
-
       // Increase the paddle's speed with each round
       this.paddle.speed = initialPaddleSpeed + this.round * speedIncrement;
       // Handle paddle (AI) wall collision
