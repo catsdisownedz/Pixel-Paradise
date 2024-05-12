@@ -1,11 +1,11 @@
 let board;
-let boardWidth=500 ;
+let boardWidth=500;
 let boardHeight=500;
 let context;
 
 let playerwidth=80; //80,500
 let playerHeight=10;
-let playerVelocityX=10;
+let playerVelocityX=12;
 
 let player={
     x: boardWidth/2 -playerwidth/2,
@@ -44,6 +44,9 @@ let blockY=45;
 let score=0;
 let gameOver=false;
 
+var loseAudio= new Audio('mixkit-losing-bleeps-2026.wav');
+var hitAudio= new Audio('sound-effect-twinklesparkle-115095.mp3');
+
 window.onload= function(){
     board= document.getElementById("board");
     board.height=boardHeight;
@@ -52,7 +55,7 @@ window.onload= function(){
      //to draw on the board ayoy
 
      // draw intial player i dont understand a thing
-     context.fillStyle="skyblue";
+     context.fillStyle="#FF681F";
      context.fillRect(player.x, player.y,player.width,player.height); 
 
      requestAnimationFrame(update);
@@ -68,10 +71,10 @@ function update(){   //game loop
     context.clearRect(0,0,board.width,board.height);
 
     //player stuff waw
-    context.fillStyle="orange";
+    context.fillStyle="#FF681F";
     context.fillRect(player.x, player.y,player.width,player.height); 
 
-    context.fillStyle="white";
+    context.fillStyle="#FFFF00";
     ball.x += ball.velocityX;
     ball.y += ball.velocityY;
     context.fillRect(ball.x, ball.y, ball.width, ball.height);
@@ -90,6 +93,7 @@ function update(){   //game loop
         
         context.font="20px sans-serif";
         context.fillText("YOU LOSE: PRESS SPACE TO RESTART",80,400);
+        loseAudio.play();
         gameOver=true;
     }
 
@@ -102,17 +106,19 @@ function update(){   //game loop
     }
 
     // tp draw the blocks
-    context.fillStyle="blue";
+    context.fillStyle="#e401a0";
     for (i =0; i<blockArray.length; i++){
         let block= blockArray[i];
         if(!block.break){
             if(topCollision(ball,block) || bottomCollision(ball,block)){
+                hitAudio.play();
                 block.break=true;
                 ball.velocityY*=-1;
                 blockCount--;
                 score+=100;
             }
             else if(leftCollision(ball,block) || rightCollision(ball,block) ){
+                hitAudio.play();
                 block.break=true;
                 ball.velocityX*=-1; 
                 blockCount--;
@@ -140,6 +146,7 @@ function outOfBounds(xPosition){
 function movePlayer(e){
     if(gameOver){
         if(e.code=="Space") resetGame();
+       
     }
 
     if(e.code=="ArrowLeft"){
@@ -201,6 +208,7 @@ function createBlocks(){
 
 function resetGame(){
     gameOver=false;
+    
 
     player={
         x: boardWidth/2 -playerwidth/2,

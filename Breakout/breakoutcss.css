@@ -1,11 +1,16 @@
+
 body{
+    background-color: rgb(255, 227, 197);
+    background-image: url(https://i.pinimg.com/originals/85/f3/04/85f30475ae31ddc6060f1c22df750208.gif);
     text-align: center;
 }
-
 #board{
-    background-color: black;
-    border-top: 5px solid skyblue;
-    border-left: 5px solid skyblue;
-    border-right: 5px solid skyblue;
+    /* background-color: rgb(241, 176, 107); */
+    /* background-color:#FF8C00; */
+    background-color: rgb(251, 187, 134);
+    border-top: 5px solid #FF681F;
+    border-left: 5px solid #FF681F;
+    border-right: 5px solid #FF681F;
+    /* #FF8C00; */
 
 }
