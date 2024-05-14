@@ -1,0 +1,76 @@
+body{
+    background-color: rgb(255, 227, 197);
+    background-image: url(https://i.pinimg.com/originals/85/f3/04/85f30475ae31ddc6060f1c22df750208.gif);
+    text-align: center;
+}
+
+#gameHome{
+    background-color: rgb(237, 214, 132);
+  
+    text-align: center; 
+    /* margin: 3vm; */
+    margin-left: 35vw;
+    margin-right: 20vw;
+    height: 35vw;
+    width: 35vw;
+    outline: solid 1px black;
+}
+
+/* // <uniquifier>: Use a unique and descriptive class name
+// <weight>: Use a value from 400 to 700 */
+
+#title{
+  font-family: "Pixelify Sans", sans-serif;
+  color:orangered;
+  font-optical-sizing: auto;
+  font: weight 100vw;;
+  font-style:oblique;
+}
+
+h2{
+    fill: #cf23cf;
+    color: #7aee44;
+}
+
+a {
+
+    /* color: rgb(219, 15, 90); */
+    background: linear-gradient(to right, #f32170, #ff6b08,#cf23cf, #eedd44);    
+    font-style:italic;
+    text-decoration: none;
+  }
+  
+  a {
+    background:
+      linear-gradient(
+        to right,
+        rgb(237, 214, 132),
+        rgb(237, 214, 132)
+        /* rgba(100, 200, 200, 1),
+        rgba(100, 200, 200, 1) */
+      ),
+      linear-gradient(
+        to right,
+        rgba(255, 0, 0, 1),
+        rgba(255, 0, 180, 1),
+        rgba(0, 100, 200, 1)
+    );
+    background-size: 100% 3px, 0 3px;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 400ms;
+  }
+  
+  a:hover {
+    background-size: 0 3px, 100% 3px;
+  }
+  
+  /* Presentational Styles */
+  /* body {
+    display: grid;
+    font-family: 'Poppins', sans-serif;
+    font-size: 27px;
+    font-weight: 700;
+    height: 100vh;
+    place-items: center;
+  } */
