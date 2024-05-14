@@ -347,7 +347,7 @@ var Game = {
   loop: function () {
     Pong.update();
     Pong.draw();
-    // If the this is not over, draw the next frame.
+    // If the this is not over and game is not paused, draw the next frame.
     if (!Pong.over && !this.paused) requestAnimationFrame(this.loop.bind(this)); // Bind 'this' to maintain context
   },
 
