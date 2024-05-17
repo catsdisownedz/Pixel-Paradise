@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +28,7 @@
     <div class="profile-section">
       <span class="level">Lv. 1 Beginner</span>
       <span class="separator"> | </span>
-      <a href="profile.html">
+      <a href="signUp.html">
         <img src="Previews/pfp.jpg" alt="Player profile pic" />
       </a>
       <span id="usernameLabel" class="username">Guest User</span>
@@ -89,7 +92,7 @@
         </div>
     </div>
   </main>
-
+  <?php if( !isset($_SESSION['logged-in'])|| ! ($_SESSION["logged-in"])): ?>
   <div id="loginPopup" class="hidden">
     <h2>Welcome Back!</h2>
     <form id="loginForm" action="login_process.php" method="post">
@@ -109,6 +112,9 @@
       <a href="#"> Continue as Guest User</a>
     </div>
   </div>
+  <?php else: ?>
+    <p>Welcome, <?php echo htmlspecialchars($_SESSION["username"]);?></p>
+    <?php endif; ?>
   
     <script src="behind_the_scenes.js"></script>
 </body>
