@@ -35,6 +35,7 @@ session_start();
     </div>
     <h1>Pixel Paradise</h1>
     <p>Power up your nostalgia</p>
+    <button id="logoutButton" class="logout-button">Logout</button>
   </header>
   <main>
     <div class="game-container">

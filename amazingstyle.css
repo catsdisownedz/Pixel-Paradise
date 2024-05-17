@@ -399,3 +399,22 @@ body {
 }
 
 
+.logout-button {
+  margin-left:1em;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color:#ffd0e1;
+  font-family: "Micro 5", sans-serif;
+  background-color: rgba(250, 100, 162, 0.29); /* Translucent white background */
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.logout-button:hover {
+  background-color: pink; /* Change color on hover */
+  color: rgba(86, 5, 50, 0.749);
+}
