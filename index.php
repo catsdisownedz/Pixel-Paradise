@@ -56,7 +56,7 @@ session_start();
         </div>
         <div class="game">
           <h2>Pong</h2>
-          <img src="Previews/pongss1.png" alt="Pong game"  />
+          <img src="Previews/pongss1.png" alt="Pong game"  />for 
           <div class="options">
             <a href="Pong/pong-single.html" id="singlePlayer">Single Player</a>
             <a href="Pong/pong-multi.html" id="multiPlayer">Multiplayer</a>

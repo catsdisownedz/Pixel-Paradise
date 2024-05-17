@@ -56,6 +56,26 @@ loginForm.addEventListener("submit", function (event) {
 });
 
 
+document.getElementById('logoutButton').addEventListener('click', function() {
+  console.log("nooooooooo");
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', 'logout_process.php', true);
+  xhr.onload = function () {
+    if (this.status == 200) {
+      const response = JSON.parse(this.responseText);
+      if (response.status === "success") {
+        console.log("Logout successful!");
+        window.location.reload();
+        // Redirect to the login page or update the UI as needed
+      } else {
+        console.log("Logout failed: " + response.message);
+      }
+    }
+  };
+  xhr.send();
+});
+
+
 const gameContainer = document.querySelector(".game-container");
 //   const sounds = {};
 
@@ -141,4 +161,5 @@ document.querySelectorAll('.game').forEach(game => {
     video.currentTime = 0; // This will rewind the video to the start
   });
 });
+
 
