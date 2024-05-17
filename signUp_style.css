@@ -23,13 +23,13 @@ body {
   input[type="password"] {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #fdb9e4;
     border-radius: 4px;
     box-sizing: border-box;
   }
   
   button[type="submit"] {
-    background-color: #4CAF50; /* Green */
+    background-color: #d257d8; /* Green */
     color: white;
     padding: 10px 20px;
     border: none;
@@ -39,7 +39,7 @@ body {
   }
   
   button[type="submit"]:hover {
-    background-color: #45A049;
+    background-color: #630b79;
   }
   
   small {

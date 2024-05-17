@@ -177,9 +177,9 @@ p {
 }
 
 /* this gives a continuous looping color animation and we can change the colors amazing */
-button {
+/* button {
   animation: rainbow-animation 200ms linear infinite;
-}
+} */
 
 @keyframes rainbow-animation {
   to {
@@ -191,6 +191,137 @@ button {
   }
 }
 
+@keyframes slideDown {
+  0% {
+    top: -100%;
+  }
+  80%{
+    top: 25%;
+  }
+  /* 87%{
+    top: 19%;
+  }
+  95%{
+    top: 22%;
+  } */
+  100% {
+    top: 20%;
+  }
+}
+#loginPopup {
+  width: auto;/* Adjust as needed (e.g., 60vw) */
+  height: 15vh; 
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #3d0735e2;
+  padding: 20px;
+  border: 1px solid #d833ac4b;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(54, 2, 46, 0.879);
+  display: none; /* Initially hidden */
+  animation: slideDown 1s ease-out forwards;
+}
+
+#loginPopup.visible {
+  display: block;
+}
+
+#loginPopup h2 {
+  font-family: "Micro 5", sans-serif;
+  font-size: 1.5em; /* Smaller size */
+  margin-top: 0; /* Remove top margin */
+  color: #ff69b4; /* Neon pink color */
+  text-shadow: 0 2px 5px rgba(54, 2, 46, 0.879);
+}
+#loginForm label,
+#loginForm input {
+  margin-top: 0px; /* Add space at the top of the labels and input fields */
+  margin-bottom: 5px;
+  margin-left: 0.5vw;
+}
+
+
+#loginPopup label {
+  font-family: "Jersey 25 Charted", sans-serif;
+  box-shadow: 0 2px 5px rgba(54, 2, 46, 0.879);
+  font-weight: 400;
+  font-style: normal;
+  color: #ff69b4; /* Neon pink color */
+  padding-right: 1px;
+  margin-left: 0%;
+}
+
+#loginPopup input[type="text"],
+#loginPopup input[type="password"] {
+  font-family: "Chakra Petch", sans-serif;
+  box-shadow: 0 2px 5px rgba(54, 2, 46, 0.879);
+  border: 1px solid #ff69b4; /* Pink border */
+  background-color: transparent; /* Transparent background */
+  color: #ff69b4; /* Text color same as border */
+  padding: 5px;
+  height: 10px;
+  margin-right: 10px; /* Add space to the right of input fields */
+}
+
+ #loginPopup button{
+  font-family: "Micro 5", sans-serif;
+  font-size: small;
+  background-color: #ff69b4; /* Pink background */
+  border: none; /* No border */
+  border-color: #981847;
+  border-radius: 1px;
+  color: white; /* White text */
+  padding: 0.5px 20px; /* Padding */
+  text-align: center; /* Centered text */
+  text-decoration: none; /* No underline */
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+#loginPopup button:hover{
+  background-color: #780a41; 
+}
+#loginPopup a {
+  color: #ff69b4; /* Pink color */
+  text-decoration: none; /* No underline */
+}
+
+#loginPopup a:hover {
+  color: #c71585; /* Dark pink color on hover */
+}
+
+#message {
+  font-family: "Micro 5", sans-serif;
+  color: #ff69b4; /* Pink color */
+  position: absolute; /* Absolute positioning relative to the popup */
+  top: 20px; /* Position from the top */
+  right: 30px; /* Position from the right */
+  font-size: 1.2em; /* Adjust size as needed */
+}
+
+.loginForm {
+  max-width: 80%;
+  display: flex;
+  justify-content: center;
+  /* Other styles */
+}
+
+
+.link-container {
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 0.6em;
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  margin-bottom: 3px;
+  padding-top: 14px;
+}
 
 .grow-hover {
   transform: scale(1.04);
@@ -227,13 +358,26 @@ body {
 
 
 .profile-section {
+  overflow: hidden;
   display: flex;
   align-items: center;
-  float: right;
-  /* Move to top right corner */
-  margin-right: 2vw;
-  /* Add margin for spacing */
+  justify-content: flex-end; /* Align items to the right */
+  width: 95%; /* Take up full width of the container */
+  padding: 0 2vw; /* Add some padding on the sides */
 }
+
+.level,
+.separator,
+.username {
+  margin-left: 1em;
+  font-family: "Micro 5", sans-serif; 
+}
+
+.separator {
+  color: rgba(226, 47, 214, 0.8); /* Increase opacity to make separator more visible */
+  margin: 0 0.5em; /* Add horizontal margin to space out the separator */
+}
+
 
 .profile-section a {
   display: block;
@@ -254,10 +398,4 @@ body {
   /* Crop image if necessary */
 }
 
-.level {
-  margin-left: 1em;
-  /* Add margin between profile picture and level */
-  font-size: 1em;
-  color: #fff;
-  font-family: "Micro 5", sans-serif;
-}
+

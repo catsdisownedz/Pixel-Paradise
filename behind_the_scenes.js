@@ -1,4 +1,59 @@
 // document.addEventListener("DOMContentLoaded", function () {
+ // Assuming you have this button elsewhere
+
+
+ const  usernameLabel = document.getElementById("usernameLabel");
+//this isnt working lol
+if(usernameLabel !== "Guest User"){
+  setTimeout(function() {
+    document.getElementById("loginPopup").classList.remove("hidden");
+    document.getElementById("loginPopup").classList.add("visible");
+  }, 5000);
+}
+
+// Handle form submission (assuming successful login)
+const loginForm = document.getElementById("loginForm");
+loginForm.addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevent default form submission
+
+  //getting the form data ayoyyyy
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  //making an instance of the formData object 
+
+  let formData = new FormData();
+  formData.append("username", username);
+  formData.append("password", password);
+
+  //we create the ajax request yay
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "login_process.php", true);
+
+
+  // Handle the response
+  xhr.onload = function() {
+    if (this.status == 200) {
+      const messageElement = document.getElementById("message");
+      const response = JSON.parse(this.responseText);
+      if (response.status === "success") {
+        console.log("Login successful!");
+        messageElement.textContent = "Login successful!";
+        usernameLabel.textContent = username;
+        setTimeout(function() {
+          document.getElementById("loginPopup").classList.remove("visible");
+          document.getElementById("loginPopup").classList.add("hidden");
+        }, 2000); 
+      } else {
+        messageElement.textContent = "Invalid password or username."
+        console.log("Login failed: " + response.message);
+      }
+    }
+  };
+  xhr.send(formData);
+});
+
+
   const gameContainer = document.querySelector(".game-container");
 //   const sounds = {};
 
