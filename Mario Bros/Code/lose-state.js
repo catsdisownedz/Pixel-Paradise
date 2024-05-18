@@ -1,4 +1,6 @@
 // State shown when player loses
+var lose = new Audio("sounds/09. Game Over.mp3");
+
 Mario.LoseState = function (score) {
   this.drawManager = null;
   this.camera = null;
@@ -11,6 +13,7 @@ Mario.LoseState = function (score) {
 Mario.LoseState.prototype = new Engine.GameState();
 
 Mario.LoseState.prototype.Enter = function () {
+  lose.play();
   var self = this;
   this.drawManager = new Engine.DrawableManager();
   this.camera = new Engine.Camera();
@@ -38,6 +41,7 @@ Mario.LoseState.prototype.Enter = function () {
 };
 
 Mario.LoseState.prototype.Exit = function () {
+  lose.pause();
   this.drawManager.Clear();
   delete this.drawManager;
   delete this.camera;

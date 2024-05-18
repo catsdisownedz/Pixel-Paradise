@@ -1,5 +1,5 @@
 // Displays title screen and menu
-var title = new Audio("../sounds/smwtitle.mp3");
+var title = new Audio("sounds/smwtitle.mp3");
 
 Mario.TitleState = function () {
   this.drawManager = null;
@@ -12,6 +12,8 @@ Mario.TitleState = function () {
 Mario.TitleState.prototype = new Engine.GameState();
 
 Mario.TitleState.prototype.Enter = function () {
+  title.play();
+
   this.drawManager = new Engine.DrawableManager();
   this.camera = new Engine.Camera();
 
@@ -57,12 +59,10 @@ Mario.TitleState.prototype.Enter = function () {
   //set up the global main character variable
   Mario.MarioCharacter = new Mario.Character();
   Mario.MarioCharacter.Image = Engine.Resources.Images["smallMario"];
-
-  Mario.PlayTitleMusic();
 };
 
 Mario.TitleState.prototype.Exit = function () {
-  Mario.StopMusic();
+  title.pause();
 
   this.drawManager.Clear();
   delete this.drawManager;
@@ -95,14 +95,19 @@ Mario.TitleState.prototype.CheckForChange = function (context) {
 };
 
 Mario.PlayTitleMusic = function () {
-  title.play();
+  if (title) {
+    title.play();
+    console.log("Playing title music");
+  } else {
+    console.error("Title music is not defined");
+  }
 };
 
 Mario.StopMusic = function () {
-  // Assuming 'title' is the global variable that holds the Audio object
   if (title) {
     title.pause();
     title.currentTime = 0; // Optional: Resets the audio playback to the start
+    console.log("Stopped title music");
   } else {
     console.error("No audio is currently playing");
   }
