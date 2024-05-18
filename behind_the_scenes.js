@@ -56,7 +56,16 @@ loginForm.addEventListener("submit", function (event) {
 });
 
 
-document.getElementById('logoutButton').addEventListener('click', function() {
+document.getElementById('logoutButton').addEventListener('click', handleLogout);
+
+const logoutButton = document.getElementById('logoutButton');
+logoutButton.addEventListener('keypress', function(event) {
+  if (event.key === 'Enter') {
+    handleLogout();
+  }
+});
+
+function handleLogout() {
   console.log("nooooooooo");
   const xhr = new XMLHttpRequest();
   xhr.open('POST', 'logout_process.php', true);
@@ -65,18 +74,38 @@ document.getElementById('logoutButton').addEventListener('click', function() {
       const response = JSON.parse(this.responseText);
       if (response.status === "success") {
         console.log("Logout successful!");
-        window.location.reload();
-        // Redirect to the login page or update the UI as needed
+        window.location.reload(); // Redirect to the login page or update UI as needed
       } else {
         console.log("Logout failed: " + response.message);
       }
     }
   };
   xhr.send();
+}
+
+
+const continueGuestLink = document.getElementById('continue');
+
+continueGuestLink.addEventListener('click', () => {
+  const loginPopup = document.getElementById('loginPopup');
+  document.getElementById("loginPopup").classList.remove("visible");
+  document.getElementById("loginPopup").classList.add("hidden");
 });
 
-
 const gameContainer = document.querySelector(".game-container");
+const games = document.querySelectorAll('.game');
+
+gameContainer.addEventListener('scroll', () => {
+  games.forEach(game => {
+    const gameCenterX = game.offsetLeft + game.offsetWidth / 2;
+    const containerCenterX = gameContainer.scrollLeft + gameContainer.offsetWidth / 2;
+
+    // Check if game center is within a tolerance range of container center
+    const isCentered = Math.abs(gameCenterX - containerCenterX) < 10; // Adjust tolerance as needed
+
+    game.classList.toggle('game-in-view', isCentered);
+  });
+});
 //   const sounds = {};
 
 // Preload game sounds
