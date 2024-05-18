@@ -47,7 +47,7 @@ body {
   
   /* Row size adjustments */
   tr:nth-child(1) { /* Target the first row (#1) */
-    font-size: 2em; /* Increase font size for #1 row */
+    font-size: 2.1em; /* Increase font size for #1 row */
     color: #31ff3c;
   }
   
@@ -57,7 +57,7 @@ body {
   }
   
   tr:nth-child(3) { /* Target the third row (#3) */
-    font-size: 1em; /* Default font size for #3 row */
+    font-size: 1.3em; /* Default font size for #3 row */
     color: #ff196e;
   }
   
