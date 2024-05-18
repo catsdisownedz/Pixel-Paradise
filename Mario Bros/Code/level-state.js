@@ -386,7 +386,6 @@ Mario.LevelState.prototype.Draw = function (context) {
     t = t * t * 0.2;
 
     if (t > 900) {
-      //TODO: goto map state with level won
       Mario.GlobalMapState.LevelWon();
       this.GotoMapState = true;
     }
@@ -405,7 +404,6 @@ Mario.LevelState.prototype.Draw = function (context) {
     t = t * t * 0.1;
 
     if (t > 900) {
-      //TODO: goto map with level lost
       Mario.MarioCharacter.Lives--;
       this.GotoMapState = true;
       if (Mario.MarioCharacter.Lives <= 0) {
@@ -556,7 +554,7 @@ Mario.LevelState.prototype.BumpInto = function (x, y) {
 
 Mario.LevelState.prototype.CheckForChange = function (context) {
   if (this.GotoLoseState) {
-    context.ChangeState(new Mario.LoseState());
+    context.ChangeState(new Mario.LoseState(Mario.MarioCharacter.Coins));
   } else {
     if (this.GotoMapState) {
       context.ChangeState(Mario.GlobalMapState);
