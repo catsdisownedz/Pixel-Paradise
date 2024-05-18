@@ -10,11 +10,13 @@
     $result= $conn->query($sql);
     
     $usernamesLeaderbaord= array();
+    $scoreLeaderBoard= array();
 
     if($result){
         while($row =$result->fetch_assoc()){
             // echo "usrname:" .$row["username"]. "score:" .$row["score"]. "<br>";
             array_push($usernamesLeaderbaord,$row["username"]);
+            array_push($scoreLeaderBoard,$row["score"]);
         }   
     }   
     else echo "nothing";
