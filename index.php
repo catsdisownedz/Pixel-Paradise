@@ -48,8 +48,8 @@ session_start();
   </header>
   <main>
     <div class="game-container">
-      <a href="Pacman/pacman.html">
-        <div class="game">
+      <div class="game">
+        <a href="Pacman/pacman.html">
           <h2>Pac-Man</h2>
           <img src="Previews/pac-man.png" alt="Pac-Man game"/>
           <video class = "game-video" src="Previews/pac_prev.mp4" autoplay muted loop></video>

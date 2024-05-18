@@ -33,21 +33,19 @@
   }
 }
 
-
 h1 {
   font-family: "Micro 5", sans-serif;
 
   margin-bottom: 0;
   justify-content: center;
   font-weight: bold;
-  background: url('Images/e557dabea8d72220bbac53427f7524fd.gif') repeat;
+  background: url("Images/e557dabea8d72220bbac53427f7524fd.gif") repeat;
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
   font-size: 4em;
 }
-
 
 main {
   display: flex;
@@ -61,7 +59,6 @@ header {
   text-align: center;
   padding: 20px;
 }
-
 
 p {
   justify-content: center;
@@ -107,13 +104,14 @@ p {
   border-radius: 0.5vw;
   text-align: center;
   scroll-snap-align: center;
-  transition: transform 0.2s ease-in-out;
+  /* Snap to left edge of game div */
+  /* padding-bottom:1vw; */
+  transition: transform 0.2s ease-in-out; 
   position: relative;
-
 }
 
 
-.game h2 {
+.game h2{
   font-family: "Pixelify Sans", sans-serif;
   font-size: 1.5em;
   margin-bottom: 0.2em;
@@ -179,13 +177,13 @@ a:visited {
   text-decoration: none;
 }
 
-a:hover {
-  color: #fab7d0;
+a:hover{
+  color: #ff77aa;
   text-decoration: none;
 }
 
-a:active {
-  color: #e86092;
+a:active{
+  color: #ff77aa;
   text-decoration: none;
 }
 
@@ -195,12 +193,10 @@ a:active {
   display: block;
   margin-top: 0%;
   /* Add smooth zoom effect*/
-
 }
 
-.game:hover {
-  transform: scale(1.05);
-  /* Zoom image on hover */
+.game:hover{
+  transform: scale(1.05); /* Zoom image on hover */
 }
 
 .game:hover .options {
@@ -298,7 +294,6 @@ a:active {
   margin-left: 0.5vw;
 }
 
-
 #loginPopup label {
   font-family: "Jersey 25 Charted", sans-serif;
   box-shadow: 0 2px 5px rgba(54, 2, 46, 0.879);
@@ -386,7 +381,6 @@ a:active {
   /* Other styles */
 }
 
-
 .link-container {
   font-family: "Chakra Petch", sans-serif;
   font-size: 0.6em;
@@ -419,7 +413,7 @@ a:active {
 }
 
 body {
-  font-family: 'Press Start 2P', sans-serif;
+  font-family: "Press Start 2P", sans-serif;
   background-color: #130015;
   color: #fff;
   margin: 0;
@@ -431,7 +425,6 @@ body {
   white-space: nowrap;
   /* Prevent content from wrapping */
 }
-
 
 .profile-section {
   overflow: hidden;
@@ -458,7 +451,6 @@ body {
 }
 
 
-
 .profile-section img {
   display: block;
   /* Make entire image clickable */
@@ -472,7 +464,6 @@ body {
   object-fit: cover;
   /* Crop image if necessary */
 }
-
 
 .logout-button {
   font-size: 1em;
