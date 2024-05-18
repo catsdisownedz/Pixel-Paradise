@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake</title>
+    <link rel="stylesheet" href="snake.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <canvas width="400" height="400" id="game"></canvas>
+    </div>
+
+    <!-- <div id="pauseMenu" class="menu hidden">
+      <h2>Game Paused</h2>
+      <p id="scoreDisplay">Score: 0</p>
+      <button id="resumeButton">Resume</button>
+      <button id="leaderboardButton">Leaderboard</button>
+    </div> -->
+
+    <div id="gameOverOverlay">
+      <div class="overlay">
+        <h1>Game Over</h1>
+        <p id="finalScore">Final Score: 0</p>
+        <button id="replayButton">Replay</button>
+        <button id="leaderboardButton">Leaderboard</button>
+        <button id="exitButton">Exit</button>
+      </div>
+    </div>
+
+    <script src="snake.js"></script>
+  </body>
+</html>

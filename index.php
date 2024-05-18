@@ -52,16 +52,14 @@ session_start();
         <a href="Pacman/pacman.html">
           <h2>Pac-Man</h2>
           <img src="Previews/pac-man.png" alt="Pac-Man game"/>
-          <video class = "game-video" src="Previews/pac_prev.mp4" autoplay muted loop></video>
+          <video class = "game-video" src="Previews/pac_prev.mp4" autoplay muted loop>
         </div>
-        <!-- <div class="game game--first">
-          <h2>Tetris</h2>
-          <img
-            src="images/tetris.png"
-            alt="Tetris game"
-            data-sound="sound/tetris.mp3"
-          />
-        </div> -->
+        <div class="game">
+          <h2>Snake</h2>
+          <a href="Snake/snake.html">
+          <img src="Previews/snakess.png" alt="Snake game"/>
+          <video class = "game-video" src="Previews/snake-rec.mov" autoplay muted loop>
+        </div>
         <div class="game">
           <h2>Pong</h2>
           <img src="Previews/pong.png" alt="Pong game"  />
@@ -90,7 +88,7 @@ session_start();
           <h2>Break out</h2>
           <a href="Breakout/breakout.html">
           <img
-            src="previews/breakk.png" alt="break out game"/>
+            src="previews/breakk.png" alt="Break Out game"/>
           <video class="game-video" src="previews/breakoutvid.mp4" autoplay muted loop>
             </video>
           </a>
