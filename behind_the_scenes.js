@@ -189,3 +189,32 @@ document.querySelectorAll(".game").forEach((game) => {
     video.currentTime = 0; // This will rewind the video to the start
   });
 });
+
+
+const levels = [
+  { name: "Lv. 1 Lazy Panda", threshold: 0 },
+  { name: "Lv. 2 Grasshopper", threshold: 1000 },
+  { name: "Lv. 3 Dragon Warrior", threshold: 2000 },
+  { name: "Lv. 4 Mantis", threshold: 3000 },
+  { name: "Lv. 5 Viper", threshold: 4000 },
+  { name: "Lv. 6 Monkey", threshold: 5000 },
+  { name: "Lv. 7 Tigress", threshold: 6000 },
+  { name: "Lv. 8 Crane", threshold: 7000 },
+  { name: "Lv. 9 Po", threshold: 8000 },
+  { name: "Lv. 10 Shifu", threshold: 9000 },
+  { name: "Lv. 11 Master Oogway", threshold: 10000 },
+  { name: "Lv. 12 Dragon Warrior", threshold: 20000 },
+  // ... add more levels as needed
+];
+
+function updateUserLevel(score) {
+  let currentLevel = levels[0]; // Default to Lv. 1
+  for (const level of levels) {
+    if (score >= level.threshold) {
+      currentLevel = level;
+    } else {
+      break; // Exit loop if score doesn't meet threshold
+    }
+  }
+  document.getElementById("usernameLabel").textContent = `${currentLevel.name}`;
+}

@@ -27,6 +27,7 @@ session_start();
 <body>
   <header>
     <div class="profile-section">
+      
       <a href="leaderBoard.php" class="level" id="wow">Lv. 1 Beginner</a>
       <span class="separator"> | </span>
       <a href="signUp.html">

@@ -35,7 +35,6 @@
 
 h1 {
   font-family: "Micro 5", sans-serif;
-
   margin-bottom: 0;
   justify-content: center;
   font-weight: bold;
@@ -44,7 +43,7 @@ h1 {
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
-  font-size: 4em;
+  font-size: 5em;
 }
 
 main {
