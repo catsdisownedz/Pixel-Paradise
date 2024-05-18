@@ -16,10 +16,11 @@ body {
     font-family: "Micro 5", sans-serif;
     text-align: center;
     font-size: 3em; /* Adjust font-size as needed */
-    margin-bottom: 20px;
+    margin-bottom: 1em;
   }
   
   table {
+    margin-top: 0%;
     width: 50%;
     height: 70%;
     border-collapse: collapse; /* Remove borders between table cells */
@@ -41,7 +42,7 @@ body {
   
   .rank h2 {
     font-size: 2.5em; /* Adjust font size for all ranks (optional) */
-    margin-bottom: 5px;
+    margin-bottom: 0.3em;
   }
   
   /* Row size adjustments */

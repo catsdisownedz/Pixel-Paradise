@@ -174,12 +174,12 @@ a:visited{
 }
 
 a:hover{
-  color: #ff77aa;
+  color: #fab7d0;
   text-decoration: none;
 }
 
 a:active{
-  color: #ff77aa;
+  color: #e86092;
   text-decoration: none;
 }
 
