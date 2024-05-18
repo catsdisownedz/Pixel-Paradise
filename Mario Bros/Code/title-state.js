@@ -1,4 +1,6 @@
 // Displays title screen and menu
+var title = new Audio("../sounds/smwtitle.mp3");
+
 Mario.TitleState = function () {
   this.drawManager = null;
   this.camera = null;
@@ -56,11 +58,11 @@ Mario.TitleState.prototype.Enter = function () {
   Mario.MarioCharacter = new Mario.Character();
   Mario.MarioCharacter.Image = Engine.Resources.Images["smallMario"];
 
-  //Mario.PlayTitleMusic();
+  Mario.PlayTitleMusic();
 };
 
 Mario.TitleState.prototype.Exit = function () {
-  //Mario.StopMusic();
+  Mario.StopMusic();
 
   this.drawManager.Clear();
   delete this.drawManager;
@@ -89,5 +91,19 @@ Mario.TitleState.prototype.Draw = function (context) {
 Mario.TitleState.prototype.CheckForChange = function (context) {
   if (Engine.KeyboardInput.IsKeyDown(Engine.Keys.S)) {
     context.ChangeState(Mario.GlobalMapState);
+  }
+};
+
+Mario.PlayTitleMusic = function () {
+  title.play();
+};
+
+Mario.StopMusic = function () {
+  // Assuming 'title' is the global variable that holds the Audio object
+  if (title) {
+    title.pause();
+    title.currentTime = 0; // Optional: Resets the audio playback to the start
+  } else {
+    console.error("No audio is currently playing");
   }
 };
