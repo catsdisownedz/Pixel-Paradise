@@ -92,7 +92,7 @@ function update(){   //game loop
         // GAME OVER AAAAAAAAAAAAAA
         
         context.font="20px sans-serif";
-        context.fillText("YOU LOSE: PRESS SPACE TO RESTART",80,400);
+        context.fillText("YOU LOSE!PRESS SPACE TO RESTART",80,400);
         loseAudio.play();
         gameOver=true;
     }

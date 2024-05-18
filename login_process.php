@@ -15,6 +15,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
+  $_SESSION["username"]= $username;
   echo json_encode(["status" => "success"]);
 } else {
   echo json_encode(["status" => "error", "message" => "Invalid credentials"]);

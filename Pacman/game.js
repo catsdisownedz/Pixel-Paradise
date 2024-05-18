@@ -117,6 +117,8 @@ let onGhostCollision = () => {
                 document.getElementById('overlay1').style.display = 'flex';
                 document.getElementById('replay-button').addEventListener('click', replayGame);
                 document.getElementById('exit-button').addEventListener('click', exitGame);
+                console.log("HELOOOO");
+                sendScoreToServer(score);
             }
         }
     }
@@ -297,3 +299,21 @@ window.addEventListener("keydown", (event) => {
         }
     }, 1);
 });
+
+function sendScoreToServer(score) {
+    let state={
+        "game":"Pacman",
+        "score":score
+    }
+    fetch("../highscores.php",{
+        "method":"POST",
+        "headers":{
+            "Content-Type":"application/json; charset=utf-8"
+        },
+        "body": JSON.stringify(state)
+    }).then(function(response){
+        return response.text();
+    }).then(function(data){
+        console.log(data);
+    })    
+}
