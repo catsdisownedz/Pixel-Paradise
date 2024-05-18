@@ -12,8 +12,8 @@ var Game = {
       self.canvas.height = window.innerHeight;
 
       // Update the canvas style dimensions
-      self.canvas.style.width = window.innerWidth + "px";
-      self.canvas.style.height = window.innerHeight + "px";
+      self.canvas.style.width = window.innerWidth * 0.8;
+      self.canvas.style.height = window.innerHeight * 0.8;
 
       // Update the font size based on new canvas size
       self.fontSize = self.canvas.width * 0.035; // 3.5% of canvas width
@@ -28,8 +28,8 @@ var Game = {
       // Redraw the this to apply the new sizes and positions
       self.draw();
     });
-    this.canvas.style.width = window.innerWidth + "px";
-    this.canvas.style.height = window.innerHeight + "px";
+    this.canvas.style.width = window.innerWidth * 0.8;
+    this.canvas.style.height = window.innerHeight * 0.8;
     this.player = Paddle.new.call(this, "left");
     this.paddle = Paddle.new.call(this, "right");
     this.ball = Ball.new.call(this);
@@ -37,7 +37,7 @@ var Game = {
     this.running = this.over = false;
     this.turn = this.paddle;
     this.timer = this.round = 0;
-    this.color = "#2c0946";
+    this.color = "#11001e";
     speedIncrement = 1;
     Pong.menu();
     Pong.listen();
@@ -320,7 +320,7 @@ var Game = {
       .getElementById("exitButton")
       .addEventListener("click", function () {
         // Exit the game
-        window.location.href = "../index.html";
+        window.location.href = "../index.php";
       });
   },
 
@@ -339,8 +339,8 @@ var Game = {
       this.showPauseMenu();
     } else {
       // Hide the pause menu
-        this.hidePauseMenu();
-        this.loop();
+      this.hidePauseMenu();
+      this.loop();
     }
   },
 

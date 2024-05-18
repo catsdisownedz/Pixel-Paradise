@@ -1,18 +1,18 @@
 // Helps manage and draw a collection of sprites
 Engine.DrawableManager = function () {
-  this.unsorted = true;
+  this.Unsorted = true;
   this.Objects = [];
 };
 
 Engine.DrawableManager.prototype = {
   Add: function (object) {
     this.Objects.push(object);
-    this.unsorted = true;
+    this.Unsorted = true;
   },
 
   AddRange: function (objects) {
     this.Objects = this.Objects.concat(objects);
-    this.unsorted = true;
+    this.Unsorted = true;
   },
 
   Clear: function () {
@@ -43,11 +43,14 @@ Engine.DrawableManager.prototype = {
   },
 
   RemoveList: function (items) {
-    for (var i = 0; i < items.length; j++) {
-      for (var j = 0; i < this.Objects.length; j++) {
-        if (this.Objects[j] === items[i]) {
-          this.Objects.splice(j, 1);
-          items.splice(i, 1);
+    var i = 0,
+      j = 0;
+    for (j = 0; j < items.length; i++) {
+      for (i = 0; i < this.Objects.length; i++) {
+        if (this.Objects[i] === items[j]) {
+          this.Objects.splice(i, 1);
+          items.splice(j, 1);
+          j--;
           break;
         }
       }
@@ -55,7 +58,8 @@ Engine.DrawableManager.prototype = {
   },
 
   Update: function (delta) {
-    for (var i = 0; i < this.Objects.length; i++) {
+    var i = 0;
+    for (i = 0; i < this.Objects.length; i++) {
       if (this.Objects[i].Update) {
         this.Objects[i].Update(delta);
       }
@@ -63,14 +67,16 @@ Engine.DrawableManager.prototype = {
   },
 
   Draw: function (context, camera) {
-    // Sort the sprites based on their 'z depth' to get the correct drawing order
-    if (this.unsorted) {
-      this.unsorted = false;
+    //sort the sprites based on their 'z depth' to get the correct drawing order
+    if (this.Unsorted) {
+      this.Unsorted = false;
       this.Objects.sort(function (x1, x2) {
         return x1.ZOrder - x2.ZOrder;
       });
     }
-    for (var i = 0; i < this.Objects.length; i++) {
+
+    var i = 0;
+    for (i = 0; i < this.Objects.length; i++) {
       if (this.Objects[i].Draw) {
         this.Objects[i].Draw(context, camera);
       }

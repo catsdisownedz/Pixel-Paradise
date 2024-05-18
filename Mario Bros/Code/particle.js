@@ -1,5 +1,5 @@
 // Broken block
-Mario.Particle = function () {
+Mario.Particle = function (world, x, y, xa, ya, xPic, yPic) {
   this.World = world;
   this.X = x;
   this.Y = y;
@@ -7,8 +7,8 @@ Mario.Particle = function () {
   this.Ya = ya;
   this.XPic = (Math.random() * 2) | 0;
   this.YPic = 0;
-  this.XPic0 = 4;
-  this.YPic0 = 4;
+  this.XPicO = 4;
+  this.YPicO = 4;
 
   this.PicWidth = 8;
   this.PicHeight = 8;

@@ -1,9 +1,9 @@
 // For sprites that are only a portion of the image
 Engine.FrameSprite = function () {
-  this.frameX = 0;
-  this.frameY = 0;
-  this.frameWidth = 0;
-  this.frameHeight = 0;
+  this.FrameX = 0;
+  this.FrameY = 0;
+  this.FrameWidth = 0;
+  this.FrameHeight = 0;
 };
 
 Engine.FrameSprite.prototype = new Engine.Sprite();
@@ -11,10 +11,10 @@ Engine.FrameSprite.prototype = new Engine.Sprite();
 Engine.FrameSprite.prototype.Draw = function (context, camera) {
   context.drawImage(
     this.Image,
-    this.frameX,
-    this.frameY,
-    this.frameWidth,
-    this.frameHeight,
+    this.FrameX,
+    this.FrameY,
+    this.FrameWidth,
+    this.FrameHeight,
     this.X - camera.X,
     this.Y - camera.Y,
     this.FrameWidth,

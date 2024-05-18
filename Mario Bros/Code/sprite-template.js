@@ -1,5 +1,5 @@
 // Creates a specific type of sprite based on the info given
-Mario.SpriteTemplate = function (typw, winged) {
+Mario.SpriteTemplate = function (type, winged) {
   this.Type = type;
   this.Winged = winged;
   this.LastVisibleTick = -1;
@@ -12,6 +12,7 @@ Mario.SpriteTemplate.prototype = {
     if (this.IsDead) {
       return;
     }
+
     if (this.Type === Mario.Enemy.Flower) {
       this.Sprite = new Mario.FlowerEnemy(world, x * 16 + 15, y * 16 + 24);
     } else {

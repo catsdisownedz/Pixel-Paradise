@@ -1,14 +1,14 @@
 // Base class to represent a double buffered canvas object
-Engine.gameCanvas = function () {
+Engine.GameCanvas = function () {
   this.Canvas = null;
   this.Context2D = null;
   this.BackBuffer = null;
   this.BackBufferContext2D = null;
 };
 
-Engine.gameCanvas.prototype = {
-  Initialize: function (canvasID, resWidth, resHeight) {
-    this.Canvas = document.getElementById(canvasID);
+Engine.GameCanvas.prototype = {
+  Initialize: function (canvasId, resWidth, resHeight) {
+    this.Canvas = document.getElementById(canvasId);
     this.Context2D = this.Canvas.getContext("2d");
     this.BackBuffer = document.createElement("canvas");
     this.BackBuffer.width = resWidth;
@@ -31,8 +31,8 @@ Engine.gameCanvas.prototype = {
       this.BackBuffer,
       0,
       0,
-      this.Canvas.width,
-      this.Canvas.height,
+      this.BackBuffer.width,
+      this.BackBuffer.height,
       0,
       0,
       this.Canvas.width,

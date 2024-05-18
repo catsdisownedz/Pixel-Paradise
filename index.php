@@ -48,8 +48,8 @@ session_start();
   </header>
   <main>
     <div class="game-container">
-      <a href="Pacman/pacman.html">
-        <div class="game">
+      <div class="game">
+        <a href="Pacman/pacman.html">
           <h2>Pac-Man</h2>
           <img src="Previews/pac-man.png" alt="Pac-Man game"/>
           <video class = "game-video" src="Previews/pac_prev.mp4" autoplay muted loop></video>
@@ -64,7 +64,8 @@ session_start();
         </div> -->
         <div class="game">
           <h2>Pong</h2>
-          <img src="Previews/pongss1.png" alt="Pong game"  />
+          <img src="Previews/pong.png" alt="Pong game"  />
+          <video class = "game-video" src="Previews/pong-single-rec.mov" autoplay muted loop>
           <div class="options">
             <a href="Pong/pong-single.html" id="singlePlayer">Single Player</a>
             <span class="separator"> | </span>
@@ -72,12 +73,10 @@ session_start();
           </div>
         </div>
         <div class="game">
-          <h2>Minesweeper</h2>
-          <img
-            src="images/mine-sweeper.png"
-            alt="Minesweeper game"
-            data-sound="sound/mine-sweeper.mp3"
-          />
+          <h2>Mario Bros</h2>
+          <a href="Mario Bros/mario-bros.html">
+          <img src="Previews/mario-bros.png" alt="Mario Bros game"/>
+          <video class = "game-video" src="Previews/mario-bros-rec.mov" autoplay muted loop>
         </div>
         <div class="game">
           <h2>Flappy Bird</h2>

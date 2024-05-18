@@ -8,8 +8,8 @@ Mario.FireFlower = function (world, x, y) {
   this.Y = y;
   this.Image = Engine.Resources.Images["items"];
 
-  this.XPic0 = 8;
-  this.YPic0 = 15;
+  this.XPicO = 8;
+  this.YPicO = 15;
   this.XPic = 1;
   this.YPic = 0;
   this.Height = 12;

@@ -10,8 +10,8 @@ Mario.Sparkle = function (world, x, y, xa, ya) {
 
   this.Life = 10 + ((Math.random() * 5) | 0);
   this.XPicStart = this.XPic;
-  this.XPic0 = 4;
-  this.YPic0 = 4;
+  this.XPicO = 4;
+  this.YPicO = 4;
 
   this.PicWidth = 8;
   this.PicHeight = 8;
@@ -24,7 +24,7 @@ Mario.Sparkle.prototype.Move = function () {
   if (this.Life > 10) {
     this.XPic = 7;
   } else {
-    this.XPic = (this.XPicStart + (10 - this.Image.Life) * 0.4) | 0;
+    this.XPic = (this.XPicStart + (10 - this.Life) * 0.4) | 0;
   }
 
   if (this.Life-- < 0) {

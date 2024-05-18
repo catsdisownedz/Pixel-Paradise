@@ -6,11 +6,11 @@ Engine.SpriteFont = function (
   letterHeight,
   letters
 ) {
-  this.Strings = strings;
   this.Image = image;
+  this.Letters = letters;
   this.LetterWidth = letterWidth;
   this.LetterHeight = letterHeight;
-  this.Letters = letters;
+  this.Strings = strings;
 };
 
 Engine.SpriteFont.prototype = new Engine.Drawable();

@@ -24,8 +24,8 @@ Mario.Enemy = function (world, x, y, dir, type, winged) {
 
   this.Image = Engine.Resources.Images["enemies"];
 
-  this.XPic0 = 8;
-  this.YPic0 = 31;
+  this.XPicO = 8;
+  this.YPicO = 31;
   this.AvoidCliffs = this.Type === Mario.Enemy.RedKoopa;
   this.NoFireballDeath = this.Type === Mario.Enemy.Spiky;
 
@@ -64,7 +64,7 @@ Mario.Enemy.prototype.CollideCheck = function () {
           this.Winged = false;
           this.Ya = 0;
         } else {
-          this.YPic0 = 31 - (32 - 8);
+          this.YPicO = 31 - (32 - 8);
           this.PicHeight = 8;
 
           if (this.SpriteTemplate !== null) {
@@ -92,8 +92,9 @@ Mario.Enemy.prototype.CollideCheck = function () {
 };
 
 Mario.Enemy.prototype.Move = function () {
-  var i = (runFrame = 0),
-    sideWaysSpeed = 1.75;
+  var i = 0,
+    sideWaysSpeed = 1.75,
+    runFrame = 0;
 
   this.WingTime++;
   if (this.DeadTime > 0) {
@@ -356,7 +357,10 @@ Mario.Enemy.prototype.IsBlocking = function (x, y, xa, ya) {
   y = (y / 16) | 0;
 
   if ((x === this.X / 16) | 0 && (y === this.Y / 16) | 0) {
+    return false;
   }
+
+  return this.World.Level.IsBlocking(x, y, xa, ya);
 };
 
 Mario.Enemy.prototype.ShellCollideCheck = function (shell) {
@@ -364,7 +368,7 @@ Mario.Enemy.prototype.ShellCollideCheck = function (shell) {
     return false;
   }
 
-  var xs = shell.X - this.X,
+  var xd = shell.X - this.X,
     yd = shell.Y - this.Y;
   if (xd > -16 && xd < 16) {
     if (yd > -this.Height && yd < shell.Height) {
@@ -393,7 +397,7 @@ Mario.Enemy.prototype.FireballCollideCheck = function (fireball) {
   var xd = fireball.X - this.X,
     yd = fireball.Y - this.Y;
   if (xd > -16 && xd < 16) {
-    if (this.yd > -this.Height && yd < fireball.Height) {
+    if (yd > -this.Height && yd < fireball.Height) {
       if (this.NoFireballDeath) {
         return true;
       }
@@ -403,7 +407,6 @@ Mario.Enemy.prototype.FireballCollideCheck = function (fireball) {
       this.Xa = fireball.Facing * 2;
       this.Ya = -5;
       this.FlyDeath = true;
-
       if (this.SpriteTemplate !== null) {
         this.SpriteTemplate.IsDead = true;
       }
@@ -518,7 +521,7 @@ Mario.Enemy.prototype.Draw = function (context, camera) {
   }
 };
 
-// Static variables
+//Static variables
 Mario.Enemy.RedKoopa = 0;
 Mario.Enemy.GreenKoopa = 1;
 Mario.Enemy.Goomba = 2;

@@ -2,17 +2,17 @@
 // Assuming you have this button elsewhere
 
 const popup = document.getElementById("loginPopup");
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const usernameLabel = document.getElementById("usernameLabel");
-  
+
   // if (usernameLabel.textContent === "Guest User") {
-    console.log("md5lnash")
-    setTimeout(function () {
-      console.log("d5lna")
-      //popup.classList.remove("hidden");
-      popup.classList.add("visible");
-      console.log("eshta8alna?")
-    }, 3000);
+  console.log("md5lnash");
+  setTimeout(function () {
+    console.log("d5lna");
+    //popup.classList.remove("hidden");
+    popup.classList.add("visible");
+    console.log("eshta8alna?");
+  }, 3000);
   //}
 });
 
@@ -25,7 +25,7 @@ loginForm.addEventListener("submit", function (event) {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
-  //making an instance of the formData object 
+  //making an instance of the formData object
 
   let formData = new FormData();
   formData.append("username", username);
@@ -34,7 +34,6 @@ loginForm.addEventListener("submit", function (event) {
   //we create the ajax request yay
   const xhr = new XMLHttpRequest();
   xhr.open("POST", "login_process.php", true);
-
 
   // Handle the response
   xhr.onload = function () {
@@ -45,14 +44,14 @@ loginForm.addEventListener("submit", function (event) {
         console.log("Login successful!");
         messageElement.textContent = "Login successful!";
         usernameLabel.textContent = username;
-        document.getElementById("username").value = '';
-        document.getElementById("password").value = '';
+        document.getElementById("username").value = "";
+        document.getElementById("password").value = "";
         setTimeout(function () {
           document.getElementById("loginPopup").classList.remove("visible");
           document.getElementById("loginPopup").classList.add("hidden");
         }, 2000);
       } else {
-        messageElement.textContent = "Invalid password or username."
+        messageElement.textContent = "Invalid password or username.";
         console.log("Login failed: " + response.message);
       }
     }
@@ -60,12 +59,11 @@ loginForm.addEventListener("submit", function (event) {
   xhr.send(formData);
 });
 
+document.getElementById("logoutButton").addEventListener("click", handleLogout);
 
-document.getElementById('logoutButton').addEventListener('click', handleLogout);
-
-const logoutButton = document.getElementById('logoutButton');
-logoutButton.addEventListener('keypress', function(event) {
-  if (event.key === 'Enter') {
+const logoutButton = document.getElementById("logoutButton");
+logoutButton.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
     handleLogout();
   }
 });
@@ -73,7 +71,7 @@ logoutButton.addEventListener('keypress', function(event) {
 function handleLogout() {
   console.log("nooooooooo");
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', 'logout_process.php', true);
+  xhr.open("POST", "logout_process.php", true);
   xhr.onload = function () {
     if (this.status == 200) {
       const response = JSON.parse(this.responseText);
@@ -88,27 +86,27 @@ function handleLogout() {
   xhr.send();
 }
 
+const continueGuestLink = document.getElementById("continue");
 
-const continueGuestLink = document.getElementById('continue');
-
-continueGuestLink.addEventListener('click', () => {
-  const loginPopup = document.getElementById('loginPopup');
+continueGuestLink.addEventListener("click", () => {
+  const loginPopup = document.getElementById("loginPopup");
   document.getElementById("loginPopup").classList.remove("visible");
   document.getElementById("loginPopup").classList.add("hidden");
 });
 
 const gameContainer = document.querySelector(".game-container");
-const games = document.querySelectorAll('.game');
+const games = document.querySelectorAll(".game");
 
-gameContainer.addEventListener('scroll', () => {
-  games.forEach(game => {
+gameContainer.addEventListener("scroll", () => {
+  games.forEach((game) => {
     const gameCenterX = game.offsetLeft + game.offsetWidth / 2;
-    const containerCenterX = gameContainer.scrollLeft + gameContainer.offsetWidth / 2;
+    const containerCenterX =
+      gameContainer.scrollLeft + gameContainer.offsetWidth / 2;
 
     // Check if game center is within a tolerance range of container center
     const isCentered = Math.abs(gameCenterX - containerCenterX) < 10; // Adjust tolerance as needed
 
-    game.classList.toggle('game-in-view', isCentered);
+    game.classList.toggle("game-in-view", isCentered);
   });
 });
 //   const sounds = {};
@@ -164,14 +162,12 @@ function loadScript(src, callback) {
   document.head.appendChild(script);
 }
 
-document
-  .getElementById("singleplayer")
-  .addEventListener("click", function () {
-    loadScript("Pong/pong.js", function () {
-      // Call a function defined in pong.js here
-      startSinglePlayerGame();
-    });
+document.getElementById("singleplayer").addEventListener("click", function () {
+  loadScript("Pong/pong.js", function () {
+    // Call a function defined in pong.js here
+    startSinglePlayerGame();
   });
+});
 
 document.getElementById("multiplayer").addEventListener("click", function () {
   loadScript("Pong/pong-multi.js", function () {
@@ -180,20 +176,16 @@ document.getElementById("multiplayer").addEventListener("click", function () {
   });
 });
 
-
-document.querySelectorAll('.game').forEach(game => {
-  const img = game.querySelector('img');
-  const video = game.querySelector('video');
-  img.addEventListener('mouseover', () => {
-
-    video = game.querySelector('video').style.display = 'block';
+document.querySelectorAll(".game").forEach((game) => {
+  const img = game.querySelector("img");
+  const video = game.querySelector("video");
+  img.addEventListener("mouseover", () => {
+    video = game.querySelector("video").style.display = "block";
     video.play();
   });
 
-  img.addEventListener('mouseout', () => {
+  img.addEventListener("mouseout", () => {
     video.pause();
     video.currentTime = 0; // This will rewind the video to the start
   });
 });
-
-

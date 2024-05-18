@@ -106,9 +106,13 @@ Mario.MapState.prototype.Enter = function () {
   this.EnterLevel = false;
   this.LevelDifficulty = 0;
   this.LevelType = 0;
+
+  //Mario.PlayMapMusic();
 };
 
 Mario.MapState.prototype.Exit = function () {
+  //Mario.StopMusic();
+
   delete this.WaterSprite;
   delete this.DecoSprite;
   delete this.HelpSprite;
@@ -122,7 +126,7 @@ Mario.MapState.prototype.NextWorld = function () {
   var generated = false;
   this.WorldNumber++;
 
-  // The player won, wait for CheckForChange to get called
+  //The player has won, wait for CheckForChange to get called
   if (this.WorldNumber === 8) {
     return;
   }
@@ -666,6 +670,7 @@ Mario.MapState.prototype.Update = function (delta) {
             Mario.MarioCharacter.LevelString += this.Data[x][y];
           }
 
+          //TODO: stop music here
           this.EnterLevel = true;
           this.LevelDifficulty = difficulty;
           this.LevelType = type;

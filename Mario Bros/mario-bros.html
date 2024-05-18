@@ -1,64 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Mario Bros</title>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    </head>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mario Bros</title>
+    <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <canvas id="canvas">
+        <p>Your browser does not support the canvas element.</p>
+      </canvas>
+    </div>
 
-    <body>
-        <canvas id="canvas" width="60%" height="60%">
-            <p>Your browser does not support the canvas element</p>
-        </canvas>
+    <!-- Engine Includes -->
+    <script src="Engine/core.js"></script>
+    <script src="Engine/game-canvas.js"></script>
+    <script src="Engine/keyboard-input.js"></script>
+    <script src="Engine/resources.js"></script>
+    <script src="Engine/drawable.js"></script>
+    <script src="Engine/state.js"></script>
+    <script src="Engine/game-timer.js"></script>
+    <script src="Engine/camera.js"></script>
+    <script src="Engine/drawable-manager.js"></script>
+    <script src="Engine/sprite.js"></script>
+    <script src="Engine/sprite-font.js"></script>
+    <script src="Engine/frame-sprite.js"></script>
+    <script src="Engine/animated-sprite.js"></script>
+    <script src="Engine/collideable.js"></script>
+    <script src="Engine/application.js"></script>
 
-        <!-- Include the Engine -->
-        <script src="Engine/animated-sprite.js"></script>
-        <script src="Engine/application.js"></script>
-        <script src="Engine/camera.js"></script>
-        <script src="Engine/collideable.js"></script>
-        <script src="Engine/core.js"></script>
-        <script src="Engine/drawable-manager.js"></script>
-        <script src="Engine/drawable.js"></script>
-        <script src="Engine/frame-sprite.js"></script>
-        <script src="Engine/game-canvas.js"></script>
-        <script src="Engine/game-timer.js"></script>
-        <script src="Engine/keyboard-input.js"></script>
-        <script src="Engine/resources.js"></script>
-        <script src="Engine/sprite-font.js"></script>
-        <script src="Engine/sprite.js"></script>
-        <script src="Engine/state.js"></script>
+    <!-- Actual game code -->
+    <script src="code/setup.js"></script>
+    <script src="code/sprite-cuts.js"></script>
+    <script src="code/level.js"></script>
+    <script src="code/bg-generator.js"></script>
+    <script src="code/bg-renderer.js"></script>
+    <script src="code/improved-noise.js"></script>
+    <script src="code/notch-sprite.js"></script>
+    <script src="code/character.js"></script>
+    <script src="code/level-renderer.js"></script>
+    <script src="code/level-generator.js"></script>
+    <script src="code/sprite-template.js"></script>
+    <script src="code/enemy.js"></script>
+    <script src="code/fireball.js"></script>
+    <script src="code/sparkle.js"></script>
+    <script src="code/coin-anim.js"></script>
+    <script src="code/mushroom.js"></script>
+    <script src="code/particle.js"></script>
+    <script src="code/fire-flower.js"></script>
+    <script src="code/bullet-bill.js"></script>
+    <script src="code/flower-enemy.js"></script>
+    <script src="code/shell.js"></script>
 
-        <!-- Include Game Code -->
-        <script src="Code/bg-generator.js"></script>
-        <script src="Code/bg-renderer.js"></script>
-        <script src="Code/bullet-bill.js"></script>
-        <script src="Code/character.js"></script>
-        <script src="Code/coin-anim.js"></script>
-        <script src="Code/enemy.js"></script>
-        <script src="Code/fire-flower.js"></script>
-        <script src="Code/fireball.js"></script>
-        <script src="Code/flower-enemy.js"></script>
-        <script src="Code/improved-noise.js"></script>
-        <script src="Code/level-generator.js"></script>
-        <script src="Code/level-renderer.js"></script>
-        <script src="Code/level-state.js"></script>
-        <script src="Code/level.js"></script>
-        <script src="Code/loading-state.js"></script>
-        <script src="Code/lose-state.js"></script>
-        <script src="Code/map-state.js"></script>
-        <script src="Code/mushroom.js"></script>
-        <script src="Code/music.js"></script>
-        <script src="Code/notch-sprite.js"></script>
-        <script src="Code/particle.js"></script>
-        <script src="Code/setup.js"></script>
-        <script src="Code/shell.js"></script>
-        <script src="Code/sparkle.js"></script>
-        <script src="Code/sprite-cuts.js"></script>
-        <script src="Code/sprite-template.js"></script>
-        <script src="Code/title-slate.js"></script>
-        <script src="Code/win-slate.js"></script>
+    <script src="code/title-state.js"></script>
+    <script src="code/loading-state.js"></script>
+    <script src="code/lose-state.js"></script>
+    <script src="code/win-state.js"></script>
+    <script src="code/map-state.js"></script>
+    <script src="code/level-state.js"></script>
 
-        <script>$(document).ready(function() { new Engine.Application().Initialize(new Mario.LoadingState(), 320, 240) });</script>
+    <script src="code/music.js"></script>
 
-
-    </body>
+    <script>
+      $(document).ready(function () {
+        new Engine.Application().Initialize(new Mario.LoadingState(), 320, 240);
+      });
+    </script>
+    <link rel="stylesheet" href="mario-bros.css" />
+  </body>
 </html>

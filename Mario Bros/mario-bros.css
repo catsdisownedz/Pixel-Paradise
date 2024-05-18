@@ -20,25 +20,9 @@ body {
   transform: translate(-50%, -50%);
 }
 
-canvas {
+#canvas {
   width: 100vh;
   height: 80vh;
   display: block;
-  border: 2px solid #3a006a88;
   background-color: #11001e;
-}
-
-#pause-menu {
-  display: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 30vw;
-  height: 30vh;
-  background-color: #bb91dbe5;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  color: #9000ff;
-  text-align: center;
 }

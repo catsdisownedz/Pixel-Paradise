@@ -38,6 +38,16 @@ Mario.LevelState.prototype.Enter = function () {
     h = 0,
     bgLevelGenerator = null;
   this.Level = levelGenerator.CreateLevel(this.LevelType, this.LevelDifficulty);
+
+  //play music here
+  //if (this.LevelType === Mario.LevelType.Overground) {
+  //Mario.PlayOvergroundMusic();
+  //} else if (this.LevelType === Mario.LevelType.Underground) {
+  //Mario.PlayUndergroundMusic();
+  //} else if (this.LevelType === Mario.LevelType.Castle) {
+  //Mario.PlayCastleMusic();
+  //}
+
   this.Paused = false;
   this.Layer = new Mario.LevelRenderer(this.Level, 320, 240);
   this.Sprites = new Engine.DrawableManager();
@@ -376,6 +386,7 @@ Mario.LevelState.prototype.Draw = function (context) {
     t = t * t * 0.2;
 
     if (t > 900) {
+      //TODO: goto map state with level won
       Mario.GlobalMapState.LevelWon();
       this.GotoMapState = true;
     }
@@ -394,6 +405,7 @@ Mario.LevelState.prototype.Draw = function (context) {
     t = t * t * 0.1;
 
     if (t > 900) {
+      //TODO: goto map with level lost
       Mario.MarioCharacter.Lives--;
       this.GotoMapState = true;
       if (Mario.MarioCharacter.Lives <= 0) {
@@ -451,7 +463,7 @@ Mario.LevelState.prototype.RenderBlackout = function (context, x, y, radius) {
     xp[i] = (x - Math.cos((i * Math.PI) / 15) * radius) | 0;
     yp[i] = (y - Math.sin((i * Math.PI) / 15) * radius) | 0;
   }
-  // Fixes a problem where the circle gets cut
+  //cure a strange problem where the circle gets cut
   yp[15] += 5;
 
   xp[16] = 320;
