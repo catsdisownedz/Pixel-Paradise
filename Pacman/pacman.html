@@ -1,193 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Jacquarda+Bastarda+9&family=Micro+5&family=Ojuju:wght@200..800&family=Satisfy&family=Whisper&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
-    <link rel="stylesheet" href="https://fonts.google.com/specimen/Dancing+Script">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple">
+      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jacquarda+Bastarda+9&family=Micro+5&family=Ojuju:wght@200..800&family=Satisfy&family=Whisper&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Sofia"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.google.com/specimen/Dancing+Script"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple"
+    />
 
     <title>Pacman</title>
     <style>
-        body {
-            margin: 0;
-            background-color: rgb(8, 0, 18);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            /* Ensures viewport height */
-        }
+      body {
+        margin: 0;
+        background-color: rgb(8, 0, 18);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        /* Ensures viewport height */
+      }
 
-        #redirect img {
-            position: fixed;
-            width: 80px;
-            transform: rotate(-10deg);
-            height: 40px;
-            bottom: 50px;
-            left: 40px;
-            filter: drop-shadow(0 0 10px rgb(221, 211, 98));
+      #redirect img {
+        position: fixed;
+        width: 80px;
+        transform: rotate(-10deg);
+        height: 40px;
+        bottom: 50px;
+        left: 40px;
+        filter: drop-shadow(0 0 10px rgb(221, 211, 98));
+      }
 
-        }
+      #redirect:hover img {
+        filter: brightness(1) drop-shadow(0 0 20px rgb(97, 168, 249));
+      }
 
-        #redirect:hover img {
-            filter: brightness(1)drop-shadow(0 0 20px rgb(97, 168, 249))
-        }
+      #redirect:active img {
+        filter: brightness(0.5) drop-shadow(0 0 0 transparent);
+      }
 
-        #redirect:active img {
-            filter: brightness(0.5) drop-shadow(0 0 0 transparent);
-        }
+      #overlay1 {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.85);
+        /* Black background with 70% opacity */
+        flex-direction: column;
+        /* Stack elements vertically */
+        align-items: center;
+        /* Align horizontally to center */
+        justify-content: center;
+        display: none;
+        /* Hidden by default */
+        z-index: 1000;
+        /* Ensure it's on top of other elements */
+      }
 
-        #overlay1 {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            /* Black background with 70% opacity */
-            flex-direction: column;
-            /* Stack elements vertically */
-            align-items: center;
-            /* Align horizontally to center */
-            justify-content: center;
-            display: none;
-            /* Hidden by default */
-            z-index: 1000;
-            /* Ensure it's on top of other elements */
-        }
+      #game-over-text-1 {
+        font-family: "Pixelify Sans", sans-serif;
+        font-size: 7vw;
+        color: rgb(216, 18, 18);
+        /* Add other styles as needed */
+      }
 
-        #game-over-text-1 {
-            font-family: 'Pixelify Sans', sans-serif;
-            font-size: 7vw;
-            color: rgb(216, 18, 18);
-            /* Add other styles as needed */
-        }
+      #replay-button,
+      #exit-button,
+      #leaderboard {
+        font-family: "Pixelify Sans", sans-serif;
+        margin: 10px 0;
+        min-width: 7em;
+        width: auto;
+        height: 2em;
+        text-align: center;
+        transition: background-color 0.3s ease;
+        background: transparent;
+        border: transparent;
+      }
 
-        #replay-button,
-        #exit-button ,
-        #leaderboard
-        {
-            font-family: 'Pixelify Sans', sans-serif;
-            margin: 10px 0;
-            min-width: 7em;
-            width: auto;
-            height: 2em;
-            text-align: center;
-            transition: background-color 0.3s ease;
-        }
+      #replay-button:hover {
+        background-color: green;
+      }
 
-        #replay-button:hover {
-            background-color: green;
-        }
+      #replay-button:active {
+        background-color: darkgreen;
+        /* This will make the green dim when the button is clicked */
+      }
+      #leaderboard:hover {
+        background-color: rgb(235, 168, 44);
+      }
 
-        #replay-button:active {
-            background-color: darkgreen;
-            /* This will make the green dim when the button is clicked */
-        }
-        #leaderboard:hover {
-            background-color: rgb(235, 168, 44);
-        }
+      #leaderboard:active {
+        background-color: rgb(173, 129, 26);
+        /* This will make the green dim when the button is clicked */
+      }
 
-        #leaderboard:active {
-            background-color: rgb(173, 129, 26);
-            /* This will make the green dim when the button is clicked */
-        }
+      #exit-button:hover {
+        background-color: red;
+      }
 
-        #exit-button:hover {
-            background-color: red;
-        }
+      #exit-button:active {
+        background-color: darkred;
+      }
 
-        #exit-button:active {
-            background-color: darkred;
-        }
+      #overlay2 {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.85);
+        /* Black background with 70% opacity */
+        flex-direction: column;
+        /* Stack elements vertically */
+        align-items: center;
+        /* Align horizontally to center */
+        justify-content: center;
+        display: none;
+        /* Hidden by default */
+        z-index: 1000;
+        /* Ensure it's on top of other elements */
+      }
 
-        #overlay2 {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            /* Black background with 70% opacity */
-            flex-direction: column;
-            /* Stack elements vertically */
-            align-items: center;
-            /* Align horizontally to center */
-            justify-content: center;
-            display: none;
-            /* Hidden by default */
-            z-index: 1000;
-            /* Ensure it's on top of other elements */
-        }
+      #game-over-text-2 {
+        font-family: "Pixelify Sans", sans-serif;
+        font-size: 7vw;
+        color: rgb(70, 176, 121);
+        /* Add other styles as needed */
+      }
 
-        #game-over-text-2 {
-            font-family: 'Pixelify Sans', sans-serif;
-            font-size: 7vw;
-            color: rgb(70, 176, 121);
-            /* Add other styles as needed */
-        }
+      #replay-button2,
+      #exit-button2,
+      #leaderboard2 {
+        font-family: "Pixelify Sans", sans-serif;
+        margin: 10px 0;
+        width: 6em;
+        height: 2em;
+        text-align: center;
+        transition: background-color 0.3s ease;
+      }
 
-        #replay-button2,
-        #exit-button2 ,
-        #leaderboard2{
-            font-family: 'Pixelify Sans', sans-serif;
-            margin: 10px 0;
-            width: 6em;
-            height: 2em;
-            text-align: center;
-            transition: background-color 0.3s ease;
-        }
+      #replay-button2:hover {
+        background-color: green;
+      }
 
-        #replay-button2:hover {
-            background-color: green;
-        }
+      #replay-button2:active {
+        background-color: darkgreen;
+        /* This will make the green dim when the button is clicked */
+      }
+      #leaderboard2:hover {
+        background-color: rgb(235, 168, 44);
+      }
 
-        #replay-button2:active {
-            background-color: darkgreen;
-            /* This will make the green dim when the button is clicked */
-        }
-        #leaderboard2:hover {
-            background-color: rgb(235, 168, 44);
-        }
+      #leaderboard2:active {
+        background-color: rgb(173, 129, 26);
+        /* This will make the green dim when the button is clicked */
+      }
+      #exit-button2:hover {
+        background-color: red;
+      }
 
-        #leaderboard2:active {
-            background-color: rgb(173, 129, 26);
-            /* This will make the green dim when the button is clicked */
-        }
-        #exit-button2:hover {
-            background-color: red;
-        }
-
-        #exit-button2:active {
-            background-color: darkred;
-        }
-        
+      #exit-button2:active {
+        background-color: darkred;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <canvas id="canvas" width="500" height="500"></canvas>
     <div id="overlay1">
-        <h1 id="game-over-text-1">YOU LOSE!</h1>
-        <button id="replay-button">Replay</button>
-        <button id="exit-button">Exit</button>
-        <button id="leaderboard">Leaderboard</button>
+      <h1 id="game-over-text-1">YOU LOSE!</h1>
+      <button id="replay-button">Replay</button>
+      <button id="exit-button">Exit</button>
+      <button id="leaderboard">Leaderboard</button>
     </div>
     <div id="overlay2">
-        <h1 id="game-over-text-2">YOU WIN!</h1>
-        <button id="replay-button2">Replay</button>
-        <button id="exit-button2">Exit</button>
-        <button id="leaderboard2">Leaderboard</button>
+      <h1 id="game-over-text-2">YOU WIN!</h1>
+      <button id="replay-button2">Replay</button>
+      <button id="exit-button2">Exit</button>
+      <button id="leaderboard2">Leaderboard</button>
     </div>
     <audio id="waka" src="sounds/waka.mp3"></audio>
     <audio id="eatGhost" src="sounds/eat_ghost.mp3"></audio>
@@ -195,16 +205,18 @@
     <audio id="gameWin" src="sounds/gameWin.mp3"></audio>
     <audio id="powerDot" src="sounds/power_dot.mp3"></audio>
     <a id="redirect" href="../index.php">
-        <img src="images/yellowArrow.png" onmouseover="this.src='images/blueArrow.png';"
-            onmouseout="this.src='images/yellowArrow.png';">
+      <img
+        src="images/yellowArrow.png"
+        onmouseover="this.src='images/blueArrow.png';"
+        onmouseout="this.src='images/yellowArrow.png';"
+      />
     </a>
-    <div style="display:none;">
-        <img id="animation" alt=""src="animations.gif" width="140" height="20">
-        <img id="ghosts" src="ghost.png" width="140" height="20">
+    <div style="display: none">
+      <img id="animation" alt="" src="animations.gif" width="140" height="20" />
+      <img id="ghosts" src="ghost.png" width="140" height="20" />
     </div>
     <script src="ghost.js"></script>
     <script src="pacman.js"></script>
     <script src="game.js"></script>
-</body>
-
+  </body>
 </html>

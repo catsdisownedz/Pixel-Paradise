@@ -1,3 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jacquarda+Bastarda+9&family=Micro+5&family=Ojuju:wght@200..800&family=Satisfy&family=Whisper&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Sofia");
+@import url("https://fonts.google.com/specimen/Dancing+Script");
+@import url("https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple");
+
 html,
 body {
   background-color: #000000;
@@ -7,6 +13,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: "Pixelify Sans", sans-serif;
 }
 
 .container {
@@ -36,9 +43,49 @@ canvas {
   transform: translate(-50%, -50%);
   width: 30vw;
   height: 30vh;
-  background-color: #bb91dbe5;
+  background-color: #5a3675b0;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  color: #9000ff;
+  color: #ffffff;
   text-align: center;
+}
+
+#resumeButton,
+#exitButton,
+#leaderboardButton {
+  font-family: "Pixelify Sans", sans-serif;
+  margin: 10px 0;
+  width: 6em;
+  height: 2em;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  font-size: large;
+  width: fit-content;
+  background: transparent;
+  border: transparent;
+  color: white;
+}
+
+#resumeButton:hover {
+  background-color: green;
+}
+
+#resumeButton:active {
+  background-color: darkgreen;
+  /* This will make the green dim when the button is clicked */
+}
+#leaderboardButton:hover {
+  background-color: rgb(235, 168, 44);
+}
+
+#leaderboardButton:active {
+  background-color: rgb(173, 129, 26);
+  /* This will make the green dim when the button is clicked */
+}
+#exitButton:hover {
+  background-color: red;
+}
+
+#exitButton:active {
+  background-color: darkred;
 }

@@ -46,7 +46,7 @@ var Game = {
   endthisMenu: function (text) {
     // Change the canvas font size based on window size
     var fontSize = this.canvas.width * 0.035; // 3.5% of canvas width
-    this.context.font = fontSize + "px Courier New";
+    this.context.font = fontSize + "px  Pixelify Sans";
     this.context.fillStyle = this.color;
 
     // Draw the rectangle behind the 'Press any key to begin' text.
@@ -78,7 +78,7 @@ var Game = {
 
     // Change the canvas font size and color
     var fontSize = this.canvas.width * 0.035; // 3.5% of canvas width
-    this.context.font = fontSize + "px Courier New";
+    this.context.font = fontSize + "px  Pixelify Sans";
     this.context.fillStyle = this.color;
 
     // Draw the rectangle behind the 'Press any key to begin' text.
@@ -104,7 +104,7 @@ var Game = {
     if (!this.over) {
       // Update dynamic elements like scores based on new canvas size
       var scoreFontSize = this.canvas.width * 0.07; // 7% of canvas width
-      this.context.font = scoreFontSize + "px Courier New";
+      this.context.font = scoreFontSize + "px Pixelify Sans";
 
       // If the ball collides with the bound limits - correct the x and y coords.
       if (this.ball.x <= 0)
@@ -234,7 +234,7 @@ var Game = {
 
     // Update dynamic elements like scores based on new canvas size
     var scoreFontSize = this.canvas.width * 0.07; // 7% of canvas width
-    this.context.font = scoreFontSize + "px Courier New";
+    this.context.font = scoreFontSize + "px Pixelify Sans";
 
     // Set the fill style to white (For the paddles and the ball)
     this.context.fillStyle = "#ffffff";
@@ -269,7 +269,7 @@ var Game = {
     // this.context.stroke(); // Render the line
 
     // Set the default canvas font and align it to the center
-    this.context.font = "100px Courier New";
+    this.context.font = "100px Pixelify Sans";
     this.context.textAlign = "center";
 
     // Draw the players score (left)
@@ -285,7 +285,7 @@ var Game = {
       200
     );
     // Change the font size for the center score text
-    this.context.font = "30px Courier New";
+    this.context.font = "30px Pixelify Sans";
     // Draw the winning score (center)
     this.context.fillText(
       "Round " + (Pong.round + 1),
@@ -293,7 +293,7 @@ var Game = {
       35
     );
     // Change the font size for the center score value
-    this.context.font = "40px Courier";
+    this.context.font = "40px Pixelify Sans";
     // Draw the current round number
     this.context.fillText(
       rounds[Pong.round] ? rounds[Pong.round] : rounds[Pong.round - 1],

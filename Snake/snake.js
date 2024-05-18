@@ -2,6 +2,7 @@ var canvas = document.getElementById("game");
 var context = canvas.getContext("2d");
 
 let eat = new Audio("sounds/bleep.mp3");
+let lose = new Audio("sounds/gameover.mp3");
 
 // the canvas width & height, snake x & y, and the apple x & y, all need to be a multiples of the grid size in order for collision detection to work
 // (e.g. 16 * 25 = 400)
@@ -105,6 +106,7 @@ function loop() {
 }
 
 function gameOver() {
+  lose.play();
   // Stop the game loop
   cancelAnimationFrame(requestId);
   // Show the game over overlay

@@ -3,10 +3,11 @@
 @import url("https://fonts.googleapis.com/css?family=Sofia");
 @import url("https://fonts.google.com/specimen/Dancing+Script");
 @import url("https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple");
-*/ html,
+html,
 body {
   height: 100%;
   margin: 0;
+  font-family: "Pixelify Sans", sans-serif;
 }
 
 body {
@@ -46,19 +47,6 @@ canvas {
   font-size: 50px;
 }
 
-/* html,
-body {
-  background-color: black;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: "Pixelify Sans", sans-serif;
-  font-size: 50px;
-}
-*/
 .container {
   width: 50vw;
   height: 80vh;
@@ -71,7 +59,47 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.menu {
+#replayButton,
+#exitButton,
+#leaderboardButton {
+  font-family: "Pixelify Sans", sans-serif;
+  margin: 10px 0;
+  width: 6em;
+  height: 2em;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  font-size: large;
+  width: fit-content;
+  background: transparent;
+  border: transparent;
+  color: white;
+}
+
+#replayButton:hover {
+  background-color: green;
+}
+
+#replayButton:active {
+  background-color: darkgreen;
+  /* This will make the green dim when the button is clicked */
+}
+#leaderboardButton:hover {
+  background-color: rgb(235, 168, 44);
+}
+
+#leaderboardButton:active {
+  background-color: rgb(173, 129, 26);
+  /* This will make the green dim when the button is clicked */
+}
+#exitButton:hover {
+  background-color: red;
+}
+
+#exitButton:active {
+  background-color: darkred;
+}
+
+/* .menu {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -88,4 +116,4 @@ body {
 
 .hidden {
   display: none;
-}
+} */
