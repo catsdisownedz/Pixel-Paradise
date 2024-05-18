@@ -76,7 +76,7 @@ session_start();
           <h2>Mario Bros</h2>
           <a href="Mario Bros/mario-bros.html">
           <img src="Previews/mario-bros.png" alt="Mario Bros game"/>
-          <video class = "game-video" src="Previews/mario-bros-rec.mov" autoplay muted loop>
+          <video class = "game-video" src="Previews/mario-bros-rec.mp4" autoplay muted loop>
         </div>
         <div class="game">
           <h2>Flappy Bird</h2>
