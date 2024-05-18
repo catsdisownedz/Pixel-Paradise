@@ -12,23 +12,23 @@ if (!$conn) {
 }
 
 
-function getTopScorers() {
-    global $conn; 
+// function getTopScorers() {
+//     global $conn; 
   
-    $sql = "SELECT username, SUM(game1 + game2 + game3 + game4) AS total_score
-            FROM GameScores
-            GROUP BY username
-            ORDER BY total_score DESC
-            LIMIT 3;"; // limit to first 3
-    $stmt = mysqli_prepare($conn, $sql);
-    $stmt->execute();
-    $leaderboardData = [];
-    while ($row = mysqli_fetch_assoc($stmt)) {
-      $leaderboardData[] = $row;
-    }
-    mysqli_stmt_close($stmt); 
-    return $leaderboardData;
-  }
+//     $sql = "SELECT username, SUM(game1 + game2 + game3 + game4) AS total_score
+//             FROM GameScores
+//             GROUP BY username
+//             ORDER BY total_score DESC
+//             LIMIT 3;"; // limit to first 3
+//     $stmt = mysqli_prepare($conn, $sql);
+//     $stmt->execute();
+//     $leaderboardData = [];
+//     while ($row = mysqli_fetch_assoc($stmt)) {
+//       $leaderboardData[] = $row;
+//     }
+//     mysqli_stmt_close($stmt); 
+//     return $leaderboardData;
+//   }
   
 
 ?>

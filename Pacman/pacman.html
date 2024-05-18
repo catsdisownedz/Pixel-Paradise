@@ -74,10 +74,13 @@
         }
 
         #replay-button,
-        #exit-button {
+        #exit-button ,
+        #leaderboard
+        {
             font-family: 'Pixelify Sans', sans-serif;
             margin: 10px 0;
-            width: 6em;
+            min-width: 7em;
+            width: auto;
             height: 2em;
             text-align: center;
             transition: background-color 0.3s ease;
@@ -89,6 +92,14 @@
 
         #replay-button:active {
             background-color: darkgreen;
+            /* This will make the green dim when the button is clicked */
+        }
+        #leaderboard:hover {
+            background-color: rgb(235, 168, 44);
+        }
+
+        #leaderboard:active {
+            background-color: rgb(173, 129, 26);
             /* This will make the green dim when the button is clicked */
         }
 
@@ -127,7 +138,8 @@
         }
 
         #replay-button2,
-        #exit-button2 {
+        #exit-button2 ,
+        #leaderboard2{
             font-family: 'Pixelify Sans', sans-serif;
             margin: 10px 0;
             width: 6em;
@@ -144,7 +156,14 @@
             background-color: darkgreen;
             /* This will make the green dim when the button is clicked */
         }
+        #leaderboard2:hover {
+            background-color: rgb(235, 168, 44);
+        }
 
+        #leaderboard2:active {
+            background-color: rgb(173, 129, 26);
+            /* This will make the green dim when the button is clicked */
+        }
         #exit-button2:hover {
             background-color: red;
         }
@@ -162,11 +181,13 @@
         <h1 id="game-over-text-1">YOU LOSE!</h1>
         <button id="replay-button">Replay</button>
         <button id="exit-button">Exit</button>
+        <button id="leaderboard">Leaderboard</button>
     </div>
     <div id="overlay2">
         <h1 id="game-over-text-2">YOU WIN!</h1>
         <button id="replay-button2">Replay</button>
         <button id="exit-button2">Exit</button>
+        <button id="leaderboard2">Leaderboard</button>
     </div>
     <audio id="waka" src="sounds/waka.mp3"></audio>
     <audio id="eatGhost" src="sounds/eat_ghost.mp3"></audio>
