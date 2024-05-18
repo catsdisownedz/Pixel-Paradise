@@ -1,21 +1,26 @@
 // document.addEventListener("DOMContentLoaded", function () {
 // Assuming you have this button elsewhere
 
-
-const usernameLabel = document.getElementById("usernameLabel");
-//this isnt working lol
-if (usernameLabel !== "Guest User") {
-  setTimeout(function () {
-    document.getElementById("loginPopup").classList.remove("hidden");
-    document.getElementById("loginPopup").classList.add("visible");
-  }, 5000);
-}
+const popup = document.getElementById("loginPopup");
+document.addEventListener("DOMContentLoaded", function() {
+  const usernameLabel = document.getElementById("usernameLabel");
+  
+  // if (usernameLabel.textContent === "Guest User") {
+    console.log("md5lnash")
+    setTimeout(function () {
+      console.log("d5lna")
+      //popup.classList.remove("hidden");
+      popup.classList.add("visible");
+      console.log("eshta8alna?")
+    }, 3000);
+  //}
+});
 
 // Handle form submission (assuming successful login)
 const loginForm = document.getElementById("loginForm");
 loginForm.addEventListener("submit", function (event) {
   event.preventDefault(); // Prevent default form submission
-
+  console.log(" we innnn");
   //getting the form data ayoyyyy
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;

@@ -45,7 +45,6 @@ session_start();
           <h2>Pac-Man</h2>
           <img src="Previews/pac-man.png" alt="Pac-Man game"/>
           <video class = "game-video" src="Previews/pac_prev.mp4" autoplay muted loop></video>
-          <!-- <audio id="hover-sound" src="sound.mp3" preload="auto"></audio> -->
         </div>
         <!-- <div class="game game--first">
           <h2>Tetris</h2>
@@ -76,8 +75,7 @@ session_start();
           <h2>Flappy Bird</h2>
           <a href="Flappy Bird/flappyhtml.html">
             <img src="Images/flappyimage.png" alt="Flappy Bird game">
-            <video class="game-video" autoplay muted loop>
-              <source src="previews/flappybird preview.mp4">
+            <video class="game-video" src="previews/flappybird_prev.mp4" autoplay muted loop>
             </video>
           </a>
         </div>
@@ -86,8 +84,8 @@ session_start();
           <a href="Breakout/breakout.html">
           <img
             src="previews/breakk.png" alt="break out game"/>
-          <video class="game-video" autoplay muted loop>
-            <source src src="previews/breakoutvid.mp4">
+          <video class="game-video" src="previews/breakoutvid.mp4" autoplay muted loop>
+            </video>
           </a>
         </div>
     </div>

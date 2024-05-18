@@ -1,4 +1,3 @@
-
 /* mobile phones */
 @media only screen and (max-width: 600px) {
   .game-container {
@@ -94,28 +93,27 @@ p {
 }
 
 .game-in-view {
-  transform: scale(1.05); /* Zoom in when centered */
+  transform: scale(1.05);
+  /* Zoom in when centered */
 }
 
 .game {
   flex: 0 0 auto;
   width: 300px;
-  height: 570px;
+  height: 410px;
   margin: 1em 2em;
   padding: 0.5em;
   border: 0.001em solid #f8c9f1;
   border-radius: 0.5vw;
   text-align: center;
   scroll-snap-align: center;
-  /* Snap to left edge of game div */
-  /* padding-bottom:1vw; */
-  transition: transform 0.2s ease-in-out; 
+  transition: transform 0.2s ease-in-out;
   position: relative;
 
 }
 
 
-.game h2{
+.game h2 {
   font-family: "Pixelify Sans", sans-serif;
   font-size: 1.5em;
   margin-bottom: 0.2em;
@@ -136,7 +134,7 @@ p {
 }
 
 .game img {
-  max-width: 90%;
+  max-width: 95%;
   margin: auto;
   display: block;
   margin-top: 2em;
@@ -152,10 +150,18 @@ p {
   opacity: 1;
 }
 
+.game img,
+.game video {
+  aspect-ratio: attr(width) / attr(height);
+  width: 100%;
+  object-fit: cover;
+}
+
 .game video {
   max-width: 95%;
   margin: auto;
   display: block;
+  margin-top: 2em;
   transition: transform 0.2s ease-in-out;
   /* Add smooth zoom effect */
   opacity: 0;
@@ -163,22 +169,22 @@ p {
   transition: 0.3s;
 }
 
-a:link{
+a:link {
   color: #f79833;
   text-decoration: none;
 }
 
-a:visited{
+a:visited {
   color: #c71585;
   text-decoration: none;
 }
 
-a:hover{
+a:hover {
   color: #fab7d0;
   text-decoration: none;
 }
 
-a:active{
+a:active {
   color: #e86092;
   text-decoration: none;
 }
@@ -192,8 +198,9 @@ a:active{
 
 }
 
-.game:hover{
-  transform: scale(1.05); /* Zoom image on hover */
+.game:hover {
+  transform: scale(1.05);
+  /* Zoom image on hover */
 }
 
 .game:hover .options {
@@ -229,6 +236,7 @@ a:active{
   80% {
     top: 25%;
   }
+
   /* 87%{
     top: 19%;
   }
@@ -260,9 +268,10 @@ a:active{
   display: block;
 }
 
-#loginPopup.hidden {
+/* #loginPopup.hidden {
+  display: none;
   animation: slideUp 1s ease-out forwards;
-}
+} */
 
 @keyframes slideUp {
   0% {
@@ -445,15 +454,10 @@ body {
 
 .separator {
   color: rgba(226, 47, 214, 0.8);
-  /* Increase opacity to make separator more visible */
   margin: 0 0.5em;
-  /* Add horizontal margin to space out the separator */
 }
 
 
-/* .profile-section a {
-
-} */
 
 .profile-section img {
   display: block;
@@ -461,11 +465,9 @@ body {
   width: 0.01em;
   height: 0.01em;
   border-radius: 50%;
-  /* Make image circular */
   overflow: hidden;
-  /* Prevent image overflow */
   width: auto;
-  height: 2.5em;
+  height: 2.3em;
   /* Ensure image fills the container */
   object-fit: cover;
   /* Crop image if necessary */
@@ -473,30 +475,27 @@ body {
 
 
 .logout-button {
+  font-size: 1em;
   margin-left: 1em;
   position: absolute;
   top: 2em;
-  left: 10px;
+  left: 1em;
   color: #ffd0e1;
   font-family: "Micro 5", sans-serif;
   background-color: rgba(250, 100, 162, 0.29);
-  /* Translucent white background */
   border: none;
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  /* Smooth transition */
 }
 
 .logout-button:hover {
   background-color: pink;
-  /* Change color on hover */
   color: rgba(86, 5, 50, 0.749);
 }
 
 .logout-button:click {
   background-color: rgb(255, 0, 43);
-  /* Change color on hover */
   color: rgba(86, 5, 50, 0.749);
 }
