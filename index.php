@@ -32,7 +32,15 @@ session_start();
       <a href="signUp.html">
         <img src="Previews/pfp.jpg" alt="Player profile pic" />
       </a>
-      <span id="usernameLabel" class="username">Guest User</span>
+      <span id="usernameLabel" class="username"> 
+         <?php 
+      if(isset($_SESSION['logged-in']) && $_SESSION["logged-in"]) {
+        echo htmlspecialchars($_SESSION["username"]);
+      } else {
+        echo "Guest User";
+      }
+    ?>
+    </span>
     </div>
     <h1 id="title">Pixel Paradise</h1>
     <p>Power up your nostalgia!</p>
