@@ -1,51 +1,58 @@
 body {
-    font-family: sans-serif;
-    margin: 20px;
-  }
-  
-  h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input[type="text"],
-  input[type="email"],
-  input[type="number"],
-  input[type="password"] {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #fdb9e4;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  button[type="submit"] {
-    background-color: #d257d8; /* Green */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    float: right; /* Align button to the right */
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #630b79;
-  }
-  
-  small {
-    display: block;
-    font-size: 0.8em;
-    color: #999;
-    margin-top: 5px;
-  }
-  
+  font-family: "Micro 5", sans-serif;
+  background-color: black;
+  color: pink;
+  margin: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: center; /* Center the input fields */
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"] {
+  width: 50%; /* Make the input fields width smaller */
+  padding: 8px;
+  border: 1px solid pink; /* Make the borders pink */
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: transparent; /* Make the input field transparent */
+  color: pink; /* Make the text pink */
+  margin: 0 auto; /* Center the input fields */
+}
+
+button[type="submit"] {
+  background-color: pink;
+  color: rgb(250, 70, 112);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: block; /* Make the button a block element */
+  margin: 0 auto; /* Center the button */
+  font-family: "Micro 5", sans-serif; /* Apply the Micro 5 font to the button */
+}
+
+button[type="submit"]:hover {
+  background-color: #630b79;
+}
+
+small {
+  display: block;
+  font-size: 0.8em;
+  color: #999;
+  margin-top: 5px;
+}
