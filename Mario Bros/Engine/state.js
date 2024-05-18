@@ -18,7 +18,7 @@ Engine.GameStateContext.prototype = {
   },
 
   Update: function (delta) {
-    this.State.CheckForChanges(this);
+    this.State.CheckForChange(this);
     this.State.Update(delta);
   },
 
@@ -27,12 +27,15 @@ Engine.GameStateContext.prototype = {
   },
 };
 
-Engine.GameState = function () { };
+/**
+ * Base game state class to at least ensure that all the functions exist.
+ */
+Engine.GameState = function () {};
 
 Engine.GameState.prototype = {
   Enter: function () {},
   Exit: function () {},
   Update: function (delta) {},
   Draw: function (context) {},
-  CheckForChanges: function (context) {},
+  CheckForChange: function (context) {},
 };

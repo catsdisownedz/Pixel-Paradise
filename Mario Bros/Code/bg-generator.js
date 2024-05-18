@@ -17,11 +17,11 @@ Mario.BackgroundGenerator.prototype = {
   CreateLevel: function () {
     var level = new Mario.Level(this.Width, this.Height);
     switch (this.Type) {
-      case Mario.LevelType.OverGround:
-        this.GenerateOverGround(level);
+      case Mario.LevelType.Overground:
+        this.GenerateOverground(level);
         break;
-      case Mario.LevelType.UnderGround:
-        this.GenerateUnderGround(level);
+      case Mario.LevelType.Underground:
+        this.GenerateUnderground(level);
         break;
       case Mario.LevelType.Castle:
         this.GenerateCastle(level);
@@ -30,25 +30,27 @@ Mario.BackgroundGenerator.prototype = {
     return level;
   },
 
-  GenerateOverGround: function (level) {
+  GenerateOverground: function (level) {
     var range = this.Distant ? 4 : 6;
     var offs = this.Distant ? 2 : 1;
     var oh = Math.floor(Math.random() * range) + offs;
     var h = Math.floor(Math.random() * range) + offs;
 
-    var h0 = (h1 = 0);
-
-    for (var x = 0; x < this.Width; x++) {
+    var x = 0,
+      y = 0,
+      h0 = 0,
+      h1 = 0,
+      s = 2;
+    for (x = 0; x < this.Width; x++) {
       oh = h;
       while (oh === h) {
-        h = Math.floor(Math.random()) * range + offs;
+        h = Math.floor(Math.random() * range) + offs;
       }
 
-      for (var y = 0; y < this.Height; y++) {
+      for (y = 0; y < this.Height; y++) {
         h0 = oh < h ? oh : h;
         h1 = oh < h ? h : oh;
-        var s = 2;
-
+        s = 2;
         if (y < h0) {
           if (this.Distant) {
             s = 2;
@@ -79,8 +81,11 @@ Mario.BackgroundGenerator.prototype = {
     }
   },
 
-  GenerateUnderGround: function (level) {
-    var x = (y = t = yy = 0);
+  GenerateUnderground: function (level) {
+    var x = 0,
+      y = 0,
+      t = 0,
+      yy = 0;
     if (this.Distant) {
       var tt = 0;
       for (x = 0; x < this.Width; x++) {
@@ -104,7 +109,6 @@ Mario.BackgroundGenerator.prototype = {
         for (y = 0; y < this.Height; y++) {
           t = x % 2;
           yy = y - 1;
-
           if (yy < 0 || yy > 7) {
             yy = 7;
             t = 0;
@@ -113,6 +117,7 @@ Mario.BackgroundGenerator.prototype = {
             t = -1;
             yy = 0;
           }
+
           level.SetBlock(x, y, 6 + t + yy * 8);
         }
       }
@@ -120,7 +125,10 @@ Mario.BackgroundGenerator.prototype = {
   },
 
   GenerateCastle: function (level) {
-    var x = (y = t = yy = 0);
+    var x = 0,
+      y = 0,
+      t = 0,
+      yy = 0;
     if (this.Distant) {
       for (x = 0; x < this.Width; x++) {
         for (y = 0; y < this.Height; y++) {
@@ -139,10 +147,10 @@ Mario.BackgroundGenerator.prototype = {
           } else if (yy > 4) {
             t = 1;
             yy = 5;
-          } else if ((t, 1 && yy === 3)) {
+          } else if (t < 1 && yy === 3) {
             t = 0;
             yy = 3;
-          } else if ((t, 1 && yy > 0 && yy < 3)) {
+          } else if (t < 1 && yy > 0 && yy < 3) {
             t = 0;
             yy = 2;
           }
@@ -165,12 +173,15 @@ Mario.BackgroundGenerator.prototype = {
           if (yy < 0) {
             t = 1;
             yy = 5;
+          } else if (yy > 4) {
+            t = 2;
+            yy = 5;
           } else if (t < 2 && yy === 4) {
             t = 2;
             yy = 4;
           } else if (t < 2 && yy > 0 && yy < 4) {
             t = 4;
-            yy -= 3;
+            yy = -3;
           }
 
           level.SetBlock(x, y, 1 + t + (yy + 3) * 8);

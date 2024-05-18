@@ -1,5 +1,5 @@
 // Displays title screen and menu
-Mario.TitleSlate = function () {
+Mario.TitleState = function () {
   this.drawManager = null;
   this.camera = null;
   this.logoY = null;
@@ -7,10 +7,10 @@ Mario.TitleSlate = function () {
   this.font = null;
 };
 
-Mario.TitleSlate.prototype = new Engine.GameState();
+Mario.TitleState.prototype = new Engine.GameState();
 
-Mario.TitleSlate.prototype.Enter = function () {
-  this.drawManager = new Engine.DrawManager();
+Mario.TitleState.prototype.Enter = function () {
+  this.drawManager = new Engine.DrawableManager();
   this.camera = new Engine.Camera();
 
   var bgGenerator = new Mario.BackgroundGenerator(
@@ -35,16 +35,14 @@ Mario.TitleSlate.prototype.Enter = function () {
 
   this.title = new Engine.Sprite();
   this.title.Image = Engine.Resources.Images["title"];
-  this.title.X = 0;
-  this.title.Y = 120;
+  (this.title.X = 0), (this.title.Y = 120);
 
   this.logo = new Engine.Sprite();
   this.logo.Image = Engine.Resources.Images["logo"];
-  this.logo.X = 0;
-  this.logo.Y = 0;
+  (this.logo.X = 0), (this.logo.Y = 0);
 
   this.font = Mario.SpriteCuts.CreateRedFont();
-  this.font.Strings[0] = { String: "Press Enter to Start", X: 96, Y: 120 };
+  this.font.Strings[0] = { String: "Press S to Start", X: 96, Y: 120 };
 
   this.logoY = 20;
 
@@ -54,20 +52,23 @@ Mario.TitleSlate.prototype.Enter = function () {
   this.bounce = 0;
 
   Mario.GlobalMapState = new Mario.MapState();
-
-  // Set up global main character variable
+  //set up the global main character variable
   Mario.MarioCharacter = new Mario.Character();
   Mario.MarioCharacter.Image = Engine.Resources.Images["smallMario"];
+
+  //Mario.PlayTitleMusic();
 };
 
-Mario.TitleSlate.prototype.Exit = function () {
+Mario.TitleState.prototype.Exit = function () {
+  //Mario.StopMusic();
+
   this.drawManager.Clear();
   delete this.drawManager;
   delete this.camera;
   delete this.font;
 };
 
-Mario.TitleSlate.prototype.Update = function (delta) {
+Mario.TitleState.prototype.Update = function (delta) {
   this.bounce += delta * 2;
   this.logoY = 20 + Math.sin(this.bounce) * 10;
 
@@ -76,17 +77,17 @@ Mario.TitleSlate.prototype.Update = function (delta) {
   this.drawManager.Update(delta);
 };
 
-Mario.TitleSlate.prototype.Draw = function (context) {
+Mario.TitleState.prototype.Draw = function (context) {
   this.drawManager.Draw(context, this.camera);
 
-  context.drawManager(Engine.Resources.Images["title"], 0, 120);
-  context.drawManager(Engine.Resources.Images["logo"], 0, this.logoY);
+  context.drawImage(Engine.Resources.Images["title"], 0, 120);
+  context.drawImage(Engine.Resources.Images["logo"], 0, this.logoY);
 
-  this.font.Draw(context, this.camera);
+  this.font.Draw(context, this.Camera);
 };
 
-Mario.TitleSlate.prototype.CheckForChange = function (context) {
-  if (Engine.KeyboardInput.IsKeyDown(Engine.Keys.Enter)) {
+Mario.TitleState.prototype.CheckForChange = function (context) {
+  if (Engine.KeyboardInput.IsKeyDown(Engine.Keys.S)) {
     context.ChangeState(Mario.GlobalMapState);
   }
 };

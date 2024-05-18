@@ -30,9 +30,6 @@ Engine.Keys = {
   Up: 38,
   Right: 39,
   Down: 40,
-  Enter: 13,
-  Space: 32,
-  Escape: 27,
 };
 
 Engine.KeyboardInput = {
@@ -40,7 +37,7 @@ Engine.KeyboardInput = {
 
   Initialize: function () {
     var self = this;
-    document.onekeydown = function (event) {
+    document.onkeydown = function (event) {
       self.KeyDownEvent(event);
     };
     document.onkeyup = function (event) {
@@ -54,17 +51,18 @@ Engine.KeyboardInput = {
   },
 
   KeyDownEvent: function (event) {
-    this.Pressed[event.keycode] = true;
-    this.PreventedScrolling(event);
+    this.Pressed[event.keyCode] = true;
+    this.PreventScrolling(event);
   },
 
   KeyUpEvent: function (event) {
-    this.Pressed[event.keycode] = false;
-    this.PreventedScrolling(event);
+    this.Pressed[event.keyCode] = false;
+    this.PreventScrolling(event);
   },
 
   PreventScrolling: function (event) {
-    if (event.keycode >= 37 && event.keycode <= 40) {
+    // 37: left, 38: up, 39: right, 40: down
+    if (event.keyCode >= 37 && event.keyCode <= 40) {
       event.preventDefault();
     }
   },

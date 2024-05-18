@@ -1,31 +1,31 @@
 // Represents game timer
 Engine.GameTimer = function () {
-  this.FPS = 1000 / 30;
-  this.lastTime = 0;
-  this.intervalFunc = null;
-  this.updatedObject = null;
+  this.FramesPerSecond = 1000 / 30;
+  this.LastTime = 0;
+  this.IntervalFunc = null;
+  this.UpdateObject = null;
 };
 
 Engine.GameTimer.prototype = {
   Start: function () {
-    this.lastTime = new Date().getTime();
+    this.LastTime = new Date().getTime();
     var self = this;
-    this.intervalFunc = setInterval(function () {
+    this.IntervalFunc = setInterval(function () {
       self.Tick();
-    }, this.FPS);
+    }, this.FramesPerSecond);
   },
 
   Tick: function () {
-    if (this.updatedObject != null) {
+    if (this.UpdateObject != null) {
       var newTime = new Date().getTime();
-      var delta = (newTime - this.lastTime) / 1000;
-      this.lastTime = newTime;
+      var delta = (newTime - this.LastTime) / 1000;
+      this.LastTime = newTime;
 
-      this.updatedObject.Update(delta);
+      this.UpdateObject.Update(delta);
     }
   },
 
   Stop: function () {
-    clearInterval(this.intervalFunc);
+    clearInterval(this.IntervalFunc);
   },
 };

@@ -12,12 +12,12 @@ Mario.WinState = function () {
 Mario.WinState.prototype = new Engine.GameState();
 
 Mario.WinState.prototype.Enter = function () {
-  this.drawManager = new Engine.DrawManager();
+  this.drawManager = new Engine.DrawableManager();
   this.camera = new Engine.Camera();
 
   this.font = Mario.SpriteCuts.CreateBlackFont();
   this.font.Strings[0] = {
-    String: "Thank you for saving me Mario!",
+    String: "Thank you for saving me, Mario!",
     X: 36,
     Y: 160,
   };
@@ -50,7 +50,7 @@ Mario.WinState.prototype.Update = function (delta) {
   if (this.waitTime > 0) {
     this.waitTime -= delta;
   } else {
-    if (Engine.KeyboardInput.IsKeyDown(Engine.Keys.Enter)) {
+    if (Engine.KeyboardInput.IsKeyDown(Engine.Keys.S)) {
       this.wasKeyDown = true;
     }
   }
@@ -62,7 +62,7 @@ Mario.WinState.prototype.Draw = function (context) {
 
 Mario.WinState.prototype.CheckForChange = function (context) {
   if (this.waitTime <= 0) {
-    if (this.wasKeyDown && !Engine.KeyboardInput.IsKeyDown(Engine.Keys.Enter)) {
+    if (this.wasKeyDown && !Engine.KeyboardInput.IsKeyDown(Engine.Keys.S)) {
       context.ChangeState(new Mario.TitleState());
     }
   }

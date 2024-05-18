@@ -1,138 +1,152 @@
-Engine.AnimationSequence = function (startRow, startCol, endRow, endCol) {
+// Represents the uninterrupted set of frames to animate
+Engine.AnimationSequence = function (startRow, startColumn, endRow, endColumn) {
   this.StartRow = startRow;
-  this.StartCol = startCol;
+  this.StartColumn = startColumn;
   this.EndRow = endRow;
-  this.EndCol = endCol;
+  this.EndColumn = endColumn;
 
   // When we want to make an animated sprite act like a static sprite
   // this will keep it from wasting time updating the animation when the sequence
   // is only a frame long -> for things like standing or pausing
   this.SingleFrame = false;
 
-  if (this.StartRow == this.EndRow && this.StartCol == this.EndRow) {
+  if (this.StartRow == this.EndRow && this.StartColumn == this.EndColumn) {
     this.SingleFrame = true;
   }
 };
 
 Engine.AnimatedSprite = function () {
-  this.lastElapsed = 0;
-  this.FPS = 1 / 20;
-  this.currSequence = null;
-  this.playing = false;
-  this.looping = false;
-  this.rows = 0;
-  this.cols = 0;
+  this.LastElapsed = 0;
+  this.FramesPerSecond = 1 / 20;
+  this.CurrentSequence = null;
+  this.Playing = false;
+  this.Looping = false;
+  this.Rows = 0;
+  this.Columns = 0;
 
   // Make animation sequence more accessible
-  this.sequences = new Object();
+  this.Sequences = new Object();
 };
 
 Engine.AnimatedSprite.prototype = new Engine.FrameSprite();
 
 Engine.AnimatedSprite.prototype.Update = function (delta) {
-  if (this.currSequence.SingleFrame) {
+  if (this.CurrentSequence.SingleFrame) {
     return;
   }
-  if (!this.playing) {
-    return;
-  }
-
-  this.lastElapsed -= delta;
-
-  if (this.lastElapsed > 0) {
+  if (!this.Playing) {
     return;
   }
 
-  this.lastElapsed = this.FPS;
-  this.frameX += this.frameWidth;
+  this.LastElapsed -= delta;
+
+  if (this.LastElapsed > 0) {
+    return;
+  }
+
+  this.LastElapsed = this.FramesPerSecond;
+  this.FrameX += this.FrameWidth;
 
   // Increment the frame
-  if (this.frameX > this.Image.width - this.frameWidth) {
-    this.frameX = 0;
-    this.frameY += this.frameHeight;
+  if (this.FrameX > this.Image.width - this.FrameWidth) {
+    this.FrameX = 0;
+    this.FrameY += this.FrameHeight;
 
-    if (this.frameY > this.Image.height - this.frameHeight) {
-      this.frameY = 0;
+    if (this.FrameY > this.Image.height - this.FrameHeight) {
+      this.FrameY = 0;
     }
   }
 
-  // Check if at end of animation sequence
+  // Check if at the end of the animation sequence
   var seqEnd = false;
   if (
-    this.frameX > this.currSequence.EndCol * this.frameWidth &&
-    this.frameY == this.currSequence.EndRow * this.frameHeight
+    this.FrameX > this.CurrentSequence.EndColumn * this.FrameWidth &&
+    this.FrameY == this.CurrentSequence.EndRow * this.FrameHeight
   ) {
     seqEnd = true;
   } else if (
-    this.frameX == 0 &&
-    this.frameY > this.currSequence.EndRow * this.frameHeight
+    this.FrameX == 0 &&
+    this.FrameY > this.CurrentSequence.EndRow * this.FrameHeight
   ) {
-    this.playing = false;
+    seqEnd = true;
+  }
+
+  // Go back to the beginning if looping, otherwise stop playing
+  if (seqEnd) {
+    if (this.Looping) {
+      this.FrameX = this.CurrentSequence.StartColumn * this.FrameWidth;
+      this.FrameY = this.CurrentSequence.StartRow * this.FrameHeight;
+    } else {
+      this.Playing = false;
+    }
   }
 };
 
 Engine.AnimatedSprite.prototype.PlaySequence = function (seqName, loop) {
-  this.playing = true;
-  this.looping = true;
-  this.currSequence = this.sequences("seq_" + seqName);
-  this.FrameX = this.currSequence.StartCol * this.frameWidth;
-  this.frameY = this.currSequence.StartRow * this.frameHeight;
+  this.Playing = true;
+  this.Looping = loop;
+  this.CurrentSequence = this.Sequences["seq_" + seqName];
+  this.FrameX = this.CurrentSequence.StartColumn * this.FrameWidth;
+  this.FrameY = this.CurrentSequence.StartRow * this.FrameHeight;
 };
 
 Engine.AnimatedSprite.prototype.StopLooping = function () {
-  this.looping = false;
+  this.Looping = false;
 };
 
 Engine.AnimatedSprite.prototype.StopPlaying = function () {
-  this.playing = false;
+  this.Playing = false;
 };
 
 Engine.AnimatedSprite.prototype.SetFrameWidth = function (width) {
-  this.frameWidth = width;
-  this.rows = this.Image.width / this.frameWidth;
+  this.FrameWidth = width;
+  this.Rows = this.Image.width / this.FrameWidth;
 };
 
 Engine.AnimatedSprite.prototype.SetFrameHeight = function (height) {
-  this.frameHeight = height;
-  this.cols = this.Image.height / this.frameHeight;
+  this.FrameHeight = height;
+  this.Columns = this.Image.height / this.FrameHeight;
 };
 
-Engine.AnimatedSprite.prototype.SetColCount = function (colCount) {
-  this.frameWidth = this.Image.width / colCount;
-  this.cols = colCount;
+Engine.AnimatedSprite.prototype.SetColumnCount = function (columnCount) {
+  this.FrameWidth = this.Image.width / columnCount;
+  this.Columns = columnCount;
 };
 
 Engine.AnimatedSprite.prototype.SetRowCount = function (rowCount) {
-  this.frameHeight = this.Image.height / rowCount;
-  this.rows = rowCount;
+  this.FrameHeight = this.Image.height / rowCount;
+  this.Rows = rowCount;
 };
 
-Engine.AnimatedSprite.prototype.AddExistingSeq = function (name, sequence) {
-  this.sequences["seq_" + name] = sequence;
+Engine.AnimatedSprite.prototype.AddExistingSequence = function (
+  name,
+  sequence
+) {
+  this.Sequences["seq_" + name] = sequence;
 };
 
-Engine.AnimatedSprite.prototype.AddNewSeq = function (
+Engine.AnimatedSprite.prototype.AddNewSequence = function (
   name,
   startRow,
-  startCol,
+  startColumn,
   endRow,
-  endCol
+  endColumn
 ) {
-  this.sequences["seq_" + name] = new Engine.AnimationSequence(
+  this.Sequences["seq_" + name] = new Engine.AnimationSequence(
     startRow,
-    startCol,
+    startColumn,
     endRow,
-    endCol
+    endColumn
   );
 };
 
-Engine.AnimatedSprite.prototype.DeleteSeq = function (name) {
-  if (this.sequences["seq_" + name] != null) {
-    delete this.sequences["seq_" + name];
+Engine.AnimatedSprite.prototype.DeleteSequence = function (name) {
+  if (this.Sequences["seq_" + name] != null) {
+    delete this.Sequences["seq_" + name];
   }
 };
 
-Engine.AnimatedSprite.prototype.ClearSeqs = function () {
-  delete this.sequences;
-  this.sequences = new Object();
+Engine.AnimatedSprite.prototype.ClearSequences = function () {
+  delete this.Sequences;
+  this.Sequences = new Object();
 };

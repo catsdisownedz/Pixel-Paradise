@@ -296,8 +296,10 @@ var Game = {
 
   showPauseMenu: function () {
     // Update the score display
-    document.getElementById("scoreDisplay").textContent =
-      "Score: " + this.player1.score;
+    document.getElementById("score1Display").textContent =
+      "Player 1 Score: " + this.player1.score;
+    document.getElementById("score2Display").textContent =
+      "Player 2 Score: " + this.player2.score;
 
     // Show the pause menu
     document.getElementById("pause-menu").style.display = "block";

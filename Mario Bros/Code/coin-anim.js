@@ -12,10 +12,11 @@ Mario.CoinAnim = function (world, x, y) {
   this.YPic = 2;
 };
 
-Mario.CoinAnim.prototype = new Mario.NotchSprites();
+Mario.CoinAnim.prototype = new Mario.NotchSprite();
 
 Mario.CoinAnim.prototype.Move = function () {
-  var x = (y = 0);
+  var x = 0,
+    y = 0;
   if (this.Life-- < 0) {
     this.World.RemoveSprite(this);
     for (x = 0; x < 2; x++) {

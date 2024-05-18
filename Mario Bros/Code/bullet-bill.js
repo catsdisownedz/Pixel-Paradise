@@ -1,13 +1,13 @@
 // Represents the bullets in the game
 Mario.BulletBill = function (world, x, y, dir) {
-  this.Image = Engine.Resources.Image["enemies"];
+  this.Image = Engine.Resources.Images["enemies"];
   this.World = world;
   this.X = x;
   this.Y = y;
   this.Facing = dir;
 
-  this.Xpic0 = 8;
-  this.Ypic0 = 31;
+  this.XPicO = 8;
+  this.YPicO = 31;
   this.Height = 12;
   this.Width = 4;
   this.PicWidth = 16;
@@ -26,7 +26,7 @@ Mario.BulletBill.prototype.CollideCheck = function () {
     return;
   }
 
-  var xMarioD = (Mario.MarioCharacter.X = this.X),
+  var xMarioD = Mario.MarioCharacter.X - this.X,
     yMarioD = Mario.MarioCharacter.Y - this.Y;
   if (xMarioD > -16 && xMarioD < 16) {
     if (yMarioD > -this.Height && yMarioD < this.World.Mario.Height) {
@@ -49,14 +49,13 @@ Mario.BulletBill.prototype.CollideCheck = function () {
 };
 
 Mario.BulletBill.prototype.Move = function () {
-  var i = 0;
-  var i = (sideWaysSpeed = 4);
+  var i = 0,
+    sideWaysSpeed = 4;
   if (this.DeadTime > 0) {
     this.DeadTime--;
 
     if (this.DeadTime === 0) {
       this.DeadTime = 1;
-
       for (i = 0; i < 8; i++) {
         this.World.AddSprite(
           new Mario.Sparkle(
@@ -112,9 +111,9 @@ Mario.BulletBill.prototype.ShellCollideCheck = function (shell) {
   }
 
   var xD = shell.X - this.X,
-    xy = shell.Y - this.Y;
+    yD = shell.Y - this.Y;
   if (xD > -16 && xD < 16) {
-    if (xy > -this.Height && xy < shell.Height) {
+    if (yD > -this.Height && yD < shell.Height) {
       Engine.Resources.PlaySound("kick");
       this.Dead = true;
       this.Xa = 0;

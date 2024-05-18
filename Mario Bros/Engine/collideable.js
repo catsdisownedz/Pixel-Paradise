@@ -42,6 +42,7 @@ Engine.Collideable.prototype = {
       return;
     }
 
+    //collision, fire the events!
     this.CollisionEvent(other);
     other.CollisionEvent(this);
   },

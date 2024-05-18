@@ -1,0 +1,28 @@
+html,
+body {
+  background-color: #000000;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100vw;
+  height: 80vw;
+  max-height: 80vh;
+  max-width: 100vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#canvas {
+  width: 100vh;
+  height: 80vh;
+  display: block;
+  background-color: #11001e;
+}

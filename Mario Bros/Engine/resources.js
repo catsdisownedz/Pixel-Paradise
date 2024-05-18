@@ -32,7 +32,7 @@ Engine.Resources = {
     return this;
   },
 
-  RemoveImages: function (name) {
+  RemoveImage: function (name) {
     delete this.Images[name];
     return this;
   },
@@ -76,14 +76,14 @@ Engine.Resources = {
     return this.Sounds[name].index;
   },
 
-  PauseChannels: function (name, index) {
+  PauseChannel: function (name, index) {
     if (!this.Sounds[name][index].paused) {
       this.Sounds[name][index].pause();
     }
     return this;
   },
 
-  PauseSounds: function (name) {
+  PauseSound: function (name) {
     for (var i = 0; i < this.Sounds[name].length; i++) {
       if (!this.Sounds[name][i].paused) {
         this.Sounds[name][i].pause();
@@ -93,14 +93,14 @@ Engine.Resources = {
   },
 
   ResetChannel: function (name, index) {
-    this.Sounds[name][index].currTime = 0;
+    this.Sounds[name][index].currentTime = 0;
     this.StopLoop(name, index);
     return this;
   },
 
   ResetSound: function (name) {
-    for (var i = 0; i < this.Sounds[name][i]; i++) {
-      this.Sounds[name][i].currTime = 0;
+    for (var i = 0; i < this.Sounds[name].length; i++) {
+      this.Sounds[name].currentTime = 0;
       this.StopLoop(name, i);
     }
     return this;
@@ -114,8 +114,8 @@ Engine.Resources = {
     );
   },
 
-  LoopCallback: function (event) {
-    this.currTime = -1;
+  LoopCallback: function () {
+    this.currentTime = -1;
     this.play();
   },
 };
