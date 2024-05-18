@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +22,7 @@
 </head>
 <body>
     <h1>Our best players!</h1>
-    <?php include 'leaderboard.php'; ?>
+    <!-- <?php include 'leaderboard.php'; ?> -->
     <table>
         <thead>
             <tr>
@@ -32,17 +33,24 @@
         <tbody>
             <tr>
                 <td class="rank rank-1"><h2>#1</h2></td>
-                <td>Username1</td>
+                <td>
+                    <?php include 'retreivehighscore.php'; 
+                     echo $usernamesLeaderbaord[0] ?>
+                </td>
             </tr>
             <tr>
                 <td class="rank rank-2"><h2>#2</h2></td>
-                <td>Username2</td>
+                <td> <?php include 'retreivehighscore.php'; 
+                     echo $usernamesLeaderbaord[1] ?></td>
             </tr>
             <tr>
                 <td class="rank rank-3"><h2>#3</h2></td>
-                <td>Username3</td>
+                <td> <?php include 'retreivehighscore.php'; 
+                     echo $usernamesLeaderbaord[2] ?></td>
             </tr>
         </tbody>
     </table>
 </body>
 </html>
+
+
