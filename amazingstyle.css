@@ -1,5 +1,3 @@
-/* <link rel "stylesheets" href="https://unpkg.com/flickity@2/dist/flickity.min.css"> */
-
 
 /* mobile phones */
 @media only screen and (max-width: 600px) {
@@ -37,36 +35,21 @@
 }
 
 
-
-html {
-  cursor: url('custom-cursor.png'), auto;
-
-  /* we can change the cursor style here amazingg */
-}
-
-
 h1 {
-  /* text-emphasis: "⏰"; */
-  /* we can add here emphasis marks to texts */
   font-family: "Micro 5", sans-serif;
-  font-size: 1 em;
+
+  margin-bottom: 0;
   justify-content: center;
-  background-image: url('flower.jpg');
+  font-weight: bold;
+  background: url('Images/e557dabea8d72220bbac53427f7524fd.gif') repeat;
   background-clip: text;
+  -webkit-background-clip: text;
   color: transparent;
-  background-color: white;
-  /* this fills text with image */
+  -webkit-text-fill-color: transparent;
+  font-size: 4em;
 }
 
-/* h1 {
-      font-size: 72px;
-      background: url('your-gif-url.gif') repeat;
-      /* -webkit-background-clip: text;   this is to make it compatible with all browsers lol */
-/* background-clip: text;
-      color: transparent;
-      animation: animate 5s linear infinite; */
-/* this makes the texts filled with gifs */
-/* } */
+
 main {
   display: flex;
   justify-content: center;
@@ -75,17 +58,17 @@ main {
 }
 
 header {
+  font-size: 1.2em;
   text-align: center;
   padding: 20px;
 }
 
-h1 {
-  font-size: 3em;
-  margin-bottom: 0;
-}
 
 p {
-  font-size: 1em;
+  justify-content: center;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: 0.8em;
+  color: #fe9acc;
   margin-top: 0;
 }
 
@@ -101,24 +84,46 @@ p {
   padding-bottom: 25vw;
 }
 
+.game-center {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Fills the entire container */
+}
+
+.game-in-view {
+  transform: scale(1.05); /* Zoom in when centered */
+}
+
 .game {
   flex: 0 0 auto;
   width: 300px;
   height: 570px;
-  margin: 0.8em;
+  margin: 1em 2em;
   padding: 0.5em;
-  border: 0.001em solid #fff;
+  border: 0.001em solid #f8c9f1;
   border-radius: 0.5vw;
   text-align: center;
-  scroll-snap-align: center; /* Snap to left edge of game div */
+  scroll-snap-align: center;
+  /* Snap to left edge of game div */
   /* padding-bottom:1vw; */
-  position:relative;
-  
+  transition: transform 0.2s ease-in-out; 
+  position: relative;
+
 }
 
-.game--first {
-  order: -1;
+
+.game h2{
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: 1.5em;
+  margin-bottom: 0.2em;
 }
+
+/* .game--first {
+  order: -1;
+} */
 
 @keyframes animate {
   0% {
@@ -130,40 +135,65 @@ p {
   }
 }
 
-.game h2 {
-  font-size: 1.5em;
-  margin-bottom: 5px;
-}
-
-.game  img {
+.game img {
   max-width: 90%;
   margin: auto;
   display: block;
-  transition: transform 0.2s ease-in-out; /* Add smooth zoom effect */
-  position:absolute;
+  margin-top: 2em;
+  transition: transform 0.2s ease-in-out;
+  position: absolute;
 }
-.game  img:hover{
-  opacity:0;
+
+.game img:hover {
+  opacity: 0;
 }
-.game  video:hover{
-  opacity:1;
+
+.game video:hover {
+  opacity: 1;
 }
-.game  video{
+
+.game video {
   max-width: 95%;
   margin: auto;
   display: block;
-  transition: transform 0.2s ease-in-out; /* Add smooth zoom effect */
-  opacity:0;
+  transition: transform 0.2s ease-in-out;
+  /* Add smooth zoom effect */
+  opacity: 0;
   position: absolute;
   transition: 0.3s;
 }
 
-.game .options {
-  transition: transform 0.2s ease-in-out; /* Add smooth zoom effect
+a:link{
+  color: #f79833;
+  text-decoration: none;
 }
 
-.game:hover img {
-  transform: scale(1.1); /* Zoom image on hover */
+a:visited{
+  color: #c71585;
+  text-decoration: none;
+}
+
+a:hover{
+  color: #ff77aa;
+  text-decoration: none;
+}
+
+a:active{
+  color: #ff77aa;
+  text-decoration: none;
+}
+
+.game .options {
+  font-family: "Micro 5", sans-serif;
+  transition: transform 0.2s ease-in-out;
+  display: block;
+  margin-top: 0%;
+  /* Add smooth zoom effect*/
+
+}
+
+.game:hover{
+  transform: scale(1.05); /* Zoom image on hover */
 }
 
 .game:hover .options {
@@ -171,7 +201,7 @@ p {
   display: block;
 }
 
-/* Hide scrollbar for a cleaner look (optional) */
+/* Hide scrollbar for a cleaner look */
 ::-webkit-scrollbar {
   display: none;
 }
@@ -195,7 +225,8 @@ p {
   0% {
     top: -100%;
   }
-  80%{
+
+  80% {
     top: 25%;
   }
   /* 87%{
@@ -208,9 +239,10 @@ p {
     top: 20%;
   }
 }
+
 #loginPopup {
-  width: auto;/* Adjust as needed (e.g., 60vw) */
-  height: 15vh; 
+  width: auto;
+  height: 15vh;
   position: fixed;
   top: 20%;
   left: 50%;
@@ -220,7 +252,7 @@ p {
   border: 1px solid #d833ac4b;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(54, 2, 46, 0.879);
-  display: none; /* Initially hidden */
+  display: none;
   animation: slideDown 1s ease-out forwards;
 }
 
@@ -228,16 +260,31 @@ p {
   display: block;
 }
 
+#loginPopup.hidden {
+  animation: slideUp 1s ease-out forwards;
+}
+
+@keyframes slideUp {
+  0% {
+    top: 20%;
+  }
+
+  100% {
+    top: -100%;
+  }
+}
+
 #loginPopup h2 {
   font-family: "Micro 5", sans-serif;
-  font-size: 1.5em; /* Smaller size */
-  margin-top: 0; /* Remove top margin */
-  color: #ff69b4; /* Neon pink color */
+  font-size: 1.5em;
+  margin-top: 0;
+  color: #ff69b4;
   text-shadow: 0 2px 5px rgba(54, 2, 46, 0.879);
 }
+
 #loginForm label,
 #loginForm input {
-  margin-top: 0px; /* Add space at the top of the labels and input fields */
+  margin-top: 0px;
   margin-bottom: 5px;
   margin-left: 0.5vw;
 }
@@ -248,7 +295,8 @@ p {
   box-shadow: 0 2px 5px rgba(54, 2, 46, 0.879);
   font-weight: 400;
   font-style: normal;
-  color: #ff69b4; /* Neon pink color */
+  color: #ff69b4;
+  /* Neon pink color */
   padding-right: 1px;
   margin-left: 0%;
 }
@@ -257,50 +305,69 @@ p {
 #loginPopup input[type="password"] {
   font-family: "Chakra Petch", sans-serif;
   box-shadow: 0 2px 5px rgba(54, 2, 46, 0.879);
-  border: 1px solid #ff69b4; /* Pink border */
-  background-color: transparent; /* Transparent background */
-  color: #ff69b4; /* Text color same as border */
+  border: 1px solid #ff69b4;
+  /* Pink border */
+  background-color: transparent;
+  /* Transparent background */
+  color: #ff69b4;
+  /* Text color same as border */
   padding: 5px;
   height: 10px;
-  margin-right: 10px; /* Add space to the right of input fields */
+  margin-right: 10px;
+  /* Add space to the right of input fields */
 }
 
- #loginPopup button{
+#loginPopup button {
   font-family: "Micro 5", sans-serif;
   font-size: small;
-  background-color: #ff69b4; /* Pink background */
-  border: none; /* No border */
+  background-color: #ff69b4;
+  /* Pink background */
+  border: none;
+  /* No border */
   border-color: #981847;
   border-radius: 1px;
-  color: white; /* White text */
-  padding: 0.5px 20px; /* Padding */
-  text-align: center; /* Centered text */
-  text-decoration: none; /* No underline */
+  color: white;
+  /* White text */
+  padding: 0.5px 20px;
+  /* Padding */
+  text-align: center;
+  /* Centered text */
+  text-decoration: none;
+  /* No underline */
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
 }
 
-#loginPopup button:hover{
-  background-color: #780a41; 
+#loginPopup button:hover {
+  background-color: #780a41;
 }
+
 #loginPopup a {
-  color: #ff69b4; /* Pink color */
-  text-decoration: none; /* No underline */
+  color: #ff69b4;
+  /* Pink color */
+  text-decoration: none;
+  /* No underline */
 }
 
 #loginPopup a:hover {
-  color: #c71585; /* Dark pink color on hover */
+  color: #c71585;
+  /* Dark pink color on hover */
 }
 
 #message {
   font-family: "Micro 5", sans-serif;
-  color: #ff69b4; /* Pink color */
-  position: absolute; /* Absolute positioning relative to the popup */
-  top: 20px; /* Position from the top */
-  right: 30px; /* Position from the right */
-  font-size: 1.2em; /* Adjust size as needed */
+  color: #ff69b4;
+  /* Pink color */
+  position: absolute;
+  /* Absolute positioning relative to the popup */
+  top: 20px;
+  /* Position from the top */
+  right: 30px;
+  /* Position from the right */
+  font-size: 1.2em;
+  /* Adjust size as needed */
 }
 
 .loginForm {
@@ -344,7 +411,7 @@ p {
 
 body {
   font-family: 'Press Start 2P', sans-serif;
-  background-color: #000;
+  background-color: #130015;
   color: #fff;
   margin: 0;
   padding: 0;
@@ -361,38 +428,44 @@ body {
   overflow: hidden;
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* Align items to the right */
-  width: 95%; /* Take up full width of the container */
-  padding: 0 2vw; /* Add some padding on the sides */
+  justify-content: flex-end;
+  /* Align items to the right */
+  width: 95%;
+  /* Take up full width of the container */
+  padding: 0 2vw;
+  /* Add some padding on the sides */
 }
 
 .level,
 .separator,
 .username {
   margin-left: 1em;
-  font-family: "Micro 5", sans-serif; 
+  font-family: "Micro 5", sans-serif;
 }
 
 .separator {
-  color: rgba(226, 47, 214, 0.8); /* Increase opacity to make separator more visible */
-  margin: 0 0.5em; /* Add horizontal margin to space out the separator */
+  color: rgba(226, 47, 214, 0.8);
+  /* Increase opacity to make separator more visible */
+  margin: 0 0.5em;
+  /* Add horizontal margin to space out the separator */
 }
 
 
-.profile-section a {
+/* .profile-section a {
+
+} */
+
+.profile-section img {
   display: block;
   /* Make entire image clickable */
-  width: 3vw;
-  height: 3vw;
+  width: 0.01em;
+  height: 0.01em;
   border-radius: 50%;
   /* Make image circular */
   overflow: hidden;
   /* Prevent image overflow */
-}
-
-.profile-section img {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: 2.5em;
   /* Ensure image fills the container */
   object-fit: cover;
   /* Crop image if necessary */
@@ -400,21 +473,30 @@ body {
 
 
 .logout-button {
-  margin-left:1em;
+  margin-left: 1em;
   position: absolute;
-  top: 10px;
+  top: 2em;
   left: 10px;
-  color:#ffd0e1;
+  color: #ffd0e1;
   font-family: "Micro 5", sans-serif;
-  background-color: rgba(250, 100, 162, 0.29); /* Translucent white background */
+  background-color: rgba(250, 100, 162, 0.29);
+  /* Translucent white background */
   border: none;
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Smooth transition */
+  transition: background-color 0.3s ease;
+  /* Smooth transition */
 }
 
 .logout-button:hover {
-  background-color: pink; /* Change color on hover */
+  background-color: pink;
+  /* Change color on hover */
+  color: rgba(86, 5, 50, 0.749);
+}
+
+.logout-button:click {
+  background-color: rgb(255, 0, 43);
+  /* Change color on hover */
   color: rgba(86, 5, 50, 0.749);
 }

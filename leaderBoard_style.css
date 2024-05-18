@@ -1,0 +1,62 @@
+body {
+    background-color: #130015; /* Dark background */
+    color: #ff9ae6; /* White text */
+    font-family: "Micro 5", sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center; /* Align vertically in center */
+    align-items: center; /* Align horizontally in center */
+    min-height: 100vh;
+  }
+  
+  h1 {
+    margin-top: 0%;
+    font-family: "Micro 5", sans-serif;
+    text-align: center;
+    font-size: 3em; /* Adjust font-size as needed */
+    margin-bottom: 20px;
+  }
+  
+  table {
+    width: 50%;
+    height: 70%;
+    border-collapse: collapse; /* Remove borders between table cells */
+  }
+  
+  th,
+  td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid orange; /* Thin orange border for all cells */
+  }
+  
+  
+  th {
+    color: #982096;
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white background for headers */
+  }
+  
+  
+  .rank h2 {
+    font-size: 2.5em; /* Adjust font size for all ranks (optional) */
+    margin-bottom: 5px;
+  }
+  
+  /* Row size adjustments */
+  tr:nth-child(1) { /* Target the first row (#1) */
+    font-size: 2em; /* Increase font size for #1 row */
+    color: #31ff3c;
+  }
+  
+  tr:nth-child(2) { /* Target the second row (#2) */
+    font-size: 1.8em; /* Slightly smaller font size for #2 row */
+    color: #f0ac1b;
+  }
+  
+  tr:nth-child(3) { /* Target the third row (#3) */
+    font-size: 1em; /* Default font size for #3 row */
+    color: #ff196e;
+  }
+  

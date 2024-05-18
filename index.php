@@ -19,6 +19,7 @@ session_start();
     href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple" />
     <link href="https://fonts.googleapis.com/css2?family=Jersey+25+Charted&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Jersey+25+Charted&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 
   <title>Retro Gaming Arcade</title>
 </head>
@@ -26,15 +27,15 @@ session_start();
 <body>
   <header>
     <div class="profile-section">
-      <span class="level">Lv. 1 Beginner</span>
+      <a href="leaderBoard.html" class="level" id="wow">Lv. 1 Beginner</a>
       <span class="separator"> | </span>
       <a href="signUp.html">
         <img src="Previews/pfp.jpg" alt="Player profile pic" />
       </a>
       <span id="usernameLabel" class="username">Guest User</span>
     </div>
-    <h1>Pixel Paradise</h1>
-    <p>Power up your nostalgia</p>
+    <h1 id="title">Pixel Paradise</h1>
+    <p>Power up your nostalgia!</p>
     <button id="logoutButton" class="logout-button">Logout</button>
   </header>
   <main>
@@ -46,19 +47,20 @@ session_start();
           <video class = "game-video" src="Previews/pac_prev.mp4" autoplay muted loop></video>
           <!-- <audio id="hover-sound" src="sound.mp3" preload="auto"></audio> -->
         </div>
-        <div class="game game--first">
+        <!-- <div class="game game--first">
           <h2>Tetris</h2>
           <img
             src="images/tetris.png"
             alt="Tetris game"
             data-sound="sound/tetris.mp3"
           />
-        </div>
+        </div> -->
         <div class="game">
           <h2>Pong</h2>
-          <img src="Previews/pongss1.png" alt="Pong game"  />for 
+          <img src="Previews/pongss1.png" alt="Pong game"  />
           <div class="options">
             <a href="Pong/pong-single.html" id="singlePlayer">Single Player</a>
+            <span class="separator"> | </span>
             <a href="Pong/pong-multi.html" id="multiPlayer">Multiplayer</a>
           </div>
         </div>
@@ -78,18 +80,15 @@ session_start();
               <source src="previews/flappybird preview.mp4">
             </video>
           </a>
-          <div class="options">
-            <a href="Flappy Bird/flappyhtml.html">Play now!</a>
-          </div>
         </div>
         <div class="game">
           <h2>Break out</h2>
+          <a href="Breakout/breakout.html">
           <img
-            src="images/break-out.png"
-            alt="break out game"
-            data-sound="sound/break-out.mp3"
-          />
-            <a href="Breakout/breakout.html">Play now!</a>
+            src="previews/breakk.png" alt="break out game"/>
+          <video class="game-video" autoplay muted loop>
+            <source src src="previews/breakoutvid.mp4">
+          </a>
         </div>
     </div>
   </main>
@@ -110,7 +109,7 @@ session_start();
     <div class="link-container">
       <a href="signUp.html">New User? Register Here </a>
       <span>    |    </span>
-      <a href="#"> Continue as Guest User</a>
+      <a href="#" id="continue"> Continue as Guest User</a>
     </div>
   </div>
   <?php else: ?>
