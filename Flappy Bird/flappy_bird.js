@@ -95,6 +95,7 @@ function update(){
         if(detectCollision(bird,pipe)){
             playCollisionSound();
             gameOver=true;
+            sendScoreToServer(score);
         }
     }
     //emptying the pipe array
@@ -167,4 +168,22 @@ function playScoreSound(){
 }
 function playCollisionSound(){
     collisionSound.play();
+}
+
+function sendScoreToServer(score) {
+    let state={
+        "game":"FlappyBird",
+        "score":score
+    }
+    fetch("../highscores.php",{
+        "method":"POST",
+        "headers":{
+            "Content-Type":"application/json; charset=utf-8"
+        },
+        "body": JSON.stringify(state)
+    }).then(function(response){
+        return response.text();
+    }).then(function(data){
+        console.log(data);
+    })    
 }

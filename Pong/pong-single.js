@@ -303,6 +303,8 @@ var Game = {
   },
 
   showPauseMenu: function () {
+    //
+    sendScoreToServer(this.player.score);
     // Update the score display
     document.getElementById("scoreDisplay").textContent =
       "Score: " + this.player.score;
@@ -404,3 +406,20 @@ var Game = {
     return newColor;
   },
 };
+function sendScoreToServer(score) {
+  let state={
+      "game":"pong",
+      "score":score
+  }
+  fetch("../highscores.php",{
+      "method":"POST",
+      "headers":{
+          "Content-Type":"application/json; charset=utf-8"
+      },
+      "body": JSON.stringify(state)
+  }).then(function(response){
+      return response.text();
+  }).then(function(data){
+      console.log(data);
+  })    
+}

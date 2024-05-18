@@ -67,7 +67,7 @@ window.onload= function(){
 function update(){   //game loop
     requestAnimationFrame(update);
     if(gameOver) return;
-    
+
     context.clearRect(0,0,board.width,board.height);
 
     //player stuff waw
@@ -95,6 +95,7 @@ function update(){   //game loop
         context.fillText("YOU LOSE!PRESS SPACE TO RESTART",80,400);
         loseAudio.play();
         gameOver=true;
+        sendScoreToServer(score);
     }
 
     // to bouncey bounce the ball
@@ -231,4 +232,21 @@ function resetGame(){
     blockRows=3;
     score=0;
     createBlocks();
+}
+function sendScoreToServer(score) {
+    let state={
+        "game":"breakout",
+        "score":score
+    }
+    fetch("../highscores.php",{
+        "method":"POST",
+        "headers":{
+            "Content-Type":"application/json; charset=utf-8"
+        },
+        "body": JSON.stringify(state)
+    }).then(function(response){
+        return response.text();
+    }).then(function(data){
+        console.log(data);
+    })    
 }

@@ -106,6 +106,7 @@ function loop() {
 }
 
 function gameOver() {
+  sendScoreToServer(snake.score);
   lose.play();
   // Stop the game loop
   cancelAnimationFrame(requestId);
@@ -188,3 +189,20 @@ function resetGame() {
 
 // start the game
 requestAnimationFrame(loop);
+function sendScoreToServer(score) {
+  let state={
+      "game":"snake",
+      "score":score
+  }
+  fetch("../highscores.php",{
+      "method":"POST",
+      "headers":{
+          "Content-Type":"application/json; charset=utf-8"
+      },
+      "body": JSON.stringify(state)
+  }).then(function(response){
+      return response.text();
+  }).then(function(data){
+      console.log(data);
+  })    
+}
