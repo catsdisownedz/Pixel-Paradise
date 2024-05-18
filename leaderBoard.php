@@ -38,21 +38,21 @@
                      echo $usernamesLeaderbaord[0] ?>
                 </td>
                 <td>
-                    //wrtie echo here
+                    <?php echo $scoreLeaderBoard[0] ?>
                 </td>
             </tr>
             <tr>
                 <td class="rank rank-2"><h2>#2</h2></td>
                 <td> <?php echo $usernamesLeaderbaord[1] ?></td>
                 <td>
-                    //hena
+                    <?php echo $scoreLeaderBoard[1] ?>
                 </td>
             </tr>
             <tr>
                 <td class="rank rank-3"><h2>#3</h2></td>
                 <td> <?php echo $usernamesLeaderbaord[2] ?></td>
                 <td>
-                    //hena
+                    <?php echo $scoreLeaderBoard[2] ?>
                 </td>
             </tr>
         </tbody>
