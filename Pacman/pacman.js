@@ -103,7 +103,7 @@ class Pacman {
     }
 
     check() {
-        if (score == 218) {
+        if (score == 213) {
             scoreReached = true;
             wonGame(); // Call the wonGame function when score reaches 10
         }
