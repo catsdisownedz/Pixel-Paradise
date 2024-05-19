@@ -29,11 +29,16 @@ Mario.LoseState.prototype.Enter = function () {
   this.gameOver.Y = 68;
   self.score = this.score;
 
-  self.font = Mario.SpriteCuts.CreateBlackFont(); // Use self instead of this
+  self.font = Mario.SpriteCuts.CreateRedFont(); // Use self instead of this
   self.font.Strings[0] = {
-    String: "Game over! Score: " + self.score, // Use self instead of this
+    String: "Game over!",
     X: 116,
     Y: 160,
+  };
+  self.font.Strings[1] = {
+    String: "Score: " + self.score,
+    X: 116,
+    Y: 180, // Adjust Y position for the second line
   };
 
   this.drawManager.Add(this.font);

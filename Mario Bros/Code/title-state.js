@@ -71,6 +71,7 @@ Mario.TitleState.prototype.Exit = function () {
 };
 
 Mario.TitleState.prototype.Update = function (delta) {
+  title.play();
   this.bounce += delta * 2;
   this.logoY = 20 + Math.sin(this.bounce) * 10;
 
