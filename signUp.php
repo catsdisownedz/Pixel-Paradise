@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="passwordValidation.js"></script>
   <title>Edit Profile</title>
   <link rel="stylesheet" href="signUp_style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -34,7 +35,10 @@
       <input type="number" name="age" id="age" min="13"> </div>
     <div class="form-group">
       <label for="current_password">Current Password:</label>
-      <input type="password" name="current_password" id="current_password" required>
+      <input type="password" name="current_password" id="current_password" 
+      pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+      title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" 
+      required>
       <small>Required to update profile information.</small>
     </div>
     <div class="form-group">
@@ -44,9 +48,7 @@
     </div>
     <div class="form-group">
 
-      <button type="submit">
-        Update Profile
-      </button>
+      <button type="submit" > Update Profile </button>
       
     </div>
   </form>
