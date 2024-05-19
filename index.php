@@ -29,7 +29,7 @@ session_start();
     <div class="profile-section">
       <a href="leaderBoard.php"<?php unset($_SESSION['game']); ?> class="level" id="wow"><?php //include "calculatelevel.php"; ?></a>
       <span class="separator"> | </span>
-      <a href="signUp.html">
+      <a href="signUp.php">
         <img src="Previews/pfp.jpg" alt="Player profile pic" />
       </a>
       <span id="usernameLabel" class="username"> 
@@ -119,7 +119,7 @@ session_start();
     </form>
     <div id="message" class="message"></div> 
     <div class="link-container">
-      <a href="signUp.html">New User? Register Here </a>
+      <a href="signUp.php">New User? Register Here </a>
       <span>    |    </span>
       <a href="#" id="continue"> Continue as Guest User</a>
     </div>

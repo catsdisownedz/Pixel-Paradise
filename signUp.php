@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,8 +43,19 @@
       <small>Leave blank if you don't want to change your password.</small>
     </div>
     <div class="form-group">
-      <button type="submit">Update Profile</button>
+
+      <button type="submit">
+        Update Profile
+      </button>
+      
     </div>
   </form>
+  <?php if(isset($_SESSION['usernameExist']) && $_SESSION['usernameExist']): ?>
+  <label>Username exists</label>
+<?php endif; ?>
+
+<?php if(isset($_SESSION['emailExist']) && $_SESSION['emailExist']): ?>
+  <label>emaill exists</label>
+<?php endif; ?>
 </body>
 </html>
