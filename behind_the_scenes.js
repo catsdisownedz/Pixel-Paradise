@@ -46,6 +46,17 @@ loginForm.addEventListener("submit", function (event) {
         usernameLabel.textContent = username;
         document.getElementById("username").value = "";
         document.getElementById("password").value = "";
+  
+        // Make an AJAX request to update the level
+        const levelXhr = new XMLHttpRequest();
+        levelXhr.open("GET", "calculateLevel.php", true);
+        levelXhr.onload = function () {
+          if (this.status == 200) {
+            document.getElementById("wow").textContent =this.responseText;
+          }
+        };
+        levelXhr.send();
+  
         setTimeout(function () {
           document.getElementById("loginPopup").classList.remove("visible");
           document.getElementById("loginPopup").classList.add("hidden");
