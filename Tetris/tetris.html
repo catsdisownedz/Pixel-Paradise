@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jacquarda+Bastarda+9&family=Micro+5&family=Ojuju:wght@200..800&family=Satisfy&family=Whisper&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Sofia"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.google.com/specimen/Dancing+Script"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple"
+    />
+    <link rel="stylesheet" href="tetris.css" />
+
+    <title>Tetris</title>
+  </head>
+
+  <body>
+    <div id="page">
+      <div id="page_home" class="page"></div>
+      <div id="page_game" class="page">
+        <div id="game_col">
+          <div id="game_zone"></div>
+          <div class="messages_wrapper">
+            <div id="messages"></div>
+          </div>
+          <div id="overlay"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="infos">
+      <div id="next_zone"></div>
+      <div class="best_wrapper">Best: <span id="best_zone"></span></div>
+      <div id="score_zone"></div>
+      <div class="lines_wrapper">Lines: <span id="lines_zone"></span></div>
+    </div>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/kineticjs/4.6.0/kinetic.min.js"
+    ></script>
+    <script type="text/javascript" src="tetris.js"></script>
+  </body>
+</html>
