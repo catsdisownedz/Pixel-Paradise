@@ -1,15 +1,20 @@
 // State shown when player loses
-Mario.LoseState = function () {
+var lose = new Audio("sounds/09. Game Over.mp3");
+
+Mario.LoseState = function (score) {
   this.drawManager = null;
   this.camera = null;
   this.gameOver = null;
   this.font = null;
   this.wasKeyDown = false;
+  this.score = score;
 };
 
 Mario.LoseState.prototype = new Engine.GameState();
 
 Mario.LoseState.prototype.Enter = function () {
+  lose.play();
+  var self = this;
   this.drawManager = new Engine.DrawableManager();
   this.camera = new Engine.Camera();
 
@@ -22,15 +27,21 @@ Mario.LoseState.prototype.Enter = function () {
   this.gameOver.FramesPerSecond = 1 / 15;
   this.gameOver.X = 112;
   this.gameOver.Y = 68;
+  self.score = this.score;
 
-  this.font = Mario.SpriteCuts.CreateBlackFont();
-  this.font.Strings[0] = { String: "Game over!", X: 116, Y: 160 };
+  self.font = Mario.SpriteCuts.CreateBlackFont(); // Use self instead of this
+  self.font.Strings[0] = {
+    String: "Game over! Score: " + self.score, // Use self instead of this
+    X: 116,
+    Y: 160,
+  };
 
   this.drawManager.Add(this.font);
   this.drawManager.Add(this.gameOver);
 };
 
 Mario.LoseState.prototype.Exit = function () {
+  lose.pause();
   this.drawManager.Clear();
   delete this.drawManager;
   delete this.camera;
@@ -39,7 +50,9 @@ Mario.LoseState.prototype.Exit = function () {
 };
 
 Mario.LoseState.prototype.Update = function (delta) {
-  this.drawManager.Update(delta);
+  if (this.drawManager) {
+    this.drawManager.Update(delta);
+  }
   if (Engine.KeyboardInput.IsKeyDown(Engine.Keys.S)) {
     this.wasKeyDown = true;
   }

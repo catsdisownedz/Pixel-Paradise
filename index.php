@@ -93,6 +93,15 @@ session_start();
             </video>
           </a>
         </div>
+        <div class="game">
+          <h2>Tetris</h2>
+          <a href="Tetris/tetris.html">
+          <img
+            src="previews/tetrisss.png" alt="Tetris game"/>
+          <video class="game-video" src="previews/tetris-rec.mov" autoplay muted loop>
+            </video>
+          </a>
+        </div>
     </div>
   </main>
   <?php if( !isset($_SESSION['logged-in'])|| ! ($_SESSION["logged-in"])): ?>

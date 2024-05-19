@@ -117,6 +117,7 @@ let onGhostCollision = () => {
                 document.getElementById('overlay1').style.display = 'flex';
                 document.getElementById('replay-button').addEventListener('click', replayGame);
                 document.getElementById('exit-button').addEventListener('click', exitGame);
+                document.getElementById('leaderboard').addEventListener('click', leaderboard);
                 console.log("HELOOOO");
                 sendScoreToServer(score);
             }
@@ -134,6 +135,9 @@ function exitGame() {
     window.location.href = document.querySelector('#redirect').href;
 }
 
+function leaderboard(){
+    window.location.href = 'pacmanBoard.php';
+}
 
 let update = () => {
     pacman.moveProcess();

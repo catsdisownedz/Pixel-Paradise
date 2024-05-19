@@ -1,4 +1,8 @@
 // State for playing the level
+var underGround = new Audio("sounds/02. Underground Theme.mp3");
+var overGround = new Audio("sounds/01. Ground Theme.mp3");
+var castle = new Audio("sounds/04. Castle Theme.mp3");
+
 Mario.LevelState = function (difficulty, type) {
   this.LevelDifficulty = difficulty;
   this.LevelType = type;
@@ -40,13 +44,13 @@ Mario.LevelState.prototype.Enter = function () {
   this.Level = levelGenerator.CreateLevel(this.LevelType, this.LevelDifficulty);
 
   //play music here
-  //if (this.LevelType === Mario.LevelType.Overground) {
-  //Mario.PlayOvergroundMusic();
-  //} else if (this.LevelType === Mario.LevelType.Underground) {
-  //Mario.PlayUndergroundMusic();
-  //} else if (this.LevelType === Mario.LevelType.Castle) {
-  //Mario.PlayCastleMusic();
-  //}
+  if (this.LevelType === Mario.LevelType.Overground) {
+    overGround.play();
+  } else if (this.LevelType === Mario.LevelType.Underground) {
+    underGround.play();
+  } else if (this.LevelType === Mario.LevelType.Castle) {
+    castle.play();
+  }
 
   this.Paused = false;
   this.Layer = new Mario.LevelRenderer(this.Level, 320, 240);
@@ -381,13 +385,15 @@ Mario.LevelState.prototype.Draw = function (context) {
   }
 
   if (Mario.MarioCharacter.WinTime > 0) {
-    //Mario.StopMusic();
+    overGround.pause();
+    underGround.pause();
+    castle.pause();
     t = Mario.MarioCharacter.WinTime + this.Delta;
     t = t * t * 0.2;
 
     if (t > 900) {
-      //TODO: goto map state with level won
       Mario.GlobalMapState.LevelWon();
+      new Audio("sounds/06. Level Complete.mp3").play();
       this.GotoMapState = true;
     }
 
@@ -400,12 +406,13 @@ Mario.LevelState.prototype.Draw = function (context) {
   }
 
   if (Mario.MarioCharacter.DeathTime > 0) {
-    //Mario.StopMusic();
+    overGround.pause();
+    underGround.pause();
+    castle.pause();
     t = Mario.MarioCharacter.DeathTime + this.Delta;
     t = t * t * 0.1;
 
     if (t > 900) {
-      //TODO: goto map with level lost
       Mario.MarioCharacter.Lives--;
       this.GotoMapState = true;
       if (Mario.MarioCharacter.Lives <= 0) {
@@ -556,7 +563,7 @@ Mario.LevelState.prototype.BumpInto = function (x, y) {
 
 Mario.LevelState.prototype.CheckForChange = function (context) {
   if (this.GotoLoseState) {
-    context.ChangeState(new Mario.LoseState());
+    context.ChangeState(new Mario.LoseState(Mario.MarioCharacter.Coins));
   } else {
     if (this.GotoMapState) {
       context.ChangeState(Mario.GlobalMapState);
