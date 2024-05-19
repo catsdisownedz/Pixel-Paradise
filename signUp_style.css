@@ -3,11 +3,13 @@ body {
   background-color: black;
   color: pink;
   margin: 20px;
+  font-size: x-large;
 }
 
 h1 {
   text-align: center;
   margin-bottom: 20px;
+  font-size: 65px;
 }
 
 .form-group {
@@ -44,6 +46,7 @@ button[type="submit"] {
   display: block; /* Make the button a block element */
   margin: 0 auto; /* Center the button */
   font-family: "Micro 5", sans-serif; /* Apply the Micro 5 font to the button */
+  font-size: x-large;
 }
 
 button[type="submit"]:hover {
