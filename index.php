@@ -96,7 +96,7 @@ session_start();
         </div>
         <div class="game">
           <h2>Tetris</h2>
-          <a href="Tetris/tetris.js">
+          <a href="Tetris/tetris.html">
           <img
             src="previews/tetrisss.png" alt="Tetris game"/>
           <video class="game-video" src="previews/tetris-rec.mov" autoplay muted loop>
