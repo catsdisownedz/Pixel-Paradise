@@ -92,7 +92,8 @@ function update(){   //game loop
         // GAME OVER AAAAAAAAAAAAAA
         
         context.font="20px sans-serif";
-        context.fillText("YOU LOSE!PRESS SPACE TO RESTART",80,400);
+        context.fillText("YOU LOSE!PRESS SPACE TO RESTART\n",65,400);
+        context.fillText("PRESS ARROW UP TO VIEW LEADERBOARDS",25,422);
         loseAudio.play();
         gameOver=true;
         sendScoreToServer(score);
@@ -147,8 +148,13 @@ function outOfBounds(xPosition){
 function movePlayer(e){
     if(gameOver){
         if(e.code=="Space") resetGame();
-       
+        else if(e.code=="ArrowUp") {
+            goToLeaderBoards();
+            window.location.href = '../leaderBoard.php';
+            return; 
+        }
     }
+
 
     if(e.code=="ArrowLeft"){
         // player.x-= player.velocityX;
@@ -250,3 +256,20 @@ function sendScoreToServer(score) {
         console.log(data);
     })    
 }
+
+    function goToLeaderBoards(){
+        let gameName={
+            "game": "breakout"
+        }
+        fetch("../leaderBoard.php",{
+            "method":"POST",
+            "headers":{
+                "Content-Type": "application/json; charset=utf-8"
+            },
+            "body": JSON.stringify(gameName)
+
+        }).then(function(response){
+            return response.text();
+
+        })
+    }

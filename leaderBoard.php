@@ -1,4 +1,20 @@
-
+<?php
+    session_Start();
+    if($_SERVER["REQUEST_METHOD"]=="POST"){
+        $data=file_get_contents("php://input");
+        $gameName=json_decode($data,true);
+        // echo "koko";
+        if (isset($gameName['game'])) {
+            $_SESSION["game"] = $gameName['game'];
+            // echo json_encode(["status" => "success", "game" => $gameName['game']]);
+        } 
+        // else {
+        //     echo json_encode(["status" => "error", "message" => "Invalid game data"]);
+        // }
+    }
+    include 'retreivehighscore.php';
+    //unset($_SESSION['game']);
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,8 +50,8 @@
             <tr>
                 <td class="rank rank-1"><h2>#1</h2></td>
                 <td>
-                    <?php include_once 'retreivehighscore.php'; 
-                     echo $usernamesLeaderbaord[0] ?>
+                    <?php  include_once 'retreivehighscore.php';
+                    echo $usernamesLeaderbaord[0] ?>
                 </td>
                 <td>
                     <?php echo $scoreLeaderBoard[0] ?>
@@ -43,7 +59,10 @@
             </tr>
             <tr>
                 <td class="rank rank-2"><h2>#2</h2></td>
-                <td> <?php echo $usernamesLeaderbaord[1] ?></td>
+                <td> <?php 
+                         echo $usernamesLeaderbaord[1] 
+                    ?><
+                    /td>
                 <td>
                     <?php echo $scoreLeaderBoard[1] ?>
                 </td>

@@ -27,7 +27,7 @@ session_start();
 <body>
   <header>
     <div class="profile-section">
-      <a href="leaderBoard.php" class="level" id="wow">Lv. 1 Beginner</a>
+      <a href="leaderBoard.php"<?php session_start(); unset($_SESSION['game']); ?> class="level" id="wow">Lv. 1 Beginner</a>
       <span class="separator"> | </span>
       <a href="signUp.html">
         <img src="Previews/pfp.jpg" alt="Player profile pic" />
@@ -86,7 +86,7 @@ session_start();
         </div>
         <div class="game">
           <h2>Break out</h2>
-          <a href="Breakout/breakout.html">
+          <a href="Breakout/breakoutHomePage.html">
           <img
             src="previews/breakk.png" alt="Break Out game"/>
           <video class="game-video" src="previews/breakoutvid.mp4" autoplay muted loop>

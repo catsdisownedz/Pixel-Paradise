@@ -8,6 +8,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     $age=$_POST["age"];
     $password=$_POST["current_password"];
 
+    echo "mwtoony blease";
+    
     $sql="INSERT INTO users(username, email, age, password) VALUES( ?, ?, ?, ?)";
     $stmt=mysqli_prepare($conn, $sql);
     $stmt->bind_param("ssis", $username, $email, $age, $password);
