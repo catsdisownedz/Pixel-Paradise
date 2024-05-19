@@ -1,7 +1,10 @@
 // State for playing the level
 var underGround = new Audio("sounds/02. Underground Theme.mp3");
+underGround.loop = true;
 var overGround = new Audio("sounds/01. Ground Theme.mp3");
+overGround.loop = true;
 var castle = new Audio("sounds/04. Castle Theme.mp3");
+castle.loop = true;
 
 Mario.LevelState = function (difficulty, type) {
   this.LevelDifficulty = difficulty;
