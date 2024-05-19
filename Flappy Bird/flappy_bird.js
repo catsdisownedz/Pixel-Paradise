@@ -111,6 +111,7 @@ function update(){
 
     if(gameOver){
         context.fillText("Game over!", 5, 90);
+        context.fillText("Press arrow right to view leaderboards", 10, 150);
     }
 
 }
@@ -153,6 +154,12 @@ function moveBird(e){
             gameOver=false;
         }
     }
+
+    else if(e.code=="ArrowRight" && gameOver){
+        goToLeaderBoards();
+        window.location.href = '../leaderBoard.php';
+        return;
+    }
 }
 function detectCollision(a,b){
     return a.x<b.x +b.width &&
@@ -186,4 +193,22 @@ function sendScoreToServer(score) {
     }).then(function(data){
         console.log(data);
     })    
+}
+
+
+function goToLeaderBoards(){
+    let gameName={
+        "game": "FlappyBird"
+    }
+    fetch("../leaderBoard.php",{
+        "method":"POST",
+        "headers":{
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": JSON.stringify(gameName)
+
+    }).then(function(response){
+        return response.text();
+
+    })
 }
