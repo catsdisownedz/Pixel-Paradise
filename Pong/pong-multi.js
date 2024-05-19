@@ -295,7 +295,7 @@ var Game = {
   },
 
   showPauseMenu: function () {
-    sendScoreToServer(this.player.score);
+    sendScoreToServer(this.player1.score);
     // Update the score display
     document.getElementById("score1Display").textContent =
       "Player 1 Score: " + this.player1.score;
