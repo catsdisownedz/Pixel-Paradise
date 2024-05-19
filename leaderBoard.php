@@ -61,8 +61,7 @@
                 <td class="rank rank-2"><h2>#2</h2></td>
                 <td> <?php 
                          echo $usernamesLeaderbaord[1] 
-                    ?><
-                    /td>
+                    ?>
                 <td>
                     <?php echo $scoreLeaderBoard[1] ?>
                 </td>

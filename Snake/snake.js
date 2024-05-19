@@ -151,7 +151,9 @@ document
   .getElementById("leaderboardButton")
   .addEventListener("click", function () {
     // Show the leaderboard
-    showLeaderboard();
+      goToLeaderBoards();
+      window.location.href = '../leaderBoard.php';
+      return;
   });
 
 document.getElementById("exitButton").addEventListener("click", function () {
@@ -205,4 +207,21 @@ function sendScoreToServer(score) {
   }).then(function(data){
       console.log(data);
   })    
+}
+
+function goToLeaderBoards(){
+  let gameName={
+      "game": "snake"
+  }
+  fetch("../leaderBoard.php",{
+      "method":"POST",
+      "headers":{
+          "Content-Type": "application/json; charset=utf-8"
+      },
+      "body": JSON.stringify(gameName)
+
+  }).then(function(response){
+      return response.text();
+
+  })
 }
