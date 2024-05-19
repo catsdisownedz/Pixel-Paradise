@@ -1,9 +1,11 @@
 {
-<<<<<<< Updated upstream
-  "workbench.colorTheme": "Dark Horizon",
-=======
-  // "workbench.colorTheme": "SynthWave '84",
-// >>>>>>> Stashed changes
+  "theme-by-language.themes": {
+    "html": "Pastel",
+    "css": "Catppuccin Macchiato",
+    "javascript": "Catppuccin Mocha",
+    "python": "Bearded Themes feat. Will"
+  },
+
   "cSpell.words": [
     "amazingg",
     "divs",
@@ -19,5 +21,6 @@
     "Packery",
     "pkgd"
   ],
-  "liveServer.settings.port": 5501
+  "liveServer.settings.port": 5501,
+  "workbench.colorTheme": "Catppuccin Macchiato"
 }
