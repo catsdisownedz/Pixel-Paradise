@@ -136,8 +136,11 @@ function exitGame() {
 }
 
 function leaderboard(){
-    window.location.href = 'pacmanBoard.php';
+    goToLeaderBoards();
+    window.location.href = '../leaderBoard.php';
+    return; 
 }
+
 
 let update = () => {
     pacman.moveProcess();
@@ -321,3 +324,20 @@ function sendScoreToServer(score) {
         console.log(data);
     })    
 }
+
+function goToLeaderBoards(){
+    let gameName={
+        "game": "Pacman"
+    }
+    fetch("../leaderBoard.php",{
+        "method":"POST",
+        "headers":{
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": JSON.stringify(gameName)
+  
+    }).then(function(response){
+        return response.text();
+  
+    })
+  }

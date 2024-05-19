@@ -314,7 +314,9 @@ var Game = {
     document
       .getElementById("leaderboardButton")
       .addEventListener("click", function () {
-        window.location.href = "../leaderboard.php";
+        goToLeaderBoards();
+        window.location.href = '../leaderBoard.php';
+        return;
       });
 
     document
@@ -437,4 +439,21 @@ function sendScoreToServer(score) {
     .then(function (data) {
       console.log(data);
     });
+}
+
+function goToLeaderBoards(){
+  let gameName={
+    "game": "pong"
+}
+fetch("../leaderBoard.php",{
+    "method":"POST",
+    "headers":{
+        "Content-Type": "application/json; charset=utf-8"
+    },
+    "body": JSON.stringify(gameName)
+
+}).then(function(response){
+    return response.text();
+
+})
 }
