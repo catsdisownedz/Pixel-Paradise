@@ -312,6 +312,12 @@ var Game = {
       });
 
     document
+      .getElementById("leaderboardButton")
+      .addEventListener("click", function () {
+        window.location.href = "../leaderboard.php";
+      });
+
+    document
       .getElementById("exitButton")
       .addEventListener("click", function () {
         // Exit the game
@@ -414,19 +420,21 @@ var Game = {
   },
 };
 function sendScoreToServer(score) {
-  let state={
-      "game":"pong",
-      "score":score
-  }
-  fetch("../highscores.php",{
-      "method":"POST",
-      "headers":{
-          "Content-Type":"application/json; charset=utf-8"
-      },
-      "body": JSON.stringify(state)
-  }).then(function(response){
+  let state = {
+    game: "pong",
+    score: score,
+  };
+  fetch("../highscores.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify(state),
+  })
+    .then(function (response) {
       return response.text();
-  }).then(function(data){
+    })
+    .then(function (data) {
       console.log(data);
-  })    
+    });
 }
