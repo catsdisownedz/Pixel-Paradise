@@ -30,6 +30,9 @@ Engine.Keys = {
   Up: 38,
   Right: 39,
   Down: 40,
+  One: 49,
+  Two: 50,
+  Three: 51,
 };
 
 Engine.KeyboardInput = {

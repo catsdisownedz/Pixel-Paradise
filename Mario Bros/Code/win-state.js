@@ -1,12 +1,13 @@
 // Slate shown when player wins
 
-Mario.WinState = function () {
+Mario.WinState = function (score) {
   this.waitTime = 2;
   this.drawManager = null;
   this.camera = null;
   this.font = null;
   this.kissing = null;
   this.wasKeyDown = false;
+  this.score = score;
 };
 
 Mario.WinState.prototype = new Engine.GameState();
@@ -62,8 +63,35 @@ Mario.WinState.prototype.Draw = function (context) {
 
 Mario.WinState.prototype.CheckForChange = function (context) {
   if (this.waitTime <= 0) {
+    if (Engine.KeyboardInput.IsKeyDown(Engine.Keys.One)) {
+      // Go to main menu
+      window.location.href = "../index.php";
+    } else if (Engine.KeyboardInput.IsKeyDown(Engine.Keys.Two)) {
+      // Go to leaderboard
+      window.location.href = "../leaderBoard.php";
+    }
     if (this.wasKeyDown && !Engine.KeyboardInput.IsKeyDown(Engine.Keys.S)) {
       context.ChangeState(new Mario.TitleState());
     }
   }
 };
+
+function sendScoreToServer(score) {
+  let state = {
+    game: "Mario Bros",
+    score: score,
+  };
+  fetch("../highscores.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify(state),
+  })
+    .then(function (response) {
+      return response.text();
+    })
+    .then(function (data) {
+      console.log(data);
+    });
+}

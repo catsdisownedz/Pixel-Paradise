@@ -28,6 +28,7 @@ Mario.LoseState.prototype.Enter = function () {
   this.gameOver.X = 112;
   this.gameOver.Y = 68;
   self.score = this.score;
+  sendScoreToServer(self.score);
 
   self.font = Mario.SpriteCuts.CreateRedFont(); // Use self instead of this
   self.font.Strings[0] = {
@@ -38,7 +39,24 @@ Mario.LoseState.prototype.Enter = function () {
   self.font.Strings[1] = {
     String: "Score: " + self.score,
     X: 116,
-    Y: 180, // Adjust Y position for the second line
+    Y: 170,
+  };
+
+  // Add options for the player
+  self.font.Strings[2] = {
+    String: "1. Main Menu",
+    X: 116,
+    Y: 180,
+  };
+  self.font.Strings[3] = {
+    String: "2. Leaderboard",
+    X: 116,
+    Y: 190,
+  };
+  self.font.Strings[4] = {
+    String: "'S' Replay",
+    X: 116,
+    Y: 200,
   };
 
   this.drawManager.Add(this.font);
@@ -68,7 +86,34 @@ Mario.LoseState.prototype.Draw = function (context) {
 };
 
 Mario.LoseState.prototype.CheckForChange = function (context) {
+  if (Engine.KeyboardInput.IsKeyDown(Engine.Keys.One)) {
+    // Go to main menu
+    window.location.href = "../index.php";
+  } else if (Engine.KeyboardInput.IsKeyDown(Engine.Keys.Two)) {
+    // Go to leaderboard
+    window.location.href = "../leaderBoard.php";
+  }
   if (this.wasKeyDown && !Engine.KeyboardInput.IsKeyDown(Engine.Keys.S)) {
     context.ChangeState(new Mario.TitleState());
   }
 };
+
+function sendScoreToServer(score) {
+  let state = {
+    game: "Mario Bros",
+    score: score,
+  };
+  fetch("../highscores.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify(state),
+  })
+    .then(function (response) {
+      return response.text();
+    })
+    .then(function (data) {
+      console.log(data);
+    });
+}
