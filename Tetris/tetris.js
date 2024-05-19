@@ -687,6 +687,8 @@ var tetris = {
     var html = "<h2>Game paused</h2>";
     html += '<a class="button" id="bt_resume">Resume</a>';
     html += '<a class="button" id="bt_play_again">New game</a>';
+    html += '<a class="button" id="bt_main_menu">Main menu</a>';
+    html += '<a class="button" id="bt_leaderboard">Leaderboard</a>';
     html += tetris.overlay.innerHTML = html;
     tetris.overlay.style.display = "block";
 
@@ -701,7 +703,12 @@ var tetris = {
     document
       .getElementById("bt_main_menu")
       .addEventListener("click", function () {
-        tetris.show_home();
+        window.location.href = "../index.php";
+      });
+    document
+      .getElementById("bt_leaderboard")
+      .addEventListener("click", function () {
+        window.location.href = "../leaderBoard.php";
       });
   },
 
@@ -733,6 +740,7 @@ var tetris = {
     html += "</div>";
     html += '<a class="button" id="bt_play_again">Play again</a>';
     html += '<a class="button" id="bt_main_menu">Main menu</a>';
+    html += '<a class="button" id="bt_leaderboard">Leaderboard</a>';
     tetris.overlay.innerHTML = html;
     tetris.overlay.style.display = "block";
 
@@ -744,7 +752,12 @@ var tetris = {
     document
       .getElementById("bt_main_menu")
       .addEventListener("click", function () {
-        tetris.show_home();
+        window.location.href = "../index.php";
+      });
+    document
+      .getElementById("bt_leaderboard")
+      .addEventListener("click", function () {
+        window.location.href = "../leaderBoard.php";
       });
   },
 
