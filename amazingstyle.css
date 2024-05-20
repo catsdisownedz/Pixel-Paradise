@@ -105,12 +105,11 @@ p {
   scroll-snap-align: center;
   /* Snap to left edge of game div */
   /* padding-bottom:1vw; */
-  transition: transform 0.2s ease-in-out; 
+  transition: transform 0.2s ease-in-out;
   position: relative;
 }
 
-
-.game h2{
+.game h2 {
   font-family: "Pixelify Sans", sans-serif;
   font-size: 1.5em;
   margin-bottom: 0.2em;
@@ -176,12 +175,12 @@ a:visited {
   text-decoration: none;
 }
 
-a:hover{
+a:hover {
   color: #ff77aa;
   text-decoration: none;
 }
 
-a:active{
+a:active {
   color: #ff77aa;
   text-decoration: none;
 }
@@ -194,7 +193,7 @@ a:active{
   /* Add smooth zoom effect*/
 }
 
-.game:hover{
+.game:hover {
   transform: scale(1.05); /* Zoom image on hover */
 }
 
@@ -262,11 +261,6 @@ a:active{
 #loginPopup.visible {
   display: block;
 }
-
-/* #loginPopup.hidden {
-  display: none;
-  animation: slideUp 1s ease-out forwards;
-} */
 
 @keyframes slideUp {
   0% {
@@ -448,7 +442,6 @@ body {
   color: rgba(226, 47, 214, 0.8);
   margin: 0 0.5em;
 }
-
 
 .profile-section img {
   display: block;

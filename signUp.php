@@ -46,7 +46,7 @@
     </div>
     <div class="form-group">
 
-      <button type="submit"> Update Profile </button>
+      <button id="submit" type="submit"> Update Profile </button>
 
     </div>
   </form>
@@ -57,6 +57,9 @@
   <?php if (isset($_SESSION['emailExist']) && $_SESSION['emailExist']) : ?>
     <label>email exists</label>
   <?php endif; ?>
+
+  <script type="javascript" src="behind_the_scenes.js"></script>
+
 </body>
 
 </html>

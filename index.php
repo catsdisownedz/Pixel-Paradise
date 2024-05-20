@@ -24,7 +24,7 @@ session_start();
 <body>
   <header>
     <div class="profile-section">
-      <a href="leaderBoard.php" <?php unset($_SESSION['game']); ?> class="level" id="wow">Lv. 1 Beginner</a>
+      <a href="leaderBoard.php" <?php unset($_SESSION['game']); ?> class="level" id="wow">Leader Board</a>
       <span class="separator"> | </span>
       <a href="signUp.php">
         <img src="Previews/pfp.jpg" alt="Player profile pic" />
@@ -97,10 +97,10 @@ session_start();
           </video>
         </a>
       </div>
-    </div>
   </main>
+
   <?php if (!isset($_SESSION['logged-in'])) : ?>
-    <div id="loginPopup" class="hidden">
+    <div id="loginPopup">
       <h2>Welcome Back!</h2>
       <form id="loginForm" action="login_process.php" method="post">
         <div class="stuff">
