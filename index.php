@@ -97,6 +97,7 @@ session_start();
           </video>
         </a>
       </div>
+    </div>
   </main>
 
   <?php if (!isset($_SESSION['logged-in'])) : ?>

@@ -43,102 +43,223 @@ function handleLogout() {
   xhr.send();
 }
 
-const popup = document.getElementById("loginPopup");
 document.addEventListener("DOMContentLoaded", function () {
   const usernameLabel = document.getElementById("usernameLabel");
+  const loginForm = document.getElementById("loginForm");
+  const popup = document.getElementById("loginPopup");
+  const continueGuestLink = document.getElementById("continue");
 
-  // if (usernameLabel.textContent === "Guest User") {
-  console.log("md5lnash");
-  setTimeout(function () {
-    console.log("d5lna");
-    //popup.classList.remove("hidden");
-    popup.classList.add("visible");
-    console.log("eshta8alna?");
-  }, 3000);
-  //}
-});
-
-// Handle form submission (assuming successful login)
-const loginForm = document.getElementById("loginForm");
-loginForm.addEventListener("submit", function (event) {
-  event.preventDefault(); // Prevent default form submission
-  console.log("we innnn");
-  //getting the form data ayoyyyy
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
-
-  //making an instance of the formData object
-
-  let formData = new FormData();
-  formData.append("username", username);
-  formData.append("password", password);
-
-  function updateLevelDisplay() {
-    var level = sessionStorage.getItem("userLevel");
-    if (level) {
-      document.getElementById("wow").textContent = level;
-    }
+  if (popup) {
+    console.log("md5lnash");
+    setTimeout(function () {
+      console.log("d5lna");
+      popup.classList.add("visible");
+      console.log("eshta8alna?");
+    }, 3000);
   }
 
-  //we create the ajax request yay
-  const xhr = new XMLHttpRequest();
-  xhr.open("POST", "login_process.php", true);
+  if (loginForm) {
+    loginForm.addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevent default form submission
+      console.log("we innnn");
+      //getting the form data ayoyyyy
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
 
-  // Handle the response
-  xhr.onload = function () {
-    if (this.status == 200) {
-      const messageElement = document.getElementById("message");
-      const response = JSON.parse(this.responseText);
-      if (response.status === "success") {
-        console.log("Login successful!");
-        messageElement.textContent = "Login successful!";
-        usernameLabel.textContent = username;
-        document.getElementById("username").value = "";
-        document.getElementById("password").value = "";
+      //making an instance of the formData object
 
-        // Make an AJAX request to update the level
-        const levelXhr = new XMLHttpRequest();
-        levelXhr.open("GET", "calculateLevel.php", true);
-        levelXhr.onload = function () {
-          // if (this.status == 200) {
-          //   document.getElementById("wow").textContent = this.responseText;
-          // }
+      let formData = new FormData();
+      formData.append("username", username);
+      formData.append("password", password);
 
-          if (this.status == 200) {
-            var level = this.responseText;
-            sessionStorage.setItem("userLevel", level); // Store the level in sessionStorage
-            updateLevelDisplay(); // Update the level display
-            console.log("Retrieved level: " + level);
-          }
-
-          setTimeout(getStatus, 1000);
-        };
-        levelXhr.send();
-
-        setTimeout(function () {
-          document.getElementById("loginPopup").classList.remove("visible");
-          document.getElementById("loginPopup").classList.add("hidden");
-        }, 2000);
-      } else {
-        messageElement.textContent = "Invalid password or username.";
-        console.log("Login failed: " + response.message);
+      function updateLevelDisplay() {
+        var level = sessionStorage.getItem("userLevel");
+        if (level) {
+          document.getElementById("wow").textContent = level;
+        }
       }
-    }
-  };
-  xhr.send(formData);
+
+      //we create the ajax request yay
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "login_process.php", true);
+
+      // Handle the response
+      xhr.onload = function () {
+        if (this.status == 200) {
+          const messageElement = document.getElementById("message");
+          const response = JSON.parse(this.responseText);
+          if (response.status === "success") {
+            console.log("Login successful!");
+            messageElement.textContent = "Login successful!";
+            usernameLabel.textContent = username;
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+
+            sessionStorage.setItem("isLoggedIn", "true"); // Set the login status to true
+
+            // Make an AJAX request to update the level
+            const levelXhr = new XMLHttpRequest();
+            levelXhr.open("GET", "calculateLevel.php", true);
+            levelXhr.onload = function () {
+              // if (this.status == 200) {
+              //   document.getElementById("wow").textContent = this.responseText;
+              // }
+
+              if (this.status == 200) {
+                var level = this.responseText;
+                sessionStorage.setItem("userLevel", level); // Store the level in sessionStorage
+                updateLevelDisplay(); // Update the level display
+                console.log("Retrieved level: " + level);
+              }
+
+              setTimeout(getStatus, 1000);
+            };
+            levelXhr.send();
+
+            setTimeout(function () {
+              document.getElementById("loginPopup").classList.remove("visible");
+              document.getElementById("loginPopup").classList.add("hidden");
+            }, 2000);
+          } else {
+            messageElement.textContent = "Invalid password or username.";
+            console.log("Login failed: " + response.message);
+          }
+        }
+      };
+      xhr.send(formData);
+    });
+  }
+
+  if (continueGuestLink) {
+    continueGuestLink.addEventListener("click", () => {
+      if (popup) {
+        popup.classList.remove("visible");
+        popup.classList.add("hidden");
+      }
+    });
+  }
+
+  const logoutButton = document.getElementById("logoutButton");
+  if (logoutButton) {
+    logoutButton.addEventListener("click", function () {
+      sessionStorage.setItem("userLevel", "Leader Board"); // Set the level to "Leader Board"
+      sessionStorage.setItem("isLoggedIn", "false"); // Set the login status to false
+      updateLevelDisplay(); // Update the level display
+    });
+  }
 });
 
 // On page load, update the level display
-updateUserLevelDisplay();
-window.onload = updateLevelDisplay;
+window.onload = function () {
+  const levelDisplay = document.getElementById("wow");
+  const isLoggedIn = sessionStorage.getItem("isLoggedIn"); // Get the login status
+  if (levelDisplay && isLoggedIn === "true") {
+    // Check if the user is logged in
+    var level = sessionStorage.getItem("userLevel");
+    if (level) {
+      levelDisplay.textContent = level;
+    }
+  } else if (levelDisplay) {
+    levelDisplay.textContent = "Leader Board"; // Default text
+  }
+};
 
-const continueGuestLink = document.getElementById("continue");
+// const popup = document.getElementById("loginPopup");
+// document.addEventListener("DOMContentLoaded", function () {
+//   const usernameLabel = document.getElementById("usernameLabel");
 
-continueGuestLink.addEventListener("click", () => {
-  const loginPopup = document.getElementById("loginPopup");
-  document.getElementById("loginPopup").classList.remove("visible");
-  document.getElementById("loginPopup").classList.add("hidden");
-});
+//   // if (usernameLabel.textContent === "Guest User") {
+//   console.log("md5lnash");
+//   setTimeout(function () {
+//     console.log("d5lna");
+//     //popup.classList.remove("hidden");
+//     popup.classList.add("visible");
+//     console.log("eshta8alna?");
+//   }, 3000);
+//   //}
+// });
+
+// // Handle form submission (assuming successful login)
+// const loginForm = document.getElementById("loginForm");
+// loginForm.addEventListener("submit", function (event) {
+//   event.preventDefault(); // Prevent default form submission
+//   console.log("we innnn");
+//   //getting the form data ayoyyyy
+//   const username = document.getElementById("username").value;
+//   const password = document.getElementById("password").value;
+
+//   //making an instance of the formData object
+
+//   let formData = new FormData();
+//   formData.append("username", username);
+//   formData.append("password", password);
+
+//   function updateLevelDisplay() {
+//     var level = sessionStorage.getItem("userLevel");
+//     if (level) {
+//       document.getElementById("wow").textContent = level;
+//     }
+//   }
+
+//   //we create the ajax request yay
+//   const xhr = new XMLHttpRequest();
+//   xhr.open("POST", "login_process.php", true);
+
+//   // Handle the response
+//   xhr.onload = function () {
+//     if (this.status == 200) {
+//       const messageElement = document.getElementById("message");
+//       const response = JSON.parse(this.responseText);
+//       if (response.status === "success") {
+//         console.log("Login successful!");
+//         messageElement.textContent = "Login successful!";
+//         usernameLabel.textContent = username;
+//         document.getElementById("username").value = "";
+//         document.getElementById("password").value = "";
+
+//         // Make an AJAX request to update the level
+//         const levelXhr = new XMLHttpRequest();
+//         levelXhr.open("GET", "calculateLevel.php", true);
+//         levelXhr.onload = function () {
+//           // if (this.status == 200) {
+//           //   document.getElementById("wow").textContent = this.responseText;
+//           // }
+
+//           if (this.status == 200) {
+//             var level = this.responseText;
+//             sessionStorage.setItem("userLevel", level); // Store the level in sessionStorage
+//             updateLevelDisplay(); // Update the level display
+//             console.log("Retrieved level: " + level);
+//           }
+
+//           setTimeout(getStatus, 1000);
+//         };
+//         levelXhr.send();
+
+//         setTimeout(function () {
+//           document.getElementById("loginPopup").classList.remove("visible");
+//           document.getElementById("loginPopup").classList.add("hidden");
+//         }, 2000);
+//       } else {
+//         messageElement.textContent = "Invalid password or username.";
+//         console.log("Login failed: " + response.message);
+//       }
+//     }
+//   };
+//   xhr.send(formData);
+// });
+
+// // On page load, update the level display
+// updateUserLevelDisplay();
+// window.onload = updateLevelDisplay;
+
+// const continueGuestLink = document.getElementById("continue");
+
+// continueGuestLink.addEventListener("click", () => {
+//   const loginPopup = document.getElementById("loginPopup");
+//   document.getElementById("loginPopup").classList.remove("visible");
+//   document.getElementById("loginPopup").classList.add("hidden");
+// });
 
 const gameContainer = document.querySelector(".game-container");
 const games = document.querySelectorAll(".game");
