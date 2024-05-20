@@ -24,7 +24,7 @@ session_start();
 <body>
   <header>
     <div class="profile-section">
-      <a href="leaderBoard.php" <?php unset($_SESSION['game']); ?> class="level" id="wow">Leader Board</a>
+      <a href="leaderBoard.php" <?php unset($_SESSION['game']); ?> class="level" id="wow"><?php include "calculateLevel.php"; ?></a>
       <span class="separator"> | </span>
       <a href="signUp.php">
         <img src="Previews/pfp.jpg" alt="Player profile pic" />

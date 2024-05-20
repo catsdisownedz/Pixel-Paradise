@@ -149,21 +149,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// On page load, update the level display
-window.onload = function () {
-  const levelDisplay = document.getElementById("wow");
-  const isLoggedIn = sessionStorage.getItem("isLoggedIn"); // Get the login status
-  if (levelDisplay && isLoggedIn === "true") {
-    // Check if the user is logged in
-    var level = sessionStorage.getItem("userLevel");
-    if (level) {
-      levelDisplay.textContent = level;
-    }
-  } else if (levelDisplay) {
-    levelDisplay.textContent = "Leader Board"; // Default text
-  }
-};
-
 // const popup = document.getElementById("loginPopup");
 // document.addEventListener("DOMContentLoaded", function () {
 //   const usernameLabel = document.getElementById("usernameLabel");

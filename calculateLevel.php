@@ -6,25 +6,25 @@ if (session_status() === PHP_SESSION_NONE) {
 
 include "DatabaseConnection.php";
 
-if(isset($_SESSION["username"])){
+if (isset($_SESSION["username"])) {
     $username = $_SESSION["username"];
-    $total=0;
-    $sql="SELECT ID FROM users WHERE username= ? LIMIT 1";
-    $stmt=mysqli_prepare($conn, $sql);
+    $total = 0;
+    $sql = "SELECT ID FROM users WHERE username= ? LIMIT 1";
+    $stmt = mysqli_prepare($conn, $sql);
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
-    while($row = $result->fetch_assoc()){
-        $userID= $row["ID"];
+    while ($row = $result->fetch_assoc()) {
+        $userID = $row["ID"];
     }
     $stmt->close();
-    $sql="SELECT score FROM HighScores WHERE UID =?";
-    $stmt=mysqli_prepare($conn, $sql);
-    $stmt->bind_param("s",$userID);
+    $sql = "SELECT score FROM HighScores WHERE UID =?";
+    $stmt = mysqli_prepare($conn, $sql);
+    $stmt->bind_param("s", $userID);
     $stmt->execute();
     $result = $stmt->get_result();
-    while($row = $result->fetch_assoc()){
-        $total+= $row["score"];
+    while ($row = $result->fetch_assoc()) {
+        $total += $row["score"];
     }
     $stmt->close();
     if ($total < 1000) {
@@ -64,10 +64,8 @@ if(isset($_SESSION["username"])){
         echo "Lv. 12 Dragon Warrior";
         return;
     }
-}
-
-else{
-    echo "Lv. 1 Beginner";
+} else {
+    echo "Leader Board";
 }
 
 /*const levels = [
