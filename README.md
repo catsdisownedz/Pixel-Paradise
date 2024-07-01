@@ -8,7 +8,7 @@
 
 
 #Resources needed to run the code:
->User must download Xampp
->Add the repository to the htdocs folder
->Activate apache and SQL
->You're done! Enjoy our website 
+>- User must download Xampp
+>- Add the repository to the htdocs folder
+>- Activate apache and SQL
+>- You're done! Enjoy our website 
