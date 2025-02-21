@@ -1,6 +1,6 @@
 # Pixel Paradise
 
-Retro Gaming Arcade is a web-based platform that lets users relive classic arcade games in a modern browser. The site features a variety of retro games such as Pac-Man, Snake, Pong, Mario Bros, Flappy Bird, Break Out, and Tetris. Built with PHP, HTML, CSS, and JavaScript, the project combines nostalgic gameplay with a contemporary design.
+Pixel Paradise is a web-based platform that lets users relive classic arcade games in a modern browser. The site features a variety of retro games such as Pac-Man, Snake, Pong, Mario Bros, Flappy Bird, Break Out, and Tetris. Built with PHP, HTML, CSS, and JavaScript, the project combines nostalgic gameplay with a contemporary design.
 
 ## Features
 
